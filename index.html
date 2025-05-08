@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainVenture - Poznaj tajemnice mózgu i wykorzystaj je w zarządzaniu</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            z-index: 1000;
+        }
+        .back-to-top.show {
+            display: block;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--primary-color);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #B4034E;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar .nav-links a:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .navbar .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .navbar .nav-links {
+                display: none;
+                flex-direction: column;
+                background-color: var(--primary-color);
+                position: absolute;
+                top: 100%;
+                right: 0;
+                width: 100%;
+                padding: 1rem 0;
+            }
+
+            .navbar .nav-links.show {
+                display: flex;
+            }
+
+            .navbar .menu-toggle {
+                display: block;
+            }
+        }
+
+        .faq-item {
+            margin-bottom: 1rem;
+        }
+
+        .faq-question {
+            background-color: #f1f1f1;
+            border: none;
+            padding: 1rem;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background-color: #e1e1e1;
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 0 1rem 1rem;
+            background-color: #f9f9f9;
+            border-left: 3px solid #007BFF;
+        }
+
+        .faq-toggle {
+            float: right;
+            font-weight: bold;
+        }
+
+        .newsletter-section {
+            background-color: #f9f9f9;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .newsletter-section h2 {
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .newsletter-form input {
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 300px;
+        }
+
+        .newsletter-form button {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background-color: #0056b3;
+        }
+
+        .brain-image-section {
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .brain-image-section img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .info-image img {
+            max-width: 50%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .small-image {
+    width: 50%;
+    height: auto;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">Brain<span>Venture</span><sup>TM</sup></div>
+            <div class="menu-toggle">☰</div>
+            <div class="nav-links">
+                <a href="#about">O Grze</a>
+                <a href="#benefits">Dlaczego Warto</a>
+                <a href="#how">Jak działa</a>
+                <a href="#for-whom">Dla kogo</a>
+                <a href="#register">Zarejestruj się</a>
+                <a href="#faq">FAQ</a>
+                <a href="blog.html">Blog</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Odkryj tajemnice mózgu i wykorzystaj je w zarządzaniu!</h1>
+            <p><strong>BrainVenture</strong> to wyjątkowa gra symulacyjna, która przenosi Cię do świata menedżerskiego wyzwania, łącząc wiedzę neuroprzywództwa z praktycznymi umiejętnościami zarządzania. Gra została stworzona z myślą o tych, którzy pragną zrozumieć, jak biologiczne mechanizmy wpływają na decyzje, zachowanie i motywację w kontekście zawodowym.
+                To połączenie zabawy, strategii i nauki, które pomoże Ci rozwijać kompetencje przywódcze, ucząc się w sposób dynamiczny i angażujący.
+                </p>
+            <a href="#register" class="btn">Rozpocznij przygodę</a>
+        </div>
+    </section>
+
+    <section class="info-section" id="about">
+        <div class="container">
+            <h2 class="section-title">Czym jest BrainVenture?</h2>
+            <div class="info-content">
+                <div class="info-text">
+                    <p>BrainVenture to unikalna gra symulacyjna, która łączy mechanikę gier planszowych z zagadnieniami z obszaru neuroprzywództwa. Uczestnicy wcielają się w rolę menedżerów zespołów, którzy stają przed wieloma wyzwaniami związanymi z zarządzaniem ludźmi, realizowaniem projektów i podejmowaniem strategicznych decyzji.</p>
+                    <p>Gra nie tylko testuje zdolności organizacyjne i negocjacyjne, ale także pozwala zrozumieć, jak nasz mózg reaguje na wyzwania, jak podejmujemy decyzje i jak nasze emocje wpływają na efektywność pracy.</p>
+                </div>
+                <div class="info-image">
+                    <img src="Mozg.jpg" alt="Obraz mózgu" class="small-image">
+                </div>
+            </div>
+            <h2 class="section-title">Know-how</h2>
+            <div class="info-content">
+                <div class="info-text">
+                    <p>Neuroprzywództwo to jeden z najnowszych trendów w zarządzaniu, który łączy badania nad mózgiem z praktyką
+                        przywódczą. Uwzględnia biologiczne mechanizmy leżące u podłoża interakcji społecznych, procesów poznawczych, emocji i motywacji. Dzięki uczestnictwu w grze, zrozumiesz jak automatyczne reakcje mózgu wpływają na nasze emocje, jakie zachowania lidera sprzyjają zaangażowaniu i efektywności zespołu oraz jak wyciągać wnioski z błędów poznawczych.</p>
+                    <p>Gra bazuje na pracach takich autorów jak: David Rock, Daniel Kahneman, Robert M. Sapolsky, Simon Sinek, Martin Seligman i wielu innych.</p>
+  
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits-section" id="benefits">
+        <div class="container">
+            <h2 class="section-title">Dlaczego warto zagrać w BrainVenture?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h3>Rozwijaj umiejętności neuroprzywódcze</h3>
+                    <p>Neuroprzywództwo to jeden z najnowszych trendów w zarządzaniu, który łączy badania nad mózgiem z praktyką przywódczą. Zrozumiesz, jak hormony, neuroprzekaźniki oraz mechanizmy emocjonalne i poznawcze wpływają na Twoje decyzje oraz decyzje Twojego zespołu.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Poznaj kluczowe mechanizmy mózgu</h3>
+                    <p>Dzięki grze zdobędziesz wiedzę na temat neurobiologii zachowań, emocji i motywacji. Zrozumiesz, jak mózg reaguje na stres, presję, rywalizację i jak te reakcje kształtują Twoje decyzje jako lidera.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Przeżyj ekscytującą rywalizację</h3>
+                    <p>Gra łączy elementy rywalizacji z edukacją, oferując wciągające wyzwania, które pozwolą Ci sprawdzić swoje zdolności strategiczne, zarządzanie zespołem i podejmowanie decyzji pod presją.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Praktyczne umiejętności menedżerskie</h3>
+                    <p>W BrainVenture uczysz się podejmować szybkie decyzje w zmieniającym się otoczeniu biznesowym. Musisz wyważyć cele finansowe z rozwojem ludzi w Twoim zespole, a każda decyzja będzie miała swoje konsekwencje.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Wyzwania i adaptacja</h3>
+                    <p>Gra oferuje szereg losowych zdarzeń, które zmieniają warunki rozgrywki, wymagając od graczy elastyczności i szybkiego dostosowywania swoich strategii. W ten sposób uczysz się radzić sobie z nieprzewidywalnymi sytuacjami w pracy.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Zwiększ swoją samoświadomość jako lider</h3>
+                    <p>Gra pomaga uczestnikom lepiej zrozumieć, jak ich własne emocje i reakcje wpływają na podejmowanie decyzji oraz zarządzanie zespołem. Dzięki BrainVenture zyskasz cenną wiedzę na temat mechanizmów, które kształtują Twoje działania jako lidera, co pozwoli Ci na skuteczniejsze kierowanie i inspirowanie innych.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-section" id="how">
+        <div class="container">
+            <h2 class="section-title">Jak działa gra?</h2>
+            <div class="how-content">
+                <div class="phase">
+                                        <p>Gra BrainVenture jest interaktywnym doświadczeniem, w którym uczestnicy wcielają się w rolę menedżera zespołu. Twoim celem jest osiągnięcie sukcesu poprzez podejmowanie strategicznych decyzji dotyczących zarządzania zespołem, realizacji kontraktów oraz inwestycji w rozwój kompetencji. Gra łączy elementy rywalizacji z edukacją, oferując realistyczne wyzwania oparte na neuroprzywództwie. W trakcie rozgrywki zdobędziesz wiedzę o tym, jak ludzki mózg wpływa na decyzje biznesowe i jak te mechanizmy mogą poprawić efektywność zarządzania.</p>
+   
+                </div>
+         
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="for-whom-section" id="for-whom">
+        <div class="container">
+            <h2 class="section-title">Dlaczego BrainVenture jest idealne dla Ciebie?</h2>
+            <div class="for-whom-list">
+                <div class="for-whom-item">
+                    <h3>Dla menedżerów i liderów</h3>
+                    <p>Jeśli chcesz poprawić swoje umiejętności zarządzania, lepiej zrozumieć siebie i swoich pracowników, BrainVenture to narzędzie, które pomoże Ci w tym.</p>
+                </div>
+                <div class="for-whom-item">
+                    <h3>Dla firm</h3>
+                    <p>Idealne do szkoleń menedżerskich, team-buildingowych oraz w ramach rozwoju liderów i pracowników. Pozwala na przećwiczenie sytuacji biznesowych w bezpiecznym, ale angażującym środowisku.</p>
+                </div>
+                <div class="for-whom-item">
+                    <h3>Dla edukacji</h3>
+                    <p>Uniwersytety i szkoły biznesowe mogą wykorzystać grę w programach nauczania z zakresu zarządzania, neuroprzywództwa i psychologii organizacyjnej.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="register">
+        <div class="container">
+            <h2>Zarejestruj się i rozpocznij przygodę z BrainVenture!</h2>
+            <p>Dołącz do grona liderów, którzy stawiają na rozwój oparty na neuroprzywództwie. Zarejestruj się teraz, aby uzyskać dostęp do wersji demo i przekonaj się, jak BrainVenture może pomóc Ci rozwinąć umiejętności menedżerskie oraz lepiej zrozumieć mechanizmy mózgu.</p>
+            <a href="#" class="btn">Zarejestruj się teraz</a>
+        </div>
+    </section>
+
+    <section class="cta-section online-course-section">
+        <div class="container">
+            <h2>Rozpocznij kurs online z neuroprzywództwa</h2>
+            <p>Dowiedz się więcej o neuroprzywództwie i rozwijaj swoje umiejętności menedżerskie dzięki naszemu interaktywnemu kursowi online.</p>
+            <a href="#" class="btn" id="online-course-btn">Przejdź do kursu online</a>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">Opinie uczestników</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        <p>Gra BrainVenture zmieniła moje podejście do zarządzania zespołem. Zrozumiałam, jak ważne są emocje i motywacja w podejmowaniu decyzji. Teraz wiem, jak lepiej zarządzać sobą i moim zespołem.</p>
+                    </div>
+                    <div class="testimonial-author">Anna Kowalska</div>
+                    <div class="testimonial-position">Menedżer w XYZ Sp. z o.o.</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        <p>Jako HR-owiec, polecam BrainVenture każdemu, kto chce rozwijać liderów w firmie. Gra nie tylko rozwija umiejętności menedżerskie, ale także uczy, jak radzić sobie z trudnymi decyzjami w złożonych sytuacjach biznesowych.</p>
+                    </div>
+                    <div class="testimonial-author">Marek Nowak</div>
+                    <div class="testimonial-position">Dyrektor HR w ABC Corp.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <h2 class="section-title">FAQ</h2>
+            <div class="faq-item">
+                <button class="faq-question">Co to jest Brainventure? <span class="faq-toggle">+</span></button>
+                <div class="faq-answer">
+                    <p>Brainventure to platforma stworzona w celu rozwijania umiejętności poznawczych i przywódczych poprzez techniki oparte na neurobiologii.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Jak mogę dołączyć do Brainventure? <span class="faq-toggle">+</span></button>
+                <div class="faq-answer">
+                    <p>Możesz dołączyć do Brainventure, rejestrując się na naszej stronie internetowej i wybierając plan, który odpowiada Twoim potrzebom.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Czy Brainventure jest odpowiednie dla zespołów? <span class="faq-toggle">+</span></button>
+                <div class="faq-answer">
+                    <p>Tak, Brainventure oferuje rozwiązania dostosowane zarówno dla indywidualnych użytkowników, jak i zespołów, aby poprawić współpracę i produktywność.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter-section">
+        <div class="container">
+            <h2>Zapisz się na nasz newsletter</h2>
+            <p>Bądź na bieżąco z nowościami o grze BrainVenture i najnowszymi artykułami z naszego bloga.</p>
+            <form class="newsletter-form">
+                <input type="email" name="email" placeholder="Wpisz swój adres e-mail" required>
+                <button type="submit" class="btn">Zapisz się</button>
+            </form>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>BrainVenture</h3>
+                    <p>Pierwsza w Polsce gra symulacyjna łącząca neuroprzywództwo z praktyką menedżerską.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Kontakt</h3>
+                    <p>Email: jstrzemecka@blueaccelerator.com</p>
+                    <p>Tel: +48 662 268 010</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Nawigacja</h3>
+                    <a href="#about">O Grze</a>
+                    <a href="#benefits">Dlaczego Warto</a>
+                    <a href="#how">Jak działa</a>
+                    <a href="#for-whom">Dla kogo</a>
+                </div>
+                <div class="footer-col">
+                    <h3>Więcej</h3>
+                    <a href="https://www.blueaccelerator.com" target="_blank">www.blueaccelerator.com</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 BrainVenture. Wszelkie prawa zastrzeżone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const backToTop = document.createElement("a");
+            backToTop.href = "#top";
+            backToTop.className = "back-to-top";
+            backToTop.textContent = "Powrót na górę";
+            document.body.appendChild(backToTop);
+
+            window.addEventListener("scroll", function() {
+                if (window.scrollY > 300) {
+                    backToTop.classList.add("show");
+                } else {
+                    backToTop.classList.remove("show");
+                }
+            });
+
+            const menuToggle = document.querySelector(".menu-toggle");
+            const navLinks = document.querySelector(".nav-links");
+
+            menuToggle.addEventListener("click", function() {
+                navLinks.classList.toggle("show");
+            });
+
+            document.querySelectorAll('.faq-question').forEach(button => {
+                button.addEventListener('click', () => {
+                    const answer = button.nextElementSibling;
+                    const toggle = button.querySelector('.faq-toggle');
+
+                    if (answer.style.display === 'block') {
+                        answer.style.display = 'none';
+                        toggle.textContent = '+';
+                    } else {
+                        answer.style.display = 'block';
+                        toggle.textContent = '-';
+                    }
+                });
+            });
+
+            document.querySelector('.newsletter-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const email = event.target.email.value;
+                alert(`Dziękujemy za zapisanie się na newsletter! Email: ${email}`);
+                event.target.reset();
+            });
+        });
+    </script>
+</body>
+</html>
