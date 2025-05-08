@@ -82,6 +82,7 @@
             font-size: 2rem;
             margin-bottom: 1.5rem;
             line-height: 1.3;
+            text-align: center; /* Center the title */
         }
 
         article p {
@@ -191,6 +192,8 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
@@ -204,10 +207,20 @@
         </article>
 
         <article id="full-article" style="display: none;">
-            <h2>Co Forrest Gump wiedział o neuroprzywództwie?</h2>
+            <h2>Co Forrest Gump wiedział o neuroprzywództwie, zanim to było modne?</h2>
             <div class="post-meta">
                 <p>Autor: Paweł Książyk</p>
-                <p>Data publikacji: 8 maja 2025r.</p>
+                <p>Data: 5 maja 2025r.</p>
+                <button class="audio-button" onclick="toggleAudioPanel()" style="display: flex; align-items: center; gap: 8px; padding: 10px 15px; border: 2px solid #333; border-radius: 5px;">
+                    <i class="fa fa-volume-up" style="font-size: 24px; color: var(--primary-color);"></i>
+                    <span>Odtwórz audio</span>
+                </button>
+            </div>
+            <div id="audio-panel" style="display: none; margin-top: 10px;">
+                <audio controls>
+                    <source src="Blog/Art1/Artykuł1_ForrestGump.mp3" type="audio/mpeg">
+                    Twoja przeglądarka nie obsługuje elementu audio.
+                </audio>
             </div>
             <p>Pamiętam, jak kilkanaście lat temu, zupełnie bez planu, postanowiłem pobiegać. Włożyłem buty, wyszedłem z domu i zacząłem biec. Nie miałem celu, nie wiedziałem, dokąd zmierzam, ale biegłem. Po kilku minutach poczułem, jak moje ciało zaczyna się rozluźniać, a umysł oczyszczać. To było jak medytacja w ruchu. Wtedy jeszcze nie wiedziałem, że to, co robię, ma głęboki związek z neuroprzywództwem.</p>
             
@@ -291,6 +304,15 @@
         function hideFullArticle() {
             document.getElementById('full-article').style.display = 'none';
             document.getElementById('article-preview').style.display = 'block';
+        }
+
+        function toggleAudioPanel() {
+            var panel = document.getElementById('audio-panel');
+            if (panel.style.display === 'none' || panel.style.display === '') {
+                panel.style.display = 'block';
+            } else {
+                panel.style.display = 'none';
+            }
         }
     </script>
 </body>

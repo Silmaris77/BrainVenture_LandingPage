@@ -42,7 +42,7 @@ header {
 }
 
 .logo {
-    font-size: 1.8rem;
+    font-size: 520px; /* Increased by 50% from 1.8rem */
     font-weight: bold;
     color: #B4034E;
 }
@@ -444,4 +444,21 @@ footer {
     .footer-content {
         flex-direction: column;
     }
+}
+
+button.audio-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    border: 2px solid #a1a1a1;
+    border-radius: 5px;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+button.audio-button:hover {
+    transform: scale(1.05);
+    background-color: #f0f0f0;
+    transition: all 0.3s ease;
 }
