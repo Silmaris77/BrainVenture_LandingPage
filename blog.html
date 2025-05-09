@@ -161,7 +161,7 @@
             font-size: 1.5rem;
             font-weight: bold;
             margin-bottom: 1rem;
-            color: var(--accent-color);
+            color: #B4034E; /* Updated to match the logo color in index.html */
         }
 
         .footer-logo span {
@@ -203,83 +203,10 @@
         <article id="article-preview">
             <h2>Co Forrest Gump wiedział o neuroprzywództwie, zanim to było modne?</h2>
             <p>Pamiętam, jak kilkanaście lat temu, zupełnie bez planu, postanowiłem pobiegać. Włożyłem buty, wyszedłem z domu i zacząłem biec...</p>
-            <button class="btn" onclick="showFullArticle()">Więcej</button>
+            <button class="btn" onclick="loadArticle('Blog/Art1/article1.html')">Rozwiń</button>
         </article>
 
-        <article id="full-article" style="display: none;">
-            <h2>Co Forrest Gump wiedział o neuroprzywództwie, zanim to było modne?</h2>
-            <div class="post-meta">
-                <p>Autor: Paweł Książyk</p>
-                <p>Data: 5 maja 2025r.</p>
-                <button class="audio-button" onclick="toggleAudioPanel()" style="display: flex; align-items: center; gap: 8px; padding: 10px 15px; border: 2px solid #333; border-radius: 5px;">
-                    <i class="fa fa-volume-up" style="font-size: 24px; color: var(--primary-color);"></i>
-                    <span>Odtwórz audio</span>
-                </button>
-            </div>
-            <div id="audio-panel" style="display: none; margin-top: 10px;">
-                <audio controls>
-                    <source src="Blog/Art1/Artykuł1_ForrestGump.mp3" type="audio/mpeg">
-                    Twoja przeglądarka nie obsługuje elementu audio.
-                </audio>
-            </div>
-            <p>Pamiętam, jak kilkanaście lat temu, zupełnie bez planu, postanowiłem pobiegać. Włożyłem buty, wyszedłem z domu i zacząłem biec. Nie miałem celu, nie wiedziałem, dokąd zmierzam, ale biegłem. Po kilku minutach poczułem, jak moje ciało zaczyna się rozluźniać, a umysł oczyszczać. To było jak medytacja w ruchu. Wtedy jeszcze nie wiedziałem, że to, co robię, ma głęboki związek z neuroprzywództwem.</p>
-            
-            <p>To był mój <strong>pierwszy trening biegowy w życiu.</strong> Najbardziej morderczy z dotychczasowych i późniejszych. Trwał... 15 minut. Potem usiadłem na fotelu i przez chwilę byłem przekonany, że czeka mnie los Filippidesa, który pobiegł do Aten z radosną nowiną o zwycięstwie Greków nad Persami i po wykonaniu swojej misji padł martwy. Jednak przeżyłem i coś we mnie wiedziało, że wrócę na tę trasę. Nie po wynik. Po coś bardziej własnego.</p>
-            
-            <h3 style="color: var(--primary-color); font-size: 1.5rem; margin: 1.8rem 0 1rem;">Forrest Gump i neurologia sukcesu</h3>
-            
-            <p>Pamiętacie go? Po prostu wstał i pobiegł. Bez celu, bez trasy. Najpierw do końca drogi. Potem do granicy hrabstwa. Potem... wiadomo.</p>
-            
-            <p>I to działa, bo tak właśnie funkcjonuje ludzki mózg. On nie znosi celów, które są zbyt daleko, zbyt duże, zbyt „na zawsze". Przeraża go maraton, ale jest ciekaw, co jest za najbliższym zakrętem.<br>
-            Jeszcze jeden zakręt? Super. Może do wzniesienia, na którym widać panoramę Wiednia z lewej i ośnieżone szczyty Alp z prawej? Koniecznie. Jeszcze trzy minuty? Okej.</p>
-            
-            <p>Podczas ruchu w mózgu zaczynają działać endorfiny i BDNF -- czynniki, które nie tylko poprawiają humor, ale też dosłownie <strong>budują nowe połączenia między neuronami</strong>. Twój mózg dosłownie się zmienia, kiedy biegasz. Nie metaforycznie. Biologicznie.</p>
-            
-            <p>A im częściej robisz coś małego i możliwego, tym częściej nagradza Cię dopaminą. Nie za efekt końcowy -- tylko za sam fakt, że jesteś w ruchu.</p>
-            
-            <h3 style="color: var(--primary-color); font-size: 1.5rem; margin: 1.8rem 0 1rem;">Bieganie jako metoda ogarniania emocji</h3>
-            
-            <p>Nie jestem ultrasem. Nie biegam po Tatrach z czołówką. Ale biegam. Regularnie. Czasem krócej, czasem dalej. I przez te lata zauważyłem, że to nie nogi się najbardziej uczą -- tylko głowa. A dokładniej: <strong>mózg w rytmie, który wreszcie ma oddech.</strong> Mózg, który regularnie „biega" (czytaj: ma swoje rytuały ruchu i pauzy), <strong>szybciej się regeneruje</strong>. I... podejmuje lepsze decyzje.</p>
-            
-            <p>Kiedy zaczynałem, miałem wrażenie, że bieganie to test dla mięśni. Dziś wiem, że to <strong>trening systemu nerwowego</strong>.</p>
-            
-            <p>W biegu nie jestem trenerem, coachem, scrum masterem. Nie jestem nawet maratończykiem. Jestem człowiekiem, który ma wreszcie <strong>szansę złapać rytm z samym sobą.</strong> Bez presji. Bez targetów. Bez powiadomień. To moment, kiedy nie jestem „produktem na rynku pracy". Jestem ja -- w ruchu.</p>
-            
-            <h3 style="color: var(--primary-color); font-size: 1.5rem; margin: 1.8rem 0 1rem;">Bieganie → mózg → praca z ludźmi</h3>
-            
-            <p>Dziś, gdy pracuję z zespołami i organizacjami, widzę dokładnie te same schematy, które poznawałem na ścieżce biegowej:</p>
-            
-            <ul>
-                <li>Zespół nie działa? Może jest zbyt dużo naraz -- i mózg się broni.</li>
-                <li>Lider się irytuje? Może zareagowało ciało migdałowate zamiast kory przedczołowej.</li>
-                <li>Projekt utknął? Może nikt nie poczuł mikroprogresu, który napędza motywację.</li>
-            </ul>
-            
-            <p>Niektórym wystarczy wprowadzenie prostej zasady: <em>„Daj ludziom więcej informacji i przestrzeni na reakcję"</em>. Inni potrzebują regularnego treningu. Każdy ma swoją unikalną ścieżkę do celu. Ale nie od razu jest to 42 kilometrów. Na początku -- to trasa do końca ulicy, a potem nawet niekoniecznie SMARTowy cel, ale rytm i sprzyjające środowisko, bo mózg lidera -- tak jak mózg biegacza -- działa najlepiej, gdy ma rytm, tlen i przestrzeń.</p>
-            
-            <h3 style="color: var(--primary-color); font-size: 1.5rem; margin: 1.8rem 0 1rem;">Czy to filozofia? Nie. To po prostu neurobiologia</h3>
-            
-            <p>Kiedy regularnie działasz w rytmie, który Twój mózg zna i akceptuje, wszystko się porządkuje:</p>
-            
-            <ul>
-                <li>Kortyzol - hormon stresu - przestaje mieć monopol.</li>
-                <li>Oksytocyna i dopamina wchodzą do gry.</li>
-                <li>Hipokamp - odpowiedzialny za pamięć i emocje - regeneruje się i rośnie (tak, serio).</li>
-            </ul>
-            
-            <p>Dlatego bieganie działa. Dlatego mikrozmiana działa. I dlatego często nie warto zaczynać od wielkich planów. Lepiej od... pierwszego zakrętu.</p>
-            
-            <h3 style="color: var(--primary-color); font-size: 1.5rem; margin: 1.8rem 0 1rem;">Co zrobisz?</h3>
-            
-            <p>Więc... co teraz? Może Twój pierwszy krok to tylko 5 minut głębszego oddechu przed trudną rozmową? Może to czas, by dać sobie trochę przestrzeni na refleksję, zanim podejmiesz ważną decyzję w pracy? W końcu, jak mówi Forrest -- 'Biegłem, bo miałem ochotę pobiec.' A Ty -- co wybierzesz dzisiaj?</p>
-            
-            <div class="author">
-                <!-- <p><strong>Paweł Książyk</strong></p>
-                <p>Partner w Blue Accelerator, Coach ICC, Scrum Master, współtwórca gry symulacyjnej BrainVenture™</p> -->
-                <p style="margin-top: 1rem;">P.S. Czy jest coś równie wartościowego jak osiąganie celów w biznesie albo sporcie? Tak - kryzysy i kontuzje. Bo czy wiedziałeś, że właśnie te „kontuzje" formują naszą prawdziwą siłę i charakter bardziej niż niejeden sukces? Ale o tym - następnym razem! 😉.</p>
-            </div>
-            <button class="btn" onclick="hideFullArticle()">Zwiń</button>
-        </article>
+        <article id="full-article" style="display: none;"></article>
         
         <div class="back-link">
             <a href="index.html" class="btn">Powrót do strony głównej</a>
@@ -288,7 +215,7 @@
     
     <footer>
         <div class="container">
-            <div class="footer-logo">Brain<span>Venture</span><sup>TM</sup></div>
+            <div class="footer-logo">BrainVenture<sup>TM</sup></div>
             <div class="copyright">
                 <p>&copy; 2025 BrainVenture. Wszelkie prawa zastrzeżone.</p>
             </div>
@@ -296,22 +223,88 @@
     </footer>
 
     <script>
-        function showFullArticle() {
-            document.getElementById('article-preview').style.display = 'none';
-            document.getElementById('full-article').style.display = 'block';
-        }
+        function loadArticle(articlePath) {
+            fetch(articlePath)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    const fullArticle = document.getElementById('full-article');
+                    
+                    // Add Zwiń button to the loaded content
+                    const zwiń = document.createElement('button');
+                    zwiń.className = 'btn';
+                    zwiń.textContent = 'Zwiń';
+                    zwiń.onclick = function() {
+                        fullArticle.style.display = 'none';
+                        document.getElementById('article-preview').style.display = 'block';
+                    };
+                    
+                    // Set the article content
+                    fullArticle.innerHTML = data;
+                    fullArticle.appendChild(zwiń);
+                    
+                    fullArticle.style.display = 'block';
+                    document.getElementById('article-preview').style.display = 'none';
 
-        function hideFullArticle() {
-            document.getElementById('full-article').style.display = 'none';
-            document.getElementById('article-preview').style.display = 'block';
+                    // Debugging: Log the loaded content
+                    console.log('Article content loaded:', data);
+
+                    // Set up audio button click handler
+                    const audioButton = fullArticle.querySelector('.audio-button');
+                    if (audioButton) {
+                        audioButton.onclick = function() {
+                            toggleAudioPanel();
+                        };
+                    }
+
+                    // Fix the audio source path after loading
+                    const audioElement = fullArticle.querySelector('audio');
+                    if (audioElement) {
+                        console.log('Audio element found:', audioElement);
+                        
+                        // Get the source element and fix its path
+                        const sourceElement = audioElement.querySelector('source');
+                        if (sourceElement) {
+                            // Set the correct path to the audio file
+                            sourceElement.src = 'Blog/Art1/Artykul1_ForrestGump.mp3';
+                            // Reload the audio element to apply the new source
+                            audioElement.load();
+                            console.log('Audio source path updated to:', sourceElement.src);
+                        }
+
+                        // Add event listeners for debugging
+                        audioElement.addEventListener('play', () => {
+                            console.log('Audio is playing');
+                        });
+                        audioElement.addEventListener('pause', () => {
+                            console.log('Audio is paused');
+                        });
+                        audioElement.addEventListener('error', (e) => {
+                            console.error('Audio error:', e);
+                            alert('There was an error with the audio file. Opening in a new tab.');
+                            window.open('Blog/Art1/Artykul1_ForrestGump.mp3', '_blank');
+                        });
+                    } else {
+                        console.warn('No audio element found in the loaded article.');
+                    }
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
         }
 
         function toggleAudioPanel() {
-            var panel = document.getElementById('audio-panel');
-            if (panel.style.display === 'none' || panel.style.display === '') {
-                panel.style.display = 'block';
+            const panel = document.getElementById('audio-panel');
+            if (panel) {
+                // Toggle the display property of the audio panel
+                panel.style.display = (panel.style.display === 'none' || panel.style.display === '') ? 'block' : 'none';
+                console.log('Audio panel toggled:', panel.style.display);
             } else {
-                panel.style.display = 'none';
+                console.error('Audio panel not found.');
             }
         }
     </script>
