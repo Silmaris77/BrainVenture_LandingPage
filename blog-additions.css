@@ -1,0 +1,83 @@
+/* Styl śródtytułów dla artykułów */
+.article-subtitle {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin: 2.2rem 0 1.2rem;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.article-subtitle::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: var(--accent-color);
+}
+
+/* Efekt hover dla artykułów */
+article {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+article:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Stylizacja przycisków */
+.btn {
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(180, 3, 78, 0.2);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(180, 3, 78, 0.3);
+}
+
+/* Stylizacja przycisku audio */
+.audio-button:hover {
+    background-color: #f8f9fa !important;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Lepsze listy w artykułach */
+article ul {
+    list-style-type: none;
+    padding-left: 1.2rem;
+}
+
+article ul li {
+    position: relative;
+    padding-left: 1.2rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+}
+
+article ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6rem;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+}
+
+/* Poprawiony styl dla cytatu */
+.quote {
+    font-style: italic;
+    padding: 15px 20px;
+    background-color: rgba(0, 86, 164, 0.05);
+    border-left: 3px solid var(--secondary-color);
+    margin: 25px 0;
+    border-radius: 2px;
+    font-size: 1.1rem;
+    color: #444;
+}

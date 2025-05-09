@@ -1,0 +1,317 @@
+/* Ulepszenia wizualne dla index.html */
+
+/* Efekt lekkiego parallax dla sekcji hero */
+.hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 86, 164, 0.9), rgba(0, 160, 227, 0.9));
+    z-index: 1;
+    animation: pulse 15s infinite alternate;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.9;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Ulepszenia kart benefitów */
+.benefit-card {
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border-top: 3px solid transparent;
+}
+
+.benefit-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    border-top-color: var(--primary-color);
+}
+
+.benefit-card h3 {
+    position: relative;
+    padding-bottom: 12px;
+}
+
+.benefit-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.benefit-card:hover h3::after {
+    width: 60px;
+}
+
+/* Stylizacja dla sekcji "Dla kogo" */
+.for-whom-item {
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    border-left: 3px solid transparent;
+}
+
+.for-whom-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border-left-color: var(--primary-color);
+}
+
+.for-whom-item h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.for-whom-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3px;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
+.for-whom-item:hover::before {
+    background-color: var(--accent-color);
+}
+
+/* Stylizacja sekcji FAQ */
+.faq-question {
+    transition: all 0.3s ease;
+    position: relative;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.faq-question:hover {
+    background-color: #e1e1e1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.faq-answer {
+    transition: all 0.3s ease;
+    border-left: 3px solid var(--secondary-color);
+    background-color: #f9f9f9;
+    border-radius: 0 0 5px 5px;
+}
+
+/* Stylizacja opinii */
+.testimonial-card {
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    background-color: white;
+    padding: 20px;
+    position: relative;
+}
+
+.testimonial-card::before {
+    content: '"';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 60px;
+    color: rgba(0, 86, 164, 0.1);
+    line-height: 1;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-author {
+    font-weight: bold;
+    margin-top: 15px;
+    color: var(--primary-color);
+}
+
+/* Ulepszenia dla formularza newslettera */
+.newsletter-section {
+    position: relative;
+    padding: 50px 0;
+    overflow: hidden;
+}
+
+.newsletter-section::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 0 10px #f9f9f9;
+}
+
+.newsletter-form {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    gap: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+.newsletter-form input {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.newsletter-form input:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.newsletter-form button {
+    padding: 12px 25px;
+    border-radius: 30px;
+    background-color: var(--accent-color);
+    color: white;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.newsletter-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Poprawiony wygląd przycisku "Powrót na górę" */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    background-color: var(--primary-color) !important;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+    font-size: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    opacity: 0.8;
+    text-decoration: none;
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    opacity: 1;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.back-to-top.show {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+/* Animowane podkreślenia w stopce */
+footer .footer-col a {
+    position: relative;
+    display: inline-block;
+    color: var(--light-text);
+    text-decoration: none;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+}
+
+footer .footer-col a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+footer .footer-col a:hover {
+    color: var(--secondary-color);
+}
+
+footer .footer-col a:hover::after {
+    width: 100%;
+}
+
+footer .footer-col h3 {
+    position: relative;
+    padding-bottom: 12px;
+    margin-bottom: 15px;
+}
+
+footer .footer-col h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--accent-color);
+}
+
+/* Animacja dla sekcji przy scrollowaniu */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s ease;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}

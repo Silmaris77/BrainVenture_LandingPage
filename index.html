@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BrainVenture - Poznaj tajemnice mózgu i wykorzystaj je w zarządzaniu</title>
+    <link rel="stylesheet" href="index-additions.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .back-to-top {
             position: fixed;
@@ -27,15 +29,22 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), #0067c2);
             padding: 1rem 2rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
         }
 
         .navbar .logo {
             font-size: 1.8rem;
             font-weight: bold;
             color: #B4034E;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
         }
 
         .navbar .nav-links {
@@ -49,11 +58,30 @@
             font-weight: 500;
             padding: 0.5rem 1rem;
             border-radius: 5px;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .navbar .nav-links a:hover {
             background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: white;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .navbar .nav-links a:hover::after {
+            width: 80%;
         }
 
         .navbar .menu-toggle {
@@ -395,7 +423,7 @@
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2025 BrainVenture. Wszelkie prawa zastrzeżone.</p>
+                <p><i class="fa fa-copyright"></i> 2025 BrainVenture. Wszelkie prawa zastrzeżone.</p>
             </div>
         </div>
     </footer>
@@ -405,7 +433,7 @@
             const backToTop = document.createElement("a");
             backToTop.href = "#top";
             backToTop.className = "back-to-top";
-            backToTop.textContent = "Powrót na górę";
+            backToTop.innerHTML = '<i class="fa fa-arrow-up"></i>';
             document.body.appendChild(backToTop);
 
             window.addEventListener("scroll", function() {
@@ -444,6 +472,26 @@
                 alert(`Dziękujemy za zapisanie się na newsletter! Email: ${email}`);
                 event.target.reset();
             });
+            
+            // Dodanie efektu fade-in dla sekcji podczas scrollowania
+            const sections = document.querySelectorAll('.info-section, .benefits-section, .how-section, .for-whom-section, .testimonials-section, .faq-section');
+            sections.forEach(section => {
+                section.classList.add('fade-in-section');
+            });
+            
+            function checkFade() {
+                sections.forEach(section => {
+                    const sectionTop = section.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    if (sectionTop < windowHeight * 0.85) {
+                        section.classList.add('is-visible');
+                    }
+                });
+            }
+            
+            // Sprawdź na początku i podczas scrollowania
+            checkFade();
+            window.addEventListener('scroll', checkFade);
         });
     </script>
 </body>
