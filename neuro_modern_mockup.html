@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainVenture - Ultra Neuro Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;900&family=Inter:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        :root {
+            /* SLightly lighter, richer background */
+            --bg-color: #0f141e;
+            --accent-cyan: #00f2ff;
+            --accent-magenta: #ff007a;
+            --accent-blue: #0066ff;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --text-main: #f8f9fa;
+            --text-dim: #94a3b8;
+            --font-heading: 'Outfit', sans-serif;
+            --font-main: 'Inter', sans-serif;
+            --card-glow: rgba(0, 242, 255, 0.2);
+            --neon-blue: #0066ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* --- Neural Background --- */
+        #neural-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+            filter: blur(0.3px);
+        }
+
+        /* Ambient Glows */
+        .ambient-glow {
+            position: fixed;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 102, 255, 0.12) 0%, transparent 70%);
+            z-index: -1;
+            filter: blur(100px);
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 30px;
+            position: relative;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 900;
+            font-style: italic;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 10px 30px;
+            border-radius: 40px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+            text-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        /* --- Hero --- */
+        header.hero-section {
+            text-align: center;
+            margin-bottom: 100px;
+            padding-top: 40px;
+        }
+
+        .neuro-label {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--accent-magenta);
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-size: 5.5rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            line-height: 1;
+            background: linear-gradient(to bottom, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -3px;
+        }
+
+        h1 span {
+            color: var(--accent-cyan);
+            -webkit-text-stroke: 1px var(--accent-cyan);
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 1.4rem;
+            color: var(--text-dim);
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* --- Bento Grid --- */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: minmax(200px, auto);
+            gap: 30px;
+            perspective: 1000px;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px) saturate(180%);
+            -webkit-backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px;
+            padding: 45px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            display: flex;
+            flex-direction: column;
+            cursor: default;
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 242, 255, 0.6);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6),
+                0 0 30px var(--card-glow),
+                inset 0 0 20px rgba(0, 242, 255, 0.1);
+        }
+
+        /* Synapse Decoration in cards */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 242, 255, 0.08), transparent 40%);
+            z-index: 0;
+            transition: opacity 0.5s;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .card-title {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 18px;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .card-text {
+            color: var(--text-dim);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        /* Grid Spans */
+        .col-2 {
+            grid-column: span 2;
+        }
+
+        .col-3 {
+            grid-column: span 3;
+        }
+
+        .row-2 {
+            grid-row: span 2;
+        }
+
+        /* --- Large Accent Elements --- */
+        .neuro-glow-text {
+            position: absolute;
+            font-size: 12rem;
+            font-family: var(--font-heading);
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.02);
+            z-index: -1;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        /* --- Buttons --- */
+        .btn-neuro {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #000;
+            padding: 20px 45px;
+            border-radius: 100px;
+            font-weight: 800;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 15px 35px rgba(0, 242, 255, 0.3);
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-neuro:hover {
+            transform: scale(1.08) translateY(-3px);
+            box-shadow: 0 25px 50px rgba(0, 242, 255, 0.5);
+            filter: brightness(1.1);
+        }
+
+        /* --- Custom Brain Graphic Card --- */
+        .brain-card {
+            background: radial-gradient(circle at top right, rgba(255, 0, 122, 0.1), transparent),
+                var(--glass-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .synapse-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 2px dashed var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: rotate 20s linear infinite;
+            position: relative;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .synapse-circle::after {
+            content: '\f21e';
+            /* heart icon / pulse */
+            font-family: FontAwesome;
+            font-size: 3rem;
+            color: var(--accent-magenta);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1) rotate(calc(-1 * var(--rotate-val, 0deg)));
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.3) rotate(calc(-1 * var(--rotate-val, 0deg)));
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1) rotate(calc(-1 * var(--rotate-val, 0deg)));
+                opacity: 0.5;
+            }
+        }
+
+        /* --- Footer --- */
+        footer {
+            margin-top: 150px;
+            padding: 100px 0 40px;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 1200px) {
+            h1 {
+                font-size: 4rem;
+            }
+
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .col-2,
+            .col-3 {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="neural-canvas"></canvas>
+
+    <!-- Ambient ambient glows -->
+    <div class="ambient-glow" style="top: -10%; left: -10%;"></div>
+    <div class="ambient-glow"
+        style="bottom: 10%; right: -10%; background: radial-gradient(circle, rgba(255, 0, 122, 0.05) 0%, transparent 70%);">
+    </div>
+
+    <div class="container">
+        <nav>
+            <a href="#" class="logo">BrainVenture<sup>™</sup></a>
+            <div class="nav-links">
+                <a href="#about">Symulacja</a>
+                <a href="#science">Nauka</a>
+                <a href="#benefits">Korzyści</a>
+                <a href="#contact">Kontakt</a>
+            </div>
+        </nav>
+
+        <header class="hero-section">
+            <span class="neuro-label">Neurobiology of Leadership</span>
+            <h1>The Next <span>Evolution</span><br>of Management</h1>
+            <p class="hero-desc">Przekrocz granice tradycyjnego szkolenia. Wykorzystaj potencjał swojego mózgu w
+                unikalnej grze symulacyjnej, która zmienia sposób, w jaki przewodzisz.</p>
+            <div style="margin-top: 50px;">
+                <a href="#" class="btn-neuro">Rozpocznij Eksplorację</a>
+            </div>
+        </header>
+
+        <div class="neuro-glow-text" style="top: 20%; left: -5%;">SYNAPSE</div>
+        <div class="neuro-glow-text" style="bottom: 10%; right: -5%;">NEURON</div>
+
+        <main class="bento-grid">
+            <!-- Main Story Card -->
+            <section class="card col-2 row-2"
+                style="background: linear-gradient(135deg, rgba(0, 242, 255, 0.05) 0%, transparent 100%), var(--glass-bg);">
+                <div class="card-icon"><i class="fa fa-brain"></i></div>
+                <h2 class="card-title">Czym jest BrainVenture?</h2>
+                <p class="card-text">To pierwsza w Polsce gra symulacyjna, która nie tylko uczy zarządzania, ale robi to
+                    w zgodzie z mechaniką ludzkiego umysłu. Wcielasz się w rolę lidera w środowisku VUKA, gdzie każda
+                    sekunda i każda decyzja rezonuje w sieciach neuronalnych Twojego zespołu.</p>
+                <p class="card-text">Testujemy nie tylko Twoje KPI, ale przede wszystkim odporność na stres, empatię
+                    kognitywną i zdolność do podejmowania strategicznych decyzji pod presją hormonalną.</p>
+                <div style="margin-top: auto;">
+                    <a href="#"
+                        style="color: var(--accent-cyan); font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                        Dowiedz się więcej <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Visual Graphic Card -->
+            <section class="card brain-card">
+                <div class="synapse-circle" id="synapse-target"></div>
+            </section>
+
+            <!-- Scientific Foundations Card -->
+            <section class="card">
+                <div class="card-icon"><i class="fa fa-flask"></i></div>
+                <h2 class="card-title">Nauka</h2>
+                <p class="card-text">Merytoryka oparta na koncepcjach Davida Rocka i Daniela Kahnemana.</p>
+            </section>
+
+            <!-- Stats Card -->
+            <section class="card col-2"
+                style="background: linear-gradient(135deg, rgba(255, 0, 122, 0.05) 0%, transparent 100%), var(--glass-bg);">
+                <div style="display: flex; gap: 40px; align-items: center;">
+                    <div>
+                        <div style="font-size: 4rem; font-weight: 900; color: var(--accent-cyan);">95%</div>
+                        <p
+                            style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim);">
+                            Decyzji podświadomych</p>
+                    </div>
+                    <div style="border-left: 1px solid var(--glass-border); padding-left: 40px;">
+                        <h2 class="card-title">Zrozum impuls</h2>
+                        <p class="card-text">Większość Twoich działań to nawyki. BrainVenture pozwala je zidentyfikować
+                            i przekształcić w świadome przywództwo.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quote/Mood Card -->
+            <section class="card"
+                style="justify-content: center; text-align: center; border-color: var(--accent-magenta);">
+                <p style="font-size: 1.2rem; font-style: italic; color: #fff;">"Leadership is not a skill. It's a
+                    biological phenomenon."</p>
+            </section>
+
+            <!-- Benefits Cards -->
+            <section class="card">
+                <div class="card-icon"><i class="fa fa-bolt"></i></div>
+                <h2 class="card-title">Adrenalina</h2>
+                <p class="card-text">Realistyczne scenariusze, które angażują układ nagrody.</p>
+            </section>
+
+            <section class="card">
+                <div class="card-icon"><i class="fa fa-users"></i></div>
+                <h2 class="card-title">Empatia</h2>
+                <p class="card-text">Zrozum lustrzane neurony i ich rolę w motywacji.</p>
+            </section>
+
+            <section class="card col-2">
+                <div class="card-icon"><i class="fa fa-line-chart"></i></div>
+                <h2 class="card-title">Mierzalny Wzrost</h2>
+                <p class="card-text">Po każdej sesji otrzymujesz raport neuro-analityczny Twoich kompetencji.</p>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-logo logo">BrainVenture</div>
+            <p style="color: var(--text-dim); margin-bottom: 20px;">Redefining Leadership through the Lens of
+                Neuroscience.</p>
+            <p style="font-size: 0.8rem; color: rgba(255,255,255,0.2);">© 2025 Blue Accelerator | Privacy Policy | Terms
+                of Service</p>
+        </footer>
+    </div>
+
+    <script>
+        // --- Enhanced Neural Canvas ---
+        const canvas = document.getElementById('neural-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null, radius: 200 };
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            init();
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.baseX = this.x;
+                this.baseY = this.y;
+                this.density = (Math.random() * 30) + 1;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(0, 242, 255, 0.4)';
+                ctx.fill();
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+                // Mouse interaction - synapse "repulsion"
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < mouse.radius) {
+                    const force = (mouse.radius - distance) / mouse.radius;
+                    const directionX = dx / distance;
+                    const directionY = dy / distance;
+                    this.x -= directionX * force * 5;
+                    this.y -= directionY * force * 5;
+                }
+            }
+        }
+
+        function init() {
+            particles = [];
+            const numberOfParticles = (canvas.width * canvas.height) / 15000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 180) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(0, 242, 255, ${0.4 * (1 - distance / 180)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+
+                        // "Synapse Pulse" - tiny spark travelling between particles
+                        if (Math.random() > 0.998) {
+                            ctx.fillStyle = '#fff';
+                            ctx.fillRect(particles[i].x, particles[i].y, 2, 2);
+                        }
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        animate();
+
+        // --- Mouse move effect for ambient light and card glow ---
+        document.addEventListener('mousemove', (e) => {
+            const glows = document.querySelectorAll('.ambient-glow');
+            const x = e.clientX;
+            const y = e.clientY;
+
+            glows[0].style.transform = `translate(${x * 0.05}px, ${y * 0.05}px)`;
+            glows[1].style.transform = `translate(${-x * 0.05}px, ${-y * 0.05}px)`;
+
+            // Card spotlight effect
+            document.querySelectorAll('.card').forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const mouseX = x - rect.left;
+                const mouseY = y - rect.top;
+                card.style.setProperty('--mouse-x', `${mouseX}px`);
+                card.style.setProperty('--mouse-y', `${mouseY}px`);
+            });
+        });
+
+        // --- Click for "Synapse Burst" ---
+        window.addEventListener('click', (e) => {
+            for (let i = 0; i < 5; i++) {
+                const p = new Particle();
+                p.x = e.clientX;
+                p.y = e.clientY;
+                p.vx = (Math.random() - 0.5) * 10;
+                p.vy = (Math.random() - 0.5) * 10;
+                p.size = 3;
+                particles.push(p);
+                // Remove extra particles after some time
+                setTimeout(() => particles.shift(), 3000);
+            }
+        });
+    </script>
+</body>
+
+</html>

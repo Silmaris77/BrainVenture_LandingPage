@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainVenture - SCARF Simulator | Menedżerska Gra Decyzyjna</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Inter:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        :root {
+            --bg-color: #0b101a;
+            --accent-cyan: #1E73B9;
+            /* Analysis Blue */
+            --accent-magenta: #B10A4A;
+            /* Emotion Burgundy */
+            --accent-blue: #0E2A47;
+            /* Structure Navy */
+            --glass-bg: rgba(14, 42, 71, 0.4);
+            --glass-border: rgba(30, 115, 185, 0.2);
+            --text-main: #f8f9fa;
+            --text-dim: #94a3b8;
+            --font-heading: 'Outfit', sans-serif;
+            --font-main: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- Background Animation --- */
+        canvas#neural-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* --- Header --- */
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+
+        .logo img {
+            height: 48px;
+            width: auto;
+            display: block;
+        }
+
+        .logo:hover {
+            filter: brightness(1.2);
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- Simulator Layout --- */
+        .simulator-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* --- Scenario Card --- */
+        .scenario-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .scenario-phase {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent-cyan);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .scenario-title {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .scenario-description {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .choices-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .choice-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: left;
+            color: var(--text-main);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .choice-btn:hover {
+            background: rgba(30, 115, 185, 0.05);
+            border-color: var(--accent-cyan);
+            transform: translateX(10px);
+        }
+
+        .choice-btn span.letter {
+            width: 30px;
+            height: 30px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        /* --- Visualization Card --- */
+        .viz-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 40px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        #radar-container {
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+        }
+
+        .scarf-label {
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.75rem;
+        }
+
+        /* --- Results Modal --- */
+        #results-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 17, 26, 0.95);
+            display: none;
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .results-content {
+            background: var(--glass-bg);
+            border: 1px solid var(--accent-cyan);
+            padding: 50px;
+            border-radius: 40px;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .results-content h2 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-cyan);
+        }
+
+        .results-summary {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            margin-bottom: 40px;
+        }
+
+        .btn-restart {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            border: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            color: white;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-restart:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--accent-cyan);
+        }
+
+        @media (max-width: 1000px) {
+            .simulator-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="neural-canvas"></canvas>
+
+    <div class="container">
+        <header>
+            <a href="#" class="logo">
+                <img src="file:///C:/Users/pksia/.gemini/antigravity/brain/370c6833-3ed3-4eac-8578-e8ef1115ba56/logo_transparent.png"
+                    alt="BrainVenture">
+            </a>
+            <h1>Menedżerski Dzień w Modelu SCARF</h1>
+            <p class="subtitle">Wciel się w rolę lidera i zobacz, jak Twoje decyzje wpływają na stan
+                neuro-psychologiczny Twojego zespołu.</p>
+        </header>
+
+        <div class="simulator-layout">
+            <!-- Left: Scenarios -->
+            <div class="scenario-card">
+                <div id="scenario-box">
+                    <div class="scenario-phase" id="phase-label">SYTUACJA 1 / 5</div>
+                    <h2 class="scenario-title" id="scenario-title">Poranna zmiana planów</h2>
+                    <p class="scenario-description" id="scenario-desc">Twój kluczowy specjalista, Marek, przyszedł do
+                        pracy z planem na ważny projekt. Ty jednak właśnie otrzymałeś pilne polecenie od zarządu, które
+                        zmienia priorytety.</p>
+                    <div class="choices-list" id="choices-container">
+                        <!-- Choices will be injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Visualization -->
+            <div class="viz-card">
+                <div id="radar-container">
+                    <canvas id="radarChart"></canvas>
+                </div>
+                <div style="margin-top: 30px; text-align: center;">
+                    <p id="feedback-text"
+                        style="font-size: 0.9rem; color: var(--accent-cyan); min-height: 3em; font-style: italic;">Stań
+                        przed wyborem, by zobaczyć reakcję mózgu pracownika...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Overlay -->
+    <div id="results-overlay">
+        <div class="results-content">
+            <h2 id="results-final-title">Dzień Zakończony!</h2>
+            <div class="results-summary" id="results-final-desc">Oto bilans Twojego wpływu na bezpieczeństwo socjalne
+                zespołu. Pamiętaj, że lider świadomy modelu SCARF buduje środowisko wysokiej efektywności.</div>
+            <button class="btn-restart" onclick="location.reload()">Zagraj Ponownie</button>
+        </div>
+    </div>
+
+    <!-- Chart.js for Spider Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // --- Data Definitions ---
+        const SCARF = {
+            Status: 60,
+            Certainty: 60,
+            Autonomy: 60,
+            Relatedness: 60,
+            Fairness: 60
+        };
+
+        const scenarios = [
+            {
+                title: "Poranna zmiana planów",
+                desc: "Musisz nagle zmienić priorytety Marka. Jak mu to przekażesz?",
+                choices: [
+                    {
+                        text: "Wyślij e-mail: 'Marek, porzucamy projekt X. Od dziś robisz Y. Szczegóły później.'",
+                        impact: { Certainty: -30, Status: -10, Autonomy: -20 },
+                        feedback: "Brak wyjaśnienia zabija Pewność (Certainty), a arbitralna decyzja uderza w Autonomię."
+                    },
+                    {
+                        text: "Zwołaj spotkanie: 'Marek, przyszedł priorytet z góry. Przykro mi, ale musimy wstrzymać X. Co sądzisz o planie na Y?'",
+                        impact: { Certainty: +10, Autonomy: +10, Status: +5 },
+                        feedback: "Wyjaśnienie buduje Pewność, a pytanie o zdanie wspiera Status i Autonomię."
+                    },
+                    {
+                        text: "Zaproponuj: 'Wybacz Marek, zmiana planów. Czy chciałbyś sam zdecydować, jak podzielić czas między stary a nowy projekt?'",
+                        impact: { Autonomy: +30, Certainty: -10, Status: +10 },
+                        feedback: "Maksymalna Autonomia! Jednak zbyt duża swoboda przy nagłej zmianie może lekko zachwiać Pewnością."
+                    }
+                ]
+            },
+            {
+                title: "Feedback po prezentacji",
+                desc: "Prezentacja Twojej podwładnej, Ani, miała kilka błędów merytorycznych, mimo dobrej formy.",
+                choices: [
+                    {
+                        text: "Przy zespole: 'Ania, forma super, ale te dane na slajdzie 5 to kompleta bzdura. Popraw to.'",
+                        impact: { Status: -40, Relatedness: -20, Fairness: -10 },
+                        feedback: "Publiczna krytyka to 'neuro-cios' w Status. Niszczy też Relacyjność."
+                    },
+                    {
+                        text: "Na osobności: 'Ania, świetna energia. Zauważyłem błąd w danych – sprawdźmy to razem, by na przyszłość było idealnie.'",
+                        impact: { Status: +10, Relatedness: +20, Certainty: +10 },
+                        feedback: "Prywatny feedback chroni Status, a wspólne rozwiązanie buduje Relacyjność (Relatedness)."
+                    },
+                    {
+                        text: "Wspomnij tylko o sukcesie, a błędy popraw sam po cichu.",
+                        impact: { Fairness: -20, Certainty: -10, Autonomy: -10 },
+                        feedback: "Brak szczerości uderza w Sprawiedliwość (Fairness) i dezorientuje (Certainty)."
+                    }
+                ]
+            },
+            {
+                title: "Podział zadań w zespole",
+                desc: "Pojawiło się bardzo atrakcyjne, rozwojowe zadanie. Komu je dasz?",
+                choices: [
+                    {
+                        text: "Daj zadanie swojemu 'ulubieńcowi', bo wiesz, że dowiezie na pewno.",
+                        impact: { Fairness: -40, Relatedness: -30 },
+                        feedback: "Faworyzowanie to najszybszy sposób na zniszczenie poczucia Sprawiedliwości w zespole."
+                    },
+                    {
+                        text: "Ogłoś konkurs: 'Kto czuje, że ma teraz przestrzeń i kompetencje na to wyzwanie?'",
+                        impact: { Fairness: +20, Autonomy: +20, Status: +10 },
+                        feedback: "Transparentne zasady budują Sprawiedliwość i dają wybór (Autonomia)."
+                    },
+                    {
+                        text: "Daj zadanie osobie, która ostatnio miała najwięcej żmudnej pracy.",
+                        impact: { Fairness: +30, Status: +10, Relatedness: +10 },
+                        feedback: "Nagradzanie wysiłku wzmacnia poczucie Sprawiedliwości i Status pracownika."
+                    }
+                ]
+            },
+            {
+                title: "Nowa procedura w biurze",
+                desc: "Zarząd wprowadza system raportowania czasu pracy co do minuty. Zespół jest wściekły.",
+                choices: [
+                    {
+                        text: "Powiedz: 'Słuchajcie, takie są zasady, nie dyskutujcie tylko wypełniajcie.'",
+                        impact: { Autonomy: -40, Status: -20, Relatedness: -10 },
+                        feedback: "Brak wpływu na zasady to drastyczny spadek Autonomii i poczucia partnerstwa."
+                    },
+                    {
+                        text: "Powiedz: 'Rozumiem opór. Spróbujmy wspólnie ustalić, jak to robić najmniej uciążliwie.'",
+                        impact: { Autonomy: +10, Relatedness: +20, Fairness: +10 },
+                        feedback: "Współdecydowanie (nawet o formie) odzyskuje część Autonomii i buduje Relacyjność."
+                    },
+                    {
+                        text: "Zignoruj temat i miej nadzieję, że zapomną.",
+                        impact: { Certainty: -30, Fairness: -10 },
+                        feedback: "Brak jasnych instrukcji w trudnej sytuacji powoduje ogromną Niepewność."
+                    }
+                ]
+            },
+            {
+                title: "Awans i docenienie",
+                desc: "Kasia wykonała tytaniczną pracę, ale budżet na awanse został zamrożony.",
+                choices: [
+                    {
+                        text: "Powiedz: 'Kasia, świetna robota, ale wiesz jak jest – nie ma kasy. Może za rok.'",
+                        impact: { Status: -20, Fairness: -30, Relatedness: -10 },
+                        feedback: "Brak uznania wysiłku niszczy poczucie Sprawiedliwości i Statusu."
+                    },
+                    {
+                        text: "Zorganizuj publiczne podziękowanie i daj jej prowadzenie ważnego komitetu.",
+                        impact: { Status: +40, Autonomy: +20, Relatedness: +10 },
+                        feedback: "Uznanie publiczne to ogromny zastrzyk Statusu, nawet przy braku premii finansowej."
+                    },
+                    {
+                        text: "Zaproponuj: 'Nie mogę dać awansu, ale mogę dać Ci 2 dni wolnego i szkolenie premium.'",
+                        impact: { Fairness: +20, Autonomy: +10, Relatedness: +10 },
+                        feedback: "Alternatywne docenienie ratuje poczucie Sprawiedliwości (Fairness)."
+                    }
+                ]
+            }
+        ];
+
+        let currentScenario = 0;
+        let chart;
+
+        // --- Logic ---
+        function initChart() {
+            const ctx = document.getElementById('radarChart').getContext('2d');
+            chart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Status', 'Pewność', 'Autonomia', 'Relacyjność', 'Sprawiedliwość'],
+                    datasets: [{
+                        label: 'Neuro-State',
+                        data: Object.values(SCARF),
+                        backgroundColor: 'rgba(30, 115, 185, 0.2)',
+                        borderColor: '#1E73B9',
+                        borderWidth: 3,
+                        pointBackgroundColor: '#1E73B9',
+                        pointRadius: 5
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(255,255,255,0.1)' },
+                            grid: { color: 'rgba(255,255,255,0.1)' },
+                            pointLabels: { color: '#94a3b8', font: { size: 12, weight: 'bold' } },
+                            ticks: { display: false, stepSize: 20 },
+                            min: 0,
+                            max: 100
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        function updateUI() {
+            if (currentScenario >= scenarios.length) {
+                showResults();
+                return;
+            }
+
+            const scenario = scenarios[currentScenario];
+            document.getElementById('phase-label').innerText = `SYTUACJA ${currentScenario + 1} / ${scenarios.length}`;
+            document.getElementById('scenario-title').innerText = scenario.title;
+            document.getElementById('scenario-desc').innerText = scenario.desc;
+
+            const container = document.getElementById('choices-container');
+            container.innerHTML = '';
+
+            scenario.choices.forEach((choice, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'choice-btn';
+                btn.innerHTML = `<span class="letter">${String.fromCharCode(65 + idx)}</span> ${choice.text}`;
+                btn.onclick = () => makeChoice(choice);
+                container.appendChild(btn);
+            });
+        }
+
+        function makeChoice(choice) {
+            // Update values
+            for (const key in choice.impact) {
+                SCARF[key] = Math.max(0, Math.min(100, SCARF[key] + choice.impact[key]));
+            }
+
+            // Update Chart
+            chart.data.datasets[0].data = Object.values(SCARF);
+            chart.update();
+
+            // Update Feedback
+            document.getElementById('feedback-text').innerText = choice.feedback;
+            document.getElementById('feedback-text').style.opacity = 0;
+            setTimeout(() => { document.getElementById('feedback-text').style.opacity = 1; }, 50);
+
+            // Next Scenario
+            currentScenario++;
+            setTimeout(updateUI, 1500);
+        }
+
+        function showResults() {
+            document.getElementById('results-overlay').style.display = 'flex';
+            const avg = Object.values(SCARF).reduce((a, b) => a + b) / 5;
+
+            let message = "";
+            if (avg > 70) message = "Znakomicie! Jesteś liderem, który dba o neuro-bezpieczeństwo. Zespół pod Twoim dowództwem będzie kreatywny i lojalny.";
+            else if (avg > 40) message = "Dobry wynik, ale uważaj na niektóre wymiary. Czasem drobne zaniedbania mogą blokować potencjał zespołu.";
+            else message = "Uwaga! Twoje decyzje wywołują reakcję lękową u podwładnych. Twoim celem w kursie BrainVenture powinno być obniżenie poziomu kortyzolu w zespole.";
+
+            document.getElementById('results-final-desc').innerText = message;
+        }
+
+        // --- Neural Background Animation (Simplified) ---
+        const navCanvas = document.getElementById('neural-canvas');
+        const nctx = navCanvas.getContext('2d');
+        let dots = [];
+
+        function resize() {
+            navCanvas.width = window.innerWidth;
+            navCanvas.height = window.innerHeight;
+        }
+
+        class Dot {
+            constructor() {
+                this.x = Math.random() * navCanvas.width;
+                this.y = Math.random() * navCanvas.height;
+                this.v = (Math.random() - 0.5) * 0.3;
+            }
+            update() {
+                this.y += this.v;
+                if (this.y < 0 || this.y > navCanvas.height) this.v *= -1;
+            }
+        }
+
+        function animDots() {
+            nctx.clearRect(0, 0, navCanvas.width, navCanvas.height);
+            dots.forEach(d => {
+                d.update();
+                nctx.beginPath();
+                nctx.arc(d.x, d.y, 1, 0, Math.PI * 2);
+                nctx.fillStyle = 'rgba(30, 115, 185, 0.2)';
+                nctx.fill();
+            });
+            requestAnimationFrame(animDots);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        for (let i = 0; i < 80; i++) dots.push(new Dot());
+        animDots();
+
+        // Start Simulator
+        initChart();
+        updateUI();
+    </script>
+</body>
+
+</html>
