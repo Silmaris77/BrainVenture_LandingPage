@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BrainVenture - Static Matrix Variant | Gdy Nauka Spotyka Przywództwo</title>
+    <title>BrainVenture™ - Static Matrix Variant | Gdy nauka spotyka przywództwo</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -159,9 +159,11 @@
         }
 
         h1 span {
-            color: var(--accent-cyan);
-            -webkit-text-stroke: 1px var(--accent-cyan);
+            background: linear-gradient(to bottom, #ffffff 30%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
         }
 
         .hero-desc {
@@ -244,15 +246,108 @@
             padding: 45px;
             position: relative;
             overflow: hidden;
-            transition: 0.5s;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             flex-direction: column;
+            cursor: pointer;
         }
 
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent-cyan);
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5), 0 0 30px var(--card-glow);
+        .card.expanded {
+            grid-column: span 3 !important;
+            border-color: var(--accent-cyan) !important;
+            background: rgba(14, 42, 71, 0.95);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+        }
+
+        @media (max-width: 900px) {
+            .card.expanded {
+                grid-column: span 1 !important;
+            }
+        }
+
+        .card-details {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            margin-top: 0;
+        }
+
+        .card.expanded .card-details {
+            max-height: 2000px;
+            opacity: 1;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .expand-hint {
+            position: absolute;
+            bottom: 25px;
+            right: 45px;
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.6;
+            transition: 0.3s;
+        }
+
+        .card:hover .expand-hint {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        .card.expanded .expand-hint {
+            opacity: 0;
+        }
+
+        .detail-section {
+            margin-bottom: 25px;
+        }
+
+        .detail-title {
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .detail-title i {
+            color: var(--accent-cyan);
+            font-size: 0.9rem;
+        }
+
+        .reflection-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .reflection-list li {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .reflection-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+        }
+
+        .business-case {
+            background: rgba(30, 115, 185, 0.1);
+            padding: 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border-left: 4px solid var(--accent-cyan);
         }
 
         .card::before {
@@ -489,122 +584,180 @@
 
         /* --- Difficulty Overlay Styles --- */
         #difficulty-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(13, 17, 26, 0.95);
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
-            border-radius: 40px;
-            z-index: 101;
-            padding: 40px;
-            text-align: center;
+            align-items: stretch;
+            padding: 40px 50px;
+            width: 100%;
         }
 
         .diff-btn {
             width: 100%;
-            max-width: 300px;
-            padding: 20px;
-            margin: 10px;
+            padding: 18px 20px 18px 24px;
             border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             background: rgba(255, 255, 255, 0.03);
             color: #fff;
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             text-align: left;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .diff-btn:hover {
-            transform: scale(1.02);
-            border-color: var(--accent-cyan);
-            background: rgba(30, 115, 185, 0.05);
-        }
-
-        .diff-btn.junior:hover {
-            border-color: #4ade80;
-        }
-
-        .diff-btn.manager:hover {
-            border-color: #fbbf24;
-        }
-
-        .diff-btn.director:hover {
-            border-color: #f87171;
-        }
-
-        .diff-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        /* Knowledge Pill - horizontal banner */
-        .knowledge-pill-card {
-            background: linear-gradient(135deg, rgba(177, 10, 74, 0.12), rgba(30, 115, 185, 0.06)) !important;
-            border-color: var(--accent-magenta) !important;
             display: flex;
             flex-direction: row;
             align-items: center;
-            gap: 30px;
-            padding: 30px 45px;
+            gap: 18px;
             position: relative;
             overflow: hidden;
-            min-height: unset;
         }
-
-        .pill-content {
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-            opacity: 1;
-        }
-
-        .pill-content.fade-out {
-            opacity: 0;
-            transform: translateY(-10px);
-        }
-
-        .pill-content.fade-in {
-            opacity: 0;
-            transform: translateY(10px);
-        }
-
-        .pill-progress-container {
+        .diff-btn::before {
+            content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            border-radius: 20px 0 0 20px;
+            background: rgba(255,255,255,0.1);
+            transition: 0.3s;
+        }
+        .diff-btn:hover {
+            transform: translateX(6px);
             background: rgba(255, 255, 255, 0.05);
         }
+        .diff-btn.junior::before  { background: #4ade80; }
+        .diff-btn.manager::before { background: #fbbf24; }
+        .diff-btn.director::before { background: #f87171; }
+        .diff-btn.junior:hover  { border-color: rgba(74, 222, 128, 0.4);  box-shadow: 0 8px 30px rgba(74, 222, 128, 0.10); }
+        .diff-btn.manager:hover { border-color: rgba(251, 191, 36, 0.4);  box-shadow: 0 8px 30px rgba(251, 191, 36, 0.10); }
+        .diff-btn.director:hover { border-color: rgba(248, 113, 113, 0.4); box-shadow: 0 8px 30px rgba(248, 113, 113, 0.10); }
 
-        #pill-progress-bar {
+        .diff-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+        .diff-level-dots {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+        .diff-level-dots span {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+        }
+        .diff-btn.junior  .diff-level-dots span:nth-child(-n+1) { background: #4ade80; }
+        .diff-btn.manager .diff-level-dots span:nth-child(-n+2) { background: #fbbf24; }
+        .diff-btn.director .diff-level-dots span { background: #f87171; }
+
+        /* Knowledge Pill Carousel */
+        .pill-carousel-section {
+            background: none !important;
+            border: none !important;
+            padding: 0 !important;
+            overflow: visible !important;
+            cursor: default !important;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .pill-carousel-section:hover::before { opacity: 0 !important; }
+        .pill-carousel-header { text-align: center; }
+        .pill-section-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent-magenta);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .pill-section-title {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: #fff;
+            font-weight: 700;
+            margin: 0;
+        }
+        .pill-carousel-wrapper {
+            overflow: hidden;
+            position: relative;
+            padding: 16px 0;
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 22%, black 78%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0%, black 22%, black 78%, transparent 100%);
+        }
+        .pill-carousel-track {
+            display: flex;
+            gap: 20px;
+            will-change: transform;
+        }
+        .pill-card-item {
+            flex: 0 0 400px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 30px 35px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            opacity: 0.12;
+            transform: scale(0.93);
+            filter: blur(0.5px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease, filter 0.6s ease;
+            min-height: 160px;
+            justify-content: center;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+        .pill-card-item.pill-active {
+            opacity: 1;
+            transform: scale(1);
+            filter: none;
+            border-color: var(--accent-magenta);
+            box-shadow: 0 8px 40px rgba(177, 10, 74, 0.25);
+            background: linear-gradient(135deg, rgba(177, 10, 74, 0.12), rgba(30, 115, 185, 0.06));
+            cursor: default;
+        }
+        .pill-card-type {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent-magenta);
+            font-weight: 700;
+        }
+        .pill-card-text {
+            color: var(--text-dim);
+            font-size: 0.97rem;
+            line-height: 1.65;
+            font-style: italic;
+            margin: 0;
+        }
+        .pill-card-item.pill-active .pill-card-text { color: var(--text-main); }
+        .pill-card-item { position: relative; }
+        .pill-progress-strip {
+            position: absolute;
+            bottom: 0;
+            left: 30px;
+            right: 30px;
+            height: 3px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+        .pill-card-item.pill-active .pill-progress-strip {
+            opacity: 1;
+        }
+        .pill-progress-fill {
             height: 100%;
             background: var(--accent-magenta);
+            box-shadow: 0 0 8px var(--accent-magenta);
             width: 0%;
-            box-shadow: 0 0 10px var(--accent-magenta);
-        }
-
-        .pill-tag {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent-magenta);
-            font-weight: 800;
-            opacity: 0.7;
         }
 
         #scroll-to-top {
@@ -659,26 +812,29 @@
         <nav>
             <a href="#" class="logo" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
                 <span
-                    style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 900; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -1px;">BrainVenture</span>
+                    style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 900; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -1px;">BrainVenture™</span>
                 <span
                     style="font-size: 0.55rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dim); padding: 2px 6px; border: 1px solid var(--glass-border); border-radius: 4px;">Beta</span>
             </a>
             <div class="nav-links">
                 <a href="#about">Metodyka</a>
-                <a href="#scarf-simulator">Symulator</a>
-                <a href="#variants">Warianty</a>
+                <a href="#lab">Laboratorium</a>
                 <a href="#modules">Program</a>
+                <a href="#online">Ekosystem</a>
                 <a href="#contact">Kontakt</a>
             </div>
         </nav>
 
         <header class="hero-section">
             <span class="neuro-label">The Future of Leadership Architecture</span>
-            <h1>Gdy Nauka Spotyka <span>Przywództwo</span></h1>
+            <h1>Gdy nauka spotyka <span>przywództwo</span></h1>
             <p class="hero-desc">BrainVenture to transformacyjne doświadczenie, które zmienia sposób myślenia o
-                liderstwie. Przekrocz granice teoretycznych szkoleń i wejdź do jedynego w Polsce laboratorium decyzji
-                opartych na neuronauce.</p>
+                nowoczesnym przywództwie. Przekrocz granice teoretycznych szkoleń i wejdź do jedynego w Polsce
+                laboratorium decyzji opartych na neuronauce.</p>
 
+            <p
+                style="font-size: 0.85rem; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 3px; font-weight: 700; margin-bottom: 25px; opacity: 0.8;">
+                Czy wiesz, że nasz mózg to:</p>
             <div class="stats-row">
                 <div class="stat-box">
                     <div class="stat-num">2%</div>
@@ -703,83 +859,150 @@
 
         <div class="section-header" id="about">
             <span>Metodyka & Filary</span>
-            <h2>Dlaczego BrainVenture?</h2>
+            <h2>Dlaczego BrainVenture™?</h2>
         </div>
 
         <main class="bento-grid">
-            <!-- Strategic Science -->
-            <section class="card col-2 row-2"
-                style="background: linear-gradient(145deg, rgba(30, 115, 185, 0.05), transparent);">
-                <div class="card-icon"><i class="fa fa-university"></i></div>
-                <h2 class="card-title">Stworzona przez Ekspertów</h2>
-                <p class="card-text">BrainVenture powstała jako wynik synergii pasjonatów gier, neuropsychologów oraz
-                    trenerów biznesu z wieloletnim doświadczeniem.</p>
-                <div class="module-list" style="margin-top: 30px;">
-                    <div class="module-item">
-                        <i class="fa fa-check-circle"></i>
-                        <div><strong>Fundament Naukowy:</strong> Merytoryka oparta na koncepcjach Davida Rocka i Daniela
-                            Kahnemana.</div>
-                    </div>
-                    <div class="module-item">
-                        <i class="fa fa-check-circle"></i>
-                        <div><strong>Empiryczna Wiedza:</strong> Przekładamy skomplikowane procesy biologiczne na
-                            codzienne sytuacje zawodowe.</div>
-                    </div>
-                    <div class="module-item">
-                        <i class="fa fa-check-circle"></i>
-                        <div><strong>Laboratorium Decyzji:</strong> Bezpieczne środowisko do testowania strategii
-                            zarządzania w VUKA.</div>
-                    </div>
+            <section class="card col-2"
+                style="background: linear-gradient(145deg, rgba(30, 115, 185, 0.05), transparent); padding-bottom: 20px;">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
+                    <div class="card-icon" style="margin-bottom: 0;"><i class="fa fa-university"></i></div>
+                    <h2 class="card-title" style="margin-bottom: 0; line-height: 1.2;">Dlaczego BrainVenture™?</h2>
                 </div>
-            </section>
 
-            <!-- Visual Insight -->
-            <section class="card row-2" style="padding:0; border:none; background:none;">
+                <p class="card-text"
+                    style="font-weight: 600; color: #fff; margin-bottom: 20px; font-size: 1.05rem; margin-top: 15px;">
+                    BrainVenture™ to unikalne podejście do rozwoju liderów, które łączy współczesną wiedzę naukową,
+                    praktykę zawodową i angażującą formę nauki.</p>
+
+                <p class="card-text" style="margin-bottom: 20px;">Programy szkoleniowe oraz gra symulacyjna tworzą
+                    spójną ścieżkę transformacji: od zrozumienia biologicznych mechanizmów zachowań, po wdrożenie
+                    precyzyjnych strategii zarządzania potencjałem ludzkim.</p>
+
+                <p class="card-text" style="margin-bottom: 20px;">To proces, który zamienia intuicyjne reakcje w
+                    świadome budowanie odporności, zaangażowania i trafnych decyzji w skali całej organizacji.</p>
+
+                <p class="card-text" style="margin-bottom: 30px;">Skuteczne przywództwo zaczyna się od zarządzania sobą,
+                    a to nie jest możliwe bez zrozumienia procesów biologicznych, które determinują nasze reakcje.</p>
+
                 <div
-                    style="width:100%; height:100%; border-radius: 40px; overflow:hidden; border: 1px solid var(--glass-border);">
-                    <img src="Images/neuro_leadership.png" alt="Neuro Leadership"
-                        style="width:100%; height:100%; object-fit:cover;">
+                    style="background: rgba(255,255,255,0.03); border-radius: 30px; padding: 35px 30px; border: 1px solid rgba(255,255,255,0.05); position: relative;">
+                    <h3
+                        style="color: var(--accent-cyan); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; font-weight: 800; margin-bottom: 35px; text-align: left;">
+                        Unikalność Programu</h3>
+
+                    <div
+                        style="position: absolute; left: 45px; top: 95px; bottom: 55px; width: 1px; background: rgba(30, 115, 185, 0.3);">
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 30px;">
+                        <div style="position: relative; padding-left: 50px;">
+                            <div
+                                style="position: absolute; left: 10px; top: 6px; width: 12px; height: 12px; background: var(--accent-blue); border-radius: 50%; box-shadow: 0 0 15px var(--accent-blue);">
+                            </div>
+                            <h4
+                                style="color: #fff; font-size: 0.95rem; margin-bottom: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">
+                                Stworzony przez ekspertów</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-dim); margin: 0; line-height: 1.5;">Synergia
+                                neuropsychologii, coachingu strategicznego i gamifikacji gwarantuje najwyższą jakość
+                                merytoryczną.</p>
+                        </div>
+
+                        <div style="position: relative; padding-left: 50px;">
+                            <div
+                                style="position: absolute; left: 10px; top: 6px; width: 12px; height: 12px; background: var(--accent-blue); border-radius: 50%; box-shadow: 0 0 15px var(--accent-blue);">
+                            </div>
+                            <h4
+                                style="color: #fff; font-size: 0.95rem; margin-bottom: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">
+                                Kompetencje, które robią różnicę</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-dim); margin: 0; line-height: 1.5;">
+                                Rozwijamy umiejętności krytyczne w warunkach BANI: regulację emocjonalną, komunikację
+                                neurobiologiczną i strategiczną odporność psychiczną.</p>
+                        </div>
+
+                        <div style="position: relative; padding-left: 50px;">
+                            <div
+                                style="position: absolute; left: 10px; top: 6px; width: 12px; height: 12px; background: var(--accent-blue); border-radius: 50%; box-shadow: 0 0 15px var(--accent-blue);">
+                            </div>
+                            <h4
+                                style="color: #fff; font-size: 0.95rem; margin-bottom: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">
+                                Wciągająca forma, realne efekty</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-dim); margin: 0; line-height: 1.5;">Dzięki
+                                symulacji wiedza nie zostaje w sali szkoleniowej – staje się nowym nawykiem, który
+                                natychmiast pracuje na ROI Twojej organizacji.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
+            <!-- Right Column Wrapper (Dynamic Perfect Height) -->
+            <div class="col-2" style="display: flex; flex-direction: column; gap: 30px;">
+                <!-- Workshop Variants - High Impact Vertical List -->
+                <section class="card" id="variants"
+                    style="background: rgba(30, 115, 185, 0.1); border: 1px solid rgba(255,255,255,0.05); padding-top: 45px; padding-bottom: 30px; padding-left: 40px; padding-right: 40px; margin: 0; flex-shrink: 0;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
+                        <div class="card-icon" style="margin-bottom: 0;"><i class="fa fa-cubes"></i></div>
+                        <h2 class="card-title" style="margin-bottom: 0; line-height: 1.2;">Warianty Współpracy</h2>
+                    </div>
+                    <div style="display: grid; gap: 15px;">
+                        <div
+                            style="padding: 20px; background: rgba(30, 115, 185, 0.08); border-radius: 20px; border-left: 4px solid var(--accent-cyan);">
+                            <p
+                                style="font-weight: 900; color: var(--accent-cyan); font-size: 1rem; margin-bottom: 8px;">
+                                Wariant I: Inspiracja & Kick-off</p>
+                            <p style="font-size: 0.9rem; color: var(--text-dim); margin: 0; line-height: 1.5;">
+                                Dynamiczne wydarzenie (konferencje, Akademie Menedżera), budujące błyskawiczne
+                                zaangażowanie i świadomość potrzeb.</p>
+                        </div>
+                        <div
+                            style="padding: 20px; background: rgba(30, 115, 185, 0.08); border-radius: 20px; border-left: 4px solid var(--accent-magenta);">
+                            <p
+                                style="font-weight: 900; color: var(--accent-magenta); font-size: 1rem; margin-bottom: 8px;">
+                                Wariant II: Gra + Wybrane Moduły</p>
+                            <p style="font-size: 0.9rem; color: var(--text-dim); margin: 0; line-height: 1.5;">
+                                Połączenie gry symulacyjnej z precyzyjnie dobranymi modułami adresującymi konkretne
+                                deficyty zespołu.</p>
+                        </div>
+                        <div
+                            style="padding: 20px; background: rgba(30, 115, 185, 0.08); border-radius: 20px; border-left: 4px solid #fff;">
+                            <p style="font-weight: 900; color: #fff; font-size: 1rem; margin-bottom: 8px;">Wariant III:
+                                Pełny Cykl Transformacji</p>
+                            <p style="font-size: 0.9rem; color: var(--text-dim); margin: 0; line-height: 1.5;">Budowa
+                                mapy mózgu lidera. Kompleksowa transformacja postaw: od gry jako fundamentu po 6 modułów
+                                merytorycznych.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Cheerful Visual Insight - PRECISION CROP 655x449 -->
+                <section class="card"
+                    style="padding:0; border:none; background:none; overflow: hidden; flex-shrink: 0; margin: 0; display: flex;">
+                    <div
+                        style="width:100%; height:100%; border-radius: 40px; overflow:hidden; border: 1px solid var(--glass-border); display: flex;">
+                        <img src="Images/neuro_leader_655x449.png" alt="Cheerful Neuro Leadership"
+                            style="width:100%; height:100%; object-fit:cover; display: block;">
+                    </div>
+                </section>
+            </div>
 
 
-            <!-- Success Formula -->
-            <section class="card">
-                <div class="card-icon"><i class="fa fa-calculator" style="color:var(--accent-magenta);"></i></div>
-                <h3 class="card-title">Równanie Sukcesu</h3>
-                <p class="card-text" style="font-size: 1.1rem; color:#fff; font-weight:700;">Kompetencje + Rezultaty =
-                    Sukces</p>
-                <p class="card-text" style="font-size: 0.85rem; margin-top: 10px;">Gra premiuje elastyczność i szybkość
-                    reagowania na zmiany rynkowe.</p>
-            </section>
-
-            <!-- SCARF Pillar -->
-            <section class="card">
-                <div class="card-icon"><i class="fa fa-shield"></i></div>
-                <h3 class="card-title">Model SCARF</h3>
-                <p class="card-text" style="font-size: 0.9rem;">Aktywacja układu nagrody i kary w interakcjach
-                    społecznych i zespołowych.</p>
-            </section>
-
-            <!-- Knowledge Pill Card - horizontal banner -->
-            <section class="card knowledge-pill-card col-4">
-                <div class="pill-tag">Neuro-Insight</div>
-                <div class="card-icon"
-                    style="color: var(--accent-magenta); font-size: 2.2rem; margin-bottom: 0; flex-shrink: 0;">
-                    <i class="fa fa-lightbulb-o"></i>
+            <!-- Lab Section Header -->
+            <div class="col-4" id="lab" style="margin-top: 20px;">
+                <div class="section-header">
+                    <span>Interaktywne Laboratorium</span>
+                    <h2>Sprawdź jak to smakuje</h2>
+                    <p style="color: var(--text-dim); max-width: 680px; margin: 16px auto 0; font-size: 1rem; line-height: 1.7;">Poniżej znajdziesz próbkę wiedzy i doświadczeń, które zdobywają uczestnicy BrainVenture™ — podczas szkoleń i gry symulacyjnej. To tylko fragment tego, co czeka Twój zespół.</p>
                 </div>
-                <div style="width: 1px; height: 50px; background: rgba(177,10,74,0.3); flex-shrink: 0;"></div>
-                <div id="pill-container" class="pill-content" style="flex: 1;">
-                    <span
-                        style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-magenta); font-weight: 700;">Pigułka
-                        Wiedzy</span>
-                    <p id="pill-text" class="card-text" style="font-style: italic; font-size: 1rem; margin-top: 4px;">
-                        Wczytywanie neuronaukowych ciekawostek...</p>
+            </div>
+
+            <!-- Knowledge Pill Carousel -->
+            <section class="card col-4 pill-carousel-section">
+                <div class="pill-carousel-header">
+                    <span class="pill-section-label">Próbka wiedzy ze szkoleń</span>
+                    <p class="pill-section-title">Fakty, które zmieniają sposób zarządzania</p>
                 </div>
-                <div class="pill-progress-container" style="bottom: 0; left: 0;"></div>
-                <div id="pill-progress-bar"
-                    style="position: absolute; bottom: 0; left: 0; height: 3px; background: var(--accent-magenta); width: 0%; box-shadow: 0 0 10px var(--accent-magenta);">
+                <div class="pill-carousel-wrapper">
+                    <div class="pill-carousel-track" id="pill-track"></div>
                 </div>
             </section>
 
@@ -789,73 +1012,63 @@
 
                 <!-- Difficulty Selection -->
                 <div id="difficulty-overlay">
-                    <span class="archetype-label">Interaktywna Symulacja</span>
-                    <h2 style="font-size: 2rem; margin-bottom: 12px;">Poziom Wyzwania</h2>
-                    <p
-                        style="color: var(--text-dim); font-size: 0.9rem; max-width: 560px; text-align: center; margin-bottom: 16px; line-height: 1.6;">
-                        Wciel się w rolę lidera i doświadcz na własnej skórze, jak decyzje zarządcze wpływają na mózg
-                        Twojego zespołu. Właśnie tego uczą się uczestnicy BrainVenture:
-                    </p>
-                    <div
-                        style="display: flex; flex-direction: column; gap: 8px; max-width: 480px; text-align: left; margin-bottom: 24px;">
-                        <div
-                            style="display: flex; align-items: flex-start; gap: 12px; font-size: 0.85rem; color: var(--text-dim);">
-                            <span
-                                style="color: var(--accent-cyan); font-size: 1rem; flex-shrink: 0; margin-top: 1px;">✓</span>
-                            <span><strong style="color: #fff;">Jak rozpoznawać sygnały mózgu</strong> — kiedy pracownik
-                                czuje zagrożenie SCARF, a kiedy nagrodę</span>
-                        </div>
-                        <div
-                            style="display: flex; align-items: flex-start; gap: 12px; font-size: 0.85rem; color: var(--text-dim);">
-                            <span
-                                style="color: var(--accent-cyan); font-size: 1rem; flex-shrink: 0; margin-top: 1px;">✓</span>
-                            <span><strong style="color: #fff;">Jak niewinne decyzje zarządcze</strong> uruchamiają
-                                kortyzol i blokują kreatywność i zaangażowanie</span>
-                        </div>
-                        <div
-                            style="display: flex; align-items: flex-start; gap: 12px; font-size: 0.85rem; color: var(--text-dim);">
-                            <span
-                                style="color: var(--accent-cyan); font-size: 1rem; flex-shrink: 0; margin-top: 1px;">✓</span>
-                            <span><strong style="color: #fff;">Jak budować zaufanie i autonomię</strong> — klucze do
-                                wysokiej wydajności i retencji</span>
-                        </div>
-                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; width: 100%; align-items: center;">
 
-                    <div
-                        style="display: flex; flex-direction: row; gap: 16px; justify-content: center; flex-wrap: wrap; width: 100%; max-width: 900px;">
-                        <button class="diff-btn junior" onclick="selectDifficulty('junior')"
-                            style="max-width: 280px; flex: 1;">
-                            <div class="diff-icon" style="background: rgba(74, 222, 128, 0.2); color: #4ade80;"><i
-                                    class="fa fa-leaf"></i></div>
-                            <div>
-                                <strong style="display:block;">Junior Lider</strong>
-                                <small style="color: var(--text-dim);">Wyzwania 1:1, budowanie autorytetu, empatyczny
-                                    feedback i onboarding.</small>
+                        <!-- Left: context -->
+                        <div>
+                            <div class="section-header" style="text-align: left; margin-bottom: 24px;">
+                                <span>Interaktywna Symulacja</span>
+                                <h2 style="font-size: 2.5rem;">Poziom Wyzwania</h2>
                             </div>
-                        </button>
+                            <p style="color: var(--text-dim); font-size: 0.95rem; line-height: 1.7; margin-bottom: 24px;">
+                                Wciel się w rolę lidera i doświadcz na własnej skórze, jak decyzje zarządcze wpływają na mózg Twojego zespołu. Właśnie tego uczą się uczestnicy BrainVenture™:
+                            </p>
+                            <div style="display: flex; flex-direction: column; gap: 12px;">
+                                <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 0.88rem; color: var(--text-dim);">
+                                    <span style="color: var(--accent-cyan); flex-shrink: 0; margin-top: 2px;">✓</span>
+                                    <span><strong style="color: #fff;">Jak rozpoznawać sygnały mózgu</strong> — kiedy pracownik czuje zagrożenie SCARF, a kiedy nagrodę</span>
+                                </div>
+                                <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 0.88rem; color: var(--text-dim);">
+                                    <span style="color: var(--accent-cyan); flex-shrink: 0; margin-top: 2px;">✓</span>
+                                    <span><strong style="color: #fff;">Jak niewinne decyzje zarządcze</strong> uruchamiają kortyzol i blokują kreatywność i zaangażowanie</span>
+                                </div>
+                                <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 0.88rem; color: var(--text-dim);">
+                                    <span style="color: var(--accent-cyan); flex-shrink: 0; margin-top: 2px;">✓</span>
+                                    <span><strong style="color: #fff;">Jak budować zaufanie i autonomię</strong> — klucze do wysokiej wydajności i retencji</span>
+                                </div>
+                            </div>
+                        </div>
 
-                        <button class="diff-btn manager" onclick="selectDifficulty('manager')"
-                            style="max-width: 280px; flex: 1;">
-                            <div class="diff-icon" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24;"><i
-                                    class="fa fa-briefcase"></i></div>
-                            <div>
-                                <strong style="display:block;">Menedżer Zespołu</strong>
-                                <small style="color: var(--text-dim);">Dynamika grupowa, konflikty o zasoby, deadline'y
-                                    i
-                                    wdrażanie zmian.</small>
-                            </div>
-                        </button>
+                        <!-- Right: 3 stacked cards -->
+                        <div style="display: flex; flex-direction: column; gap: 14px;">
+                            <button class="diff-btn junior" onclick="selectDifficulty('junior')">
+                                <div class="diff-icon" style="background: rgba(74, 222, 128, 0.15); color: #4ade80;"><i class="fa fa-leaf"></i></div>
+                                <div style="flex: 1;">
+                                    <strong style="display: block; font-family: var(--font-heading); font-size: 1rem; margin-bottom: 4px;">Junior Lider</strong>
+                                    <small style="color: var(--text-dim); font-size: 0.8rem; line-height: 1.5;">Wyzwania 1:1, budowanie autorytetu, empatyczny feedback i onboarding.</small>
+                                </div>
+                                <div class="diff-level-dots"><span></span><span></span><span></span></div>
+                            </button>
 
-                        <button class="diff-btn director" onclick="selectDifficulty('director')"
-                            style="max-width: 280px; flex: 1;">
-                            <div class="diff-icon" style="background: rgba(248, 113, 113, 0.2); color: #f87171;"><i
-                                    class="fa fa-trophy"></i></div>
-                            <div>
-                                <strong style="display:block;">Dyrektor Strategiczny</strong>
-                                <small style="color: var(--text-dim);">Zarządzanie kryzysowe, fuzje, restrukturyzacje i
-                                    presja rynkowa.</small>
-                            </div>
-                        </button>
+                            <button class="diff-btn manager" onclick="selectDifficulty('manager')">
+                                <div class="diff-icon" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24;"><i class="fa fa-briefcase"></i></div>
+                                <div style="flex: 1;">
+                                    <strong style="display: block; font-family: var(--font-heading); font-size: 1rem; margin-bottom: 4px;">Menedżer Zespołu</strong>
+                                    <small style="color: var(--text-dim); font-size: 0.8rem; line-height: 1.5;">Dynamika grupowa, konflikty o zasoby, deadline’y i wdrażanie zmian.</small>
+                                </div>
+                                <div class="diff-level-dots"><span></span><span></span><span></span></div>
+                            </button>
+
+                            <button class="diff-btn director" onclick="selectDifficulty('director')">
+                                <div class="diff-icon" style="background: rgba(248, 113, 113, 0.15); color: #f87171;"><i class="fa fa-trophy"></i></div>
+                                <div style="flex: 1;">
+                                    <strong style="display: block; font-family: var(--font-heading); font-size: 1rem; margin-bottom: 4px;">Dyrektor Strategiczny</strong>
+                                    <small style="color: var(--text-dim); font-size: 0.8rem; line-height: 1.5;">Zarządzanie kryzysowe, fuzje, restrukturyzacje i presja rynkowa.</small>
+                                </div>
+                                <div class="diff-level-dots"><span></span><span></span><span></span></div>
+                            </button>
+                        </div>
+
                     </div>
                 </div>
                 <div id="results-overlay">
@@ -871,6 +1084,7 @@
                     </div>
                 </div>
 
+                <div id="simulator-main" style="display:none; width:100%;">
                 <div class="section-header" style="text-align: left; margin-bottom: 40px;">
                     <span>Interaktywne Laboratorium</span>
                     <h2 style="font-size: 2.2rem;">SCARF Dynamic Simulator</h2>
@@ -932,31 +1146,39 @@
                         </div>
                     </div>
                 </div>
+                </div><!-- /simulator-main -->
             </section>
 
-            <!-- Team Synergy Visual -->
-            <section class="card col-2 row-2" style="padding:0; border:none; background:none;">
+            <!-- Bridge block after simulator -->
+            <div class="col-4" style="display: flex; align-items: stretch; gap: 30px;">
+                <div style="flex: 1; background: linear-gradient(135deg, rgba(30,115,185,0.08), rgba(177,10,74,0.05)); border: 1px solid rgba(30,115,185,0.2); border-radius: 30px; padding: 40px 50px; display: flex; flex-direction: column; justify-content: center; gap: 16px;">
+                    <p style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-cyan); font-weight: 700; margin: 0;">Co dalej?</p>
+                    <p style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: #fff; margin: 0; line-height: 1.3;">W programie takich decyzji, faktów i refleksji jest znacznie więcej — osadzonych w realiach Twojego zespołu i Twojej organizacji.</p>
+                    <p style="color: var(--text-dim); font-size: 0.95rem; line-height: 1.7; margin: 0;">Gra symulacyjna i 6 modułów merytorycznych tworzą spójną ścieżkę, po której każdy lider wychodzi z konkretnym zestawem narzędzi — nie teorią, ale nawykami.</p>
+                </div>
+                <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px; flex-shrink: 0; padding: 40px 20px;">
+                    <a href="#contact" style="background: linear-gradient(135deg, var(--accent-magenta), var(--accent-blue)); color: #fff; padding: 18px 44px; border-radius: 100px; font-weight: 900; text-decoration: none; font-size: 1rem; box-shadow: 0 10px 30px rgba(177,10,74,0.35); white-space: nowrap; letter-spacing: 0.3px;">Zarezerwuj Bezpłatne Demo →</a>
+                    <p style="color: var(--text-dim); font-size: 0.8rem; margin: 0;">Bez zobowiązań · 45 minut · Online lub stacjonarnie</p>
+                </div>
+            </div>
+
+            <!-- Team Synergy Visual - PRECISION CROP 655x355 -->
+            <section class="card col-2" style="padding:0; border:none; background:none; display: flex; align-self: stretch;">
                 <div
-                    style="width:100%; height:100%; border-radius: 40px; overflow:hidden; border: 1px solid var(--glass-border);">
-                    <img src="Images/team_synergy.png" alt="Team Neural Synergy"
-                        style="width:100%; height:100%; object-fit:cover;">
+                    style="width:100%; height:100%; border-radius: 40px; overflow:hidden; border: 1px solid var(--glass-border); display: flex; flex-grow: 1;">
+                    <img src="Images/team_synergy_655x355.png" alt="Team Neural Synergy"
+                        style="width:100%; height:100%; object-fit:cover; display: block;">
                 </div>
             </section>
 
-
-
-
-
-
-
-
-
-
             <!-- For Whom Section -->
-            <section class="card col-2">
-                <div class="card-icon"><i class="fa fa-users"></i></div>
-                <h2 class="card-title">Dla kogo ta inwestycja?</h2>
-                <p class="card-text">BrainVenture to idealne rozwiązanie dla organizacji stawiających na nowoczesne
+            <section class="card col-2" style="justify-content: center;">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
+                    <div class="card-icon" style="margin-bottom: 0; font-size: 2.5rem;"><i class="fa fa-users"></i>
+                    </div>
+                    <h2 class="card-title" style="margin-bottom: 0;">Dla kogo ta inwestycja?</h2>
+                </div>
+                <p class="card-text">BrainVenture™ to idealne rozwiązanie dla organizacji stawiających na nowoczesne
                     przywództwo:</p>
                 <div class="audience-grid"
                     style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top:20px;">
@@ -975,83 +1197,285 @@
                 </div>
             </section>
 
-            <!-- Workshop Variants -->
-            <section class="card col-2" id="variants">
-                <div class="card-icon"><i class="fa fa-clock-o"></i></div>
-                <h2 class="card-title">Elastyczność Czasu</h2>
-                <div style="display:grid; gap:20px;">
-                    <div style="padding: 20px; background: rgba(30, 115, 185, 0.05); border-radius: 20px;">
-                        <p style="font-weight:900; color:var(--accent-cyan);">Wariant I (5 Godzin)</p>
-                        <p class="card-text" style="font-size: 0.85rem;">Intensywna symulacja z kluczowymi treściami i
-                            podsumowaniem eksperckim.</p>
-                    </div>
-                    <div
-                        style="padding: 20px; background: rgba(30, 115, 185, 0.08); border-radius: 20px; border: 1px solid rgba(30,115,185,0.2);">
-                        <p style="font-weight:900; color:var(--accent-cyan);">Wariant II (8 Godzin)</p>
-                        <p class="card-text" style="font-size: 0.85rem;">Pełna forma z wszystkimi modułami i
-                            pogłębionymi wskazówkami wdrożeniowymi.</p>
-                    </div>
-                </div>
-            </section>
 
             <!-- Modules (Program) Section -->
             <div class="col-4" id="modules" style="margin-top: 60px;">
-                <div class="section-header" style="text-align: left; margin-bottom: 40px;">
-                    <span>Program Warsztatu</span>
-                    <h2 style="font-size: 2.2rem;">Kluczowe Moduły Merytoryczne</h2>
+                <div class="section-header" style="margin-bottom: 40px;">
+                    <span>6 Modułów Merytorycznych</span>
+                    <h2>Program</h2>
                 </div>
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-                    <!-- SCARF card (moved here) -->
-                    <section class="card">
-                        <div class="card-icon"><i class="fa fa-shield"></i></div>
-                        <h3 class="card-title">Model SCARF</h3>
-                        <p class="card-text" style="font-size: 0.9rem;">Aktywacja układu nagrody i kary w interakcjach
-                            społecznych i zespołowych.</p>
-                    </section>
+                        <!-- Moduł 1 -->
+                        <section class="card module-card" onclick="toggleCard(this)">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                                <div class="card-icon" style="margin-bottom: 0; font-size: 2rem;"><i
+                                        class="fa fa-eye"></i></div>
+                                <h3 class="card-title" style="margin-bottom: 0;">1. Poznanie</h3>
+                            </div>
+                            <p class="card-text">Jak mózg tworzy Twoją rzeczywistość? Dekonstrukcja filtrów
+                                percepcyjnych i pułapek myślenia.</p>
+                            <div class="expand-hint">Rozwiń szczegóły <i class="fa fa-chevron-right"></i></div>
+                            <div class="card-details">
+                                <div class="detail-section">
+                                    <div class="detail-title"><i class="fa fa-info-circle"></i> O czym to jest?</div>
+                                    <p class="card-text" style="font-size: 0.9rem;">Analizujemy proces kodowania
+                                        informacji, skupiając się na modelu SEEDS® Davida Rocka. Dowiesz się, jak
+                                        systemowe uproszczenia (heurystyki) wpływają na postrzeganie faktów i
+                                        formułowanie opinii.</p>
+                                </div>
+                                <div class="detail-section">
+                                    <div class="detail-title"><i class="fa fa-question-circle"></i> Pytania do refleksji
+                                    </div>
+                                    <ul class="reflection-list">
+                                        <li>Jakie błędy popełniamy oceniając innych i dlaczego robimy to automatycznie?
+                                        </li>
+                                        <li>W jakich sytuacjach zawodowych Twoje przekonania mogą Cię zawodzić?</li>
+                                        <li>Co sprawia, że dwie osoby patrzą na ten sam problem i wyciągają różne
+                                            wnioski?</li>
+                                    </ul>
+                                </div>
+                                <div class="business-case">
+                                    <strong>Przykład biznesowy:</strong> Menedżer odrzuca pomysł nowego pracownika, bo
+                                    „to się u nas nie sprawdza”. Reaguje na wzorzec z przeszłości zamiast analizować
+                                    dane.
+                                </div>
+                            </div>
+                        </section>
+                        <!-- Moduł 2 -->
+                        <section class="card module-card" onclick="toggleCard(this)">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                                <div class="card-icon" style="margin-bottom: 0; font-size: 2rem;"><i
+                                        class="fa fa-heartbeat" style="color: var(--accent-magenta);"></i></div>
+                                <h3 class="card-title" style="margin-bottom: 0;">2. Emocje</h3>
+                            </div>
+                            <p class="card-text">Homo Emotionalis. Czy logika to iluzja? Mechanizmy powstawania emocji i
+                                ich wpływ na korę.</p>
+                            <div class="expand-hint">Rozwiń szczegóły <i class="fa fa-chevron-right"></i></div>
+                            <div class="card-details">
+                                <div class="detail-section">
+                                    <div class="detail-title"><i class="fa fa-info-circle"></i> O czym to jest?</div>
+                                    <p class="card-text" style="font-size: 0.9rem;">Skąd biorą się emocje, co robią z
+                                        korą przedczołową i jak kształtują postrzeganie świata. Poznasz mechanizmy
+                                        eskalacji konfliktów i budowania bezpieczeństwa.</p>
+                                </div>
+                                <div class="detail-section">
+                                    <div class="detail-title"><i class="fa fa-question-circle"></i> Pytania do refleksji
+                                    </div>
+                                    <ul class="reflection-list">
+                                        <li>Jak rozpoznajesz, że emocje przejęły kontrolę nad rozmową — u Ciebie lub u
+                                            rozmówcy?</li>
+                                        <li>Jakie emocje dominują w Twoim zespole w obliczu zmiany strategicznej?</li>
+                                        <li>W jaki sposób konflikty w Twojej organizacji są zazwyczaj rozwiązywane?</li>
+                                    </ul>
+                                </div>
+                                <div class="business-case"
+                                    style="border-color: var(--accent-magenta); background: rgba(177, 10, 74, 0.1);">
+                                    <strong>Przykład biznesowy:</strong> Dwaj menedżerowie wchodzą w destrukcyjny
+                                    konflikt o zasoby. Skoncentrowani na obronie własnego ego ("walcz lub uciekaj"),
+                                    tracą cel strategiczny.
+                                </div>
+                            </div>
+                        </section>
+                        <!-- Moduł 3 -->
+                        <section class="card module-card" onclick="toggleCard(this)">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                                <div class="card-icon" style="margin-bottom: 0; font-size: 2rem;"><i
+                                        class="fa fa-balance-scale"></i></div>
+                                <h3 class="card-title" style="margin-bottom: 0;">3. Decyzje</h3>
+                            </div>
+                            <p class="card-text">Neurobiologia wyboru. Od automatycznych schematów do świadomych
+                                strategii.</p>
+                            <div class="expand-hint">Rozwiń szczegóły <i class="fa fa-chevron-right"></i></div>
+                            <div class="card-details">
+                                <div class="detail-section">
+                                    <div class="detail-title"><i class="fa fa-info-circle"></i> O czym to jest?</div>
+                                    <p class="card-text" style="font-size: 0.9rem;">Eksplorujemy architekturę wyboru –
+                                        momenty, w których automatyzmy poznawcze wypierają rzetelną analizę. Uczymy
+                                        rozpoznawania stereotypów narzucanych przez otoczenie.</p>
+                                </div>
+                                <div class="detail-section">
+                                    <div class="detail-title"><i class="fa fa-question-circle"></i> Pytania do refleksji
+                                    </div>
+                                    <ul class="reflection-list">
+                                        <li>Jak odróżnisz fakty od interpretacji v codziennych rozmowach i raportach?
+                                        </li>
+                                        <li>Czy uwzględniasz presję grupy i hierarchię w procesie podejmowania decyzji?
+                                        </li>
+                                        <li>Jakie przekonania w Twojej branży mogą być dzisiaj przestarzałe lub błędne?
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="business-case">
+                                    <strong>Przykład biznesowy:</strong> Zarząd podejmuje ryzykowną inwestycję tylko
+                                    dlatego, że „wszyscy liderzy rynku tak robią”. Brak krytycznej weryfikacji to
+                                    ulegnięcie błędowi stadnemu.
+                                </div>
+                            </div>
+                        </section>
+                        <!-- Moduł 4 -->
+                        <section class="card module-card" onclick="toggleCard(this)">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                                <div class="card-icon" style="margin-bottom: 0; font-size: 2rem;"><i
+                                        class="fa fa-comments-o" style="color: var(--accent-cyan);"></i></div>
+                                <h3 class="card-title" style="margin-bottom: 0;">4. Komunikacja</h3>
+                            </div>
+                            <p class="card-text">Neurochemia rozmowy. Jak słowa aktywują neuroprzekaźniki, budując
+                                otwartość lub opór.</p>
+                            <div class="expand-hint">Rozwiń szczegóły <i class="fa fa-chevron-right"></i></div>
+                            <div class="card-details">
+                                <div class="detail-section">
+                                    <div class="detail-title"><i class="fa fa-info-circle"></i> O czym to jest?</div>
+                                    <p class="card-text" style="font-size: 0.9rem;">Każda rozmowa zmienia chemię mózgu
+                                        obu stron. Opierając się na modelu Conversational Intelligence®, pokazujemy, jak
+                                        inicjować współpracę zamiast walki o dominację.</p>
+                                </div>
+                                <div class="detail-section">
+                                    <div class="detail-title"><i class="fa fa-question-circle"></i> Pytania do refleksji
+                                    </div>
+                                    <ul class="reflection-list">
+                                        <li>Jakie słowa lub zachowania w Twoim zespole najczęściej wywołują
+                                            defensywność?</li>
+                                        <li>Czy ludzie w Twojej organizacji mówią Ci prawdę, czy raczej to, co chcesz
+                                            usłyszeć?</li>
+                                        <li>Jak budujesz w rozmowach poczucie bezpieczeństwa zachęcające do otwartości?
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="business-case">
+                                    <strong>Przykład biznesowy:</strong> Agresywna krytyka lidera podczas review
+                                    sprawia, że mózgi zespołu przechodzą w tryb przetrwania (zalew kortyzolu), co
+                                    całkowicie blokuje kreatywność.
+                                </div>
+                            </div>
+                        </section>
+                        <!-- Moduł 5 -->
+                        <section class="card module-card" onclick="toggleCard(this)"
+                            style="border-color: var(--accent-magenta);">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                                <div class="card-icon"
+                                    style="margin-bottom: 0; font-size: 2rem; color: var(--accent-magenta);"><i
+                                        class="fa fa-battery-half"></i></div>
+                                <h3 class="card-title" style="margin-bottom: 0;">5. Wellbeing</h3>
+                            </div>
+                            <p class="card-text">Mózg, który nie wypoczywa, nie myśli. Zarządzanie snem i energią jako
+                                paliwem.</p>
+                            <div class="expand-hint">Rozwiń szczegóły <i class="fa fa-chevron-right"></i></div>
+                            <div class="card-details">
+                                <div class="detail-section">
+                                    <div class="detail-title"><i class="fa fa-info-circle"></i> O czym to jest?</div>
+                                    <p class="card-text" style="font-size: 0.9rem;">Stres to bilans zasobów
+                                        energetycznych. Skupiamy się na podstawach sprawności lidera: precyzyjnym
+                                        zarządzaniu snem, ruchem i odżywianiem jako paliwem dla kory.</p>
+                                </div>
+                                <div class="detail-section">
+                                    <div class="detail-title"><i class="fa fa-question-circle"></i> Pytania do refleksji
+                                    </div>
+                                    <ul class="reflection-list">
+                                        <li>Które elementy modelu SCARF® są w Twoim zespole najczęściej naruszane?</li>
+                                        <li>Jak Twoja reakcja na stres wspiera lub utrudnia zarządzanie innymi?</li>
+                                        <li>Jakie nawyki wspierają Twoją efektywność, a jakie ją realnie obniżają?</li>
+                                    </ul>
+                                </div>
+                                <div class="business-case"
+                                    style="border-color: var(--accent-magenta); background: rgba(177, 10, 74, 0.1);">
+                                    <strong>Przykład biznesowy:</strong> Ekspert po miesiącach presji zaczyna popełniać
+                                    błędy. Zarząd błędnie diagnozuje spadek motywacji zamiast wyczerpania zasobów
+                                    kognitywnych i naruszenia Autonomii.
+                                </div>
+                            </div>
+                        </section>
+                        <!-- Moduł 6 -->
+                        <section class="card module-card" onclick="toggleCard(this)">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                                <div class="card-icon" style="margin-bottom: 0; font-size: 2rem;"><i
+                                        class="fa fa-lightbulb-o" style="color: var(--accent-cyan);"></i></div>
+                                <h3 class="card-title" style="margin-bottom: 0;">6. Przywództwo XXI w.</h3>
+                            </div>
+                            <p class="card-text">Między kontrolą a transformacją. Budowanie środowiska opartego na
+                                sprawczości i zaufaniu.</p>
+                            <div class="expand-hint">Rozwiń szczegóły <i class="fa fa-chevron-right"></i></div>
+                            <div class="card-details">
+                                <div class="detail-section">
+                                    <div class="detail-title"><i class="fa fa-info-circle"></i> O czym to jest?</div>
+                                    <p class="card-text" style="font-size: 0.9rem;">W zmiennym środowisku mózg
+                                        instynktownie szuka silnych liderów. Moduł pokazuje, dlaczego kontrola musi
+                                        ustąpić miejsca sprawczości i bezpieczeństwu psychologicznemu.</p>
+                                </div>
+                                <div class="detail-section">
+                                    <div class="detail-title"><i class="fa fa-question-circle"></i> Pytania do refleksji
+                                    </div>
+                                    <ul class="reflection-list">
+                                        <li>Co łączy, a co różni liderów znanych z historii od liderów jutra?</li>
+                                        <li>Dlaczego toksyczne przywództwo jest wciąż tolerowane w świecie biznesu?</li>
+                                        <li>Kiedy skuteczność krótkofalowa staje się barierą dla wyników w długim
+                                            terminie?</li>
+                                    </ul>
+                                </div>
+                                <div class="business-case">
+                                    <strong>Przykład biznesowy:</strong> Firma stawia na lidera dyrektywnego podczas
+                                    restrukturyzacji. Efekt: kultura strachu, masowe odejścia specjalistów i zerowy
+                                    poziom innowacyjności.
+                                </div>
+                            </div>
+                        </section>
+                    </div>
 
-                    <!-- SEEDS -->
-                    <section class="card">
-                        <div class="card-icon"><i class="fa fa-crosshairs" style="color: var(--accent-cyan);"></i></div>
-                        <h3 class="card-title">Model SEEDS</h3>
-                        <p class="card-text" style="font-size: 0.9rem;">Identyfikacja i neutralizacja nieuświadomionych
-                            błędów poznawczych w decyzjach.</p>
-                    </section>
+                <!-- BrainVenture™ Online Section -->
+                <div class="col-4" id="online" style="margin-top: 80px; margin-bottom: 40px;">
+                    <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+                        <span>Rozwój Bez Granic</span>
+                        <h2 style="font-size: 2.5rem;">BrainVenture™ On-line</h2>
+                        <p style="color: var(--text-dim); max-width: 700px; margin: 15px auto 0;">Cyfrowe przedłużenie
+                            programu, które pozwala uczestnikom pogłębiać wiedzę we własnym tempie i stosować ją w
+                            codziennej praktyce.</p>
+                    </div>
 
-                    <!-- Dopamine -->
-                    <section class="card" style="border-color: var(--accent-magenta);">
-                        <div class="card-icon" style="color: var(--accent-magenta);"><i class="fa fa-rocket"></i></div>
-                        <h3 class="card-title">Dopamina</h3>
-                        <p class="card-text" style="font-size: 0.85rem;">Silnik motywacji i dążenia do celu. Klucz do
-                            zaangażowania w fazie Zadania.</p>
-                    </section>
-
-                    <!-- Oxytocin -->
-                    <section class="card">
-                        <div class="card-icon"><i class="fa fa-users" style="color: var(--accent-cyan);"></i></div>
-                        <h3 class="card-title">Oksytocyna</h3>
-                        <p class="card-text" style="font-size: 0.85rem;">Budowanie więzi i bezpieczeństwa
-                            psychologicznego. Fundament relacyjności.</p>
-                    </section>
-
-                    <!-- Cortisol -->
-                    <section class="card" style="border-color: var(--accent-magenta);">
-                        <div class="card-icon" style="color: var(--accent-magenta);"><i
-                                class="fa fa-exclamation-triangle"></i>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+                        <!-- Diagnoza -->
+                        <div class="card"
+                            style="background: linear-gradient(135deg, rgba(30, 115, 185, 0.1), transparent);">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                                <div class="card-icon" style="margin-bottom: 0; font-size: 2rem;"><i
+                                        class="fa fa-sliders"></i></div>
+                                <h3 class="card-title" style="margin-bottom: 0;">1. Diagnoza</h3>
+                            </div>
+                            <p
+                                style="color: var(--accent-cyan); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">
+                                Profil Neurolidera</p>
+                            <p class="card-text" style="font-size: 0.9rem;">Dynamiczny test oparty na scenariuszach
+                                decyzyjnych. Wynikiem jest osobista mapa potrzeb rozwojowych i wzorców zachowań.</p>
                         </div>
-                        <h3 class="card-title">Kortyzol</h3>
-                        <p class="card-text" style="font-size: 0.85rem;">Mechanizm przetrwania. Zrozum, jak stres
-                            blokuje kreatywność i IQ zespołu.</p>
-                    </section>
-
-                    <!-- Endorphins -->
-                    <section class="card">
-                        <div class="card-icon"><i class="fa fa-leaf" style="color: var(--accent-cyan);"></i></div>
-                        <h3 class="card-title">Endorfiny</h3>
-                        <p class="card-text" style="font-size: 0.85rem;">Naturalny reduktor napięcia. Wsparcie
-                            odporności psychicznej w VUKA.</p>
-                    </section>
+                        <!-- Nauka -->
+                        <div class="card"
+                            style="background: linear-gradient(135deg, rgba(177, 10, 74, 0.1), transparent); border-color: var(--accent-magenta);">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                                <div class="card-icon"
+                                    style="margin-bottom: 0; font-size: 2rem; color: var(--accent-magenta);"><i
+                                        class="fa fa-book"></i></div>
+                                <h3 class="card-title" style="margin-bottom: 0;">2. Nauka</h3>
+                            </div>
+                            <p
+                                style="color: var(--accent-magenta); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">
+                                Mikrodawki Wiedzy</p>
+                            <p class="card-text" style="font-size: 0.9rem;">Lekcje ułożone w interaktywne talie kart.
+                                Pigułki wiedzy, quizy i case studies dostępne 24/7 na dowolnym urządzeniu.</p>
+                        </div>
+                        <!-- Trening -->
+                        <div class="card"
+                            style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent);">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                                <div class="card-icon" style="margin-bottom: 0; font-size: 2rem;"><i
+                                        class="fa fa-gamepad"></i></div>
+                                <h3 class="card-title" style="margin-bottom: 0;">3. Trening</h3>
+                            </div>
+                            <p
+                                style="color: var(--text-dim); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">
+                                Gra Online</p>
+                            <p class="card-text" style="font-size: 0.9rem;">Poligon doświadczalny w formie symulacji
+                                (solo lub multiplayer). Pozwala ugruntować wiedzę w bezpiecznym środowisku.</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
         </main>
 
@@ -1100,8 +1524,7 @@
                     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(177,10,74,0.4)'">
                     Zarezerwuj Demo &rarr;
                 </button>
-                <p style="text-align: center; font-size: 0.8rem; color: var(--text-dim);">Odpowiadamy w ciągu 24 godzin
-                    roboczych.</p>
+
             </form>
             <div id="form-success"
                 style="display:none; background: rgba(30,115,185,0.1); border: 1px solid var(--accent-cyan); border-radius: 20px; padding: 30px; max-width: 560px; margin: 0 auto 50px;">
@@ -1129,10 +1552,10 @@
         <footer>
             <div class="logo" style="opacity: 0.6; margin-bottom: 30px; justify-content: center;">
                 <img src="file:///C:/Users/pksia/.gemini/antigravity/brain/370c6833-3ed3-4eac-8578-e8ef1115ba56/logo_transparent.png"
-                    alt="BrainVenture">
+                    alt="BrainVenture™">
             </div>
-            <p style="color: var(--text-dim); font-size: 1rem; margin-bottom: 10px;">Gdy Nauka Spotyka Przywództwo.</p>
-            <p style="font-size: 0.75rem; color: rgba(255,255,255,0.2); margin-top: 40px;">© 2025 BrainVenture Landing
+            <p style="color: var(--text-dim); font-size: 1rem; margin-bottom: 10px;">Gdy nauka spotyka przywództwo.</p>
+            <p style="font-size: 0.75rem; color: rgba(255,255,255,0.2); margin-top: 40px;">© 2025 BrainVenture™ Landing
                 Page Prototype | Created by Antigravity</p>
         </footer>
     </div>
@@ -1664,6 +2087,7 @@
             scarfCurrent = 0;
             document.getElementById('difficulty-overlay').style.display = 'none';
             document.getElementById('results-overlay').style.display = 'none';
+            document.getElementById('simulator-main').style.display = 'block';
             initScarfChart();
             updateScarfUI();
         }
@@ -1872,58 +2296,188 @@
                 }
             });
         });
-        // --- Knowledge Pill Logic ---
+        // --- Knowledge Pill Carousel ---
         const knowledgePills = [
-            "Oksytocyna, zwana hormonem zaufania, uwalnia się podczas współpracy, obniżając poziom lęku w zespole.",
-            "Mózg traktuje wykluczenie społeczne tak samo jak ból fizyczny – aktywuje te same obszary (ACC).",
-            "Wielozadaniowość (multitasking) obniża efektywne IQ o 10 punktów – to więcej niż palenie marihuany.",
-            "Silny stres (kortyzol) fizycznie 'wyłącza' korę przedczołową, uniemożliwiając logiczne myślenie.",
-            "Neuroplastyczność pozwala mózgowi dorosłego na naukę nowych nawyków w każdym wieku.",
-            "Poczucie autonomii hamuje reakcję stresową amygdali i zwiększa zaangażowanie o 25%.",
-            "Mikro-przerwy (nawet 40 sekund) regenerują zasoby uwagi kory przedczołowej.",
-            "Neurony lustrzane sprawiają, że emocje lidera są dosłownie 'zaraźliwe' dla całego zespołu.",
-            "Dopamina uwalnia się nie tylko przy nagrodzie, ale już przy samym oczekiwaniu na sukces.",
-            "Mózg zużywa 20% energii całego organizmu, mimo że stanowi tylko 2% jego masy."
+            { type: 'Neuro-Fakt', text: "Mózg dorosłego człowieka zawiera ok. 86 miliardów neuronów — każdy może tworzyć do 10 000 połączeń synaptycznych z innymi komórkami." },
+            { type: 'Neuro-Fakt', text: "Mózg zużywa ok. 20% energii całego ciała, choć stanowi zaledwie 2% jego masy. Glukoza to jego jedyne paliwo — głodny mózg to gorszy mózg." },
+            { type: 'Neuro-Fakt', text: "Nasz mózg jest nadal 'na sawannie'. Traktuje zagrożenia społeczne dokładnie tak samo jak zagrożenia fizyczne — uruchamia ten sam mechanizm reakcji stresowej." },
+            { type: 'Neuro-Fakt', text: "Odrzucenie przez zespół, krytyka czy pominięcie w decyzjach aktywują ten sam obszar mózgu co ból fizyczny. Ból społeczny jest równie realny jak złamana kość." },
+            { type: 'Neuro-Fakt', text: "Kortyzol (hormon stresu) wydzielany w sytuacjach zagrożenia społecznego hamuje kreatywność, obniża zdolność logicznego myślenia i utrudnia współpracę." },
+            { type: 'Neuro-Fakt', text: "Nastrój lidera biologicznie 'zaraża' cały zespół. Układ limbiczny pracowników reaguje na emocje szefa automatycznie — nawet bez słów. To fizjologia, nie metafora." },
+            { type: 'Neuro-Fakt', text: "Oksytocyna — hormon zaufania — wydziela się nie tylko przy dotyku, ale też przy autentycznym kontakcie wzrokowym i poczuciu bycia wysłuchanym. Zaufanie skraca czas i obniża koszty." },
+            { type: 'Neuro-Fakt', text: "Serotonina reguluje aktywność całego mózgu, nastrój i sen. Jej poziom podnosi: światło słoneczne, aktywność fizyczna, 7–8h snu i... dobre relacje społeczne." },
+            { type: 'Neuro-Fakt', text: "Dopamina nie nagradza za osiągnięcie celu — wydziela się na antycypację nagrody. Mózg kocha dążenie bardziej niż posiadanie. Stąd siła dobrze postawionych celów." },
+            { type: 'Neuro-Fakt', text: "Daniel Kahneman udowodnił: porażkę odczuwamy dwukrotnie silniej niż radość z sukcesu. Mózg jest jak rzep na negatywne wydarzenia i jak teflon na pozytywne." },
+            { type: 'Neuro-Fakt', text: "Nasze samopoczucie zaczyna być dobre, jeśli liczba pozytywnych zdarzeń co najmniej 3-krotnie przekracza liczbę negatywnych. Menedżer ma realny wpływ na ten bilans." },
+            { type: 'Neuro-Fakt', text: "Model SCARF® Davida Rocka ma potwierdzenie w fMRI: zagrożenia Statusu, Pewności, Autonomii, Relacji i Sprawiedliwości aktywują ciało migdałowate tak samo jak zagrożenie fizyczne." },
+            { type: 'Neuro-Fakt', text: "Status: poczucie posiadania wysokiego statusu może być dla mózgu większą nagrodą niż pieniądz. Jedno niepotrzebne pouczenie lub pominięcie uruchamia reakcję obronną." },
+            { type: 'Neuro-Fakt', text: "Pewność: gdy nie wiemy, co nas czeka, kora przedczołowa pracuje w nadgodzinach — zamiast rozwiązywać problemy, skanuje otoczenie w poszukiwaniu zagrożeń." },
+            { type: 'Neuro-Fakt', text: "Autonomia to aktywizator motywacji wewnętrznej. Im więcej kontroli nad własnym działaniem, tym mniejszy stres i silniejsze zaangażowanie — bez żadnej marchewki z zewnątrz." },
+            { type: 'Neuro-Fakt', text: "Brak poczucia przynależności do zespołu wywołuje fizjologiczną odpowiedź na zagrożenie: spada motywacja, kreatywność i jakość współpracy. Integracja to nie 'miękki temat'." },
+            { type: 'Neuro-Fakt', text: "Niesprawiedliwość aktywuje silne emocje negatywne, które utrzymują się bardzo długo. Ludzie nie nawiązują bliskich relacji z kimś, kogo uważają za nieuczciwego — nawet jeśli ta osoba cierpi." },
+            { type: 'Neuro-Fakt', text: "Kora przedczołowa — centrum planowania, decyzji i regulacji emocji — jest niezwykle wrażliwa na stres. Zdenerwowany szef potrafi zablokować myślenie całego zespołu samą swoją obecnością." },
+            { type: 'Neuro-Fakt', text: "Nie jesteśmy obiektywni. Mózg aktywnie filtruje rzeczywistość przez pryzmat przekonań i emocji. Jonathan Haidt: 'Rozum to mały jeździec na wielkim słoniu emocji.'" },
+            { type: 'Neuro-Fakt', text: "Endorfiny wydzielają się nie tylko podczas wysiłku fizycznego, ale też przy śmiechu, pomaganiu innym i... gdy duży stres mija. Bezpieczeństwo psychologiczne sprzyja ich produkcji." },
+            { type: 'Neuro-Fakt', text: "Neuroplastyczność — zdolność mózgu do tworzenia nowych połączeń — trwa przez całe życie. Każde nowe doświadczenie dosłownie przebudowuje jego strukturę. Zmiana jest biologicznie możliwa." },
+            { type: 'Neuro-Fakt', text: "Sen to nie odpoczynek mózgu — to czas aktywnego usuwania toksyn (system glimfatyczny), konsolidacji pamięci i integracji emocji. Niedobór snu obniża jakość decyzji menedżerskich dramatycznie." }
         ];
 
-        let pillIndex = 0;
-        const pillTextEl = document.getElementById('pill-text');
-        const pillContainer = document.getElementById('pill-container');
-        const pillProgressBar = document.getElementById('pill-progress-bar');
-        const PILL_DURATION = 15000; // 15 seconds
+        const PILL_DURATION = 15000;
+        let pillActiveIdx = 1;
+        let pillDirection = 1;
+        let pillPaused = false;
+        let pillPausedAt = 0;       // ms elapsed when paused
+        let pillStartedAt = 0;      // timestamp when fill started
+        let pillTimer = null;
+        const pillTrack = document.getElementById('pill-track');
+        let pillFill = null;
 
-        function updateKnowledgePill() {
-            // Start fade out
-            pillContainer.classList.add('fade-out');
-
-            setTimeout(() => {
-                pillIndex = (pillIndex + 1) % knowledgePills.length;
-                pillTextEl.innerText = knowledgePills[pillIndex];
-
-                pillContainer.classList.remove('fade-out');
-                pillContainer.classList.add('fade-in');
-
-                setTimeout(() => {
-                    pillContainer.classList.remove('fade-in');
-                }, 500);
-
-                // Restart progress bar
-                pillProgressBar.style.transition = 'none';
-                pillProgressBar.style.width = '0%';
-
-                setTimeout(() => {
-                    pillProgressBar.style.transition = `width ${PILL_DURATION}ms linear`;
-                    pillProgressBar.style.width = '100%';
-                }, 50);
-
-            }, 500);
+        function buildPillCards() {
+            pillTrack.innerHTML = '';
+            knowledgePills.forEach((p, i) => {
+                const div = document.createElement('div');
+                div.className = 'pill-card-item' + (i === pillActiveIdx ? ' pill-active' : '');
+                div.innerHTML = `<span class="pill-card-type">${p.type}</span><p class="pill-card-text">${p.text}</p><div class="pill-progress-strip"><div class="pill-progress-fill"></div></div>`;
+                // Click on non-active card → navigate to it
+                div.addEventListener('click', () => {
+                    const idx = Array.from(pillTrack.children).indexOf(div);
+                    if (idx !== pillActiveIdx) {
+                        pillActiveIdx = idx;
+                        const min = 1, max = knowledgePills.length - 2;
+                        if (pillActiveIdx < min) pillActiveIdx = min;
+                        if (pillActiveIdx > max) pillActiveIdx = max;
+                        positionTrack(true);
+                        updatePillClasses();
+                        resetPillTimer();
+                        attachHoverToActive();
+                    }
+                });
+                pillTrack.appendChild(div);
+            });
         }
 
-        // Initialize pill
-        pillTextEl.innerText = knowledgePills[0];
-        pillProgressBar.style.transition = `width ${PILL_DURATION}ms linear`;
-        pillProgressBar.style.width = '100%';
-        setInterval(updateKnowledgePill, PILL_DURATION);
+        function calcAndSetCardWidth() {
+            const wrapper = pillTrack.parentElement;
+            const gap = 20;
+            const cardW = Math.floor((wrapper.offsetWidth - 2 * gap) / 3);
+            pillTrack.querySelectorAll('.pill-card-item').forEach(el => { el.style.flexBasis = cardW + 'px'; });
+            return cardW;
+        }
+
+        function positionTrack(animated) {
+            const gap = 20;
+            const cardW = calcAndSetCardWidth();
+            const offset = pillActiveIdx * (cardW + gap) - (cardW + gap);
+            pillTrack.style.transition = animated ? 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1)' : 'none';
+            pillTrack.style.transform = `translateX(-${Math.max(0, offset)}px)`;
+        }
+
+        function updatePillClasses() {
+            pillTrack.querySelectorAll('.pill-card-item').forEach((el, i) => {
+                el.classList.toggle('pill-active', i === pillActiveIdx);
+            });
+        }
+
+        function startPillFill(remaining) {
+            pillFill = pillTrack.querySelector('.pill-card-item.pill-active .pill-progress-fill');
+            if (!pillFill) return;
+            const startWidth = ((PILL_DURATION - remaining) / PILL_DURATION) * 100;
+            pillFill.style.transition = 'none';
+            pillFill.style.width = startWidth + '%';
+            pillStartedAt = performance.now() - (PILL_DURATION - remaining);
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+                pillFill.style.transition = `width ${remaining}ms linear`;
+                pillFill.style.width = '100%';
+            }));
+        }
+
+        function pausePillFill() {
+            if (!pillFill) return;
+            const elapsed = performance.now() - pillStartedAt;
+            pillPausedAt = Math.min(elapsed, PILL_DURATION);
+            const pct = (pillPausedAt / PILL_DURATION) * 100;
+            pillFill.style.transition = 'none';
+            pillFill.style.width = pct + '%';
+        }
+
+        function resumePillFill() {
+            const remaining = PILL_DURATION - pillPausedAt;
+            startPillFill(remaining);
+            // Reset timer to fire after remaining time
+            clearTimeout(pillTimer);
+            pillTimer = setTimeout(advancePill, remaining);
+        }
+
+        function resetPillTimer() {
+            clearTimeout(pillTimer);
+            pillPaused = false;
+            pillPausedAt = 0;
+            startPillFill(PILL_DURATION);
+            pillTimer = setTimeout(advancePill, PILL_DURATION);
+        }
+
+        function advancePill() {
+            const min = 1, max = knowledgePills.length - 2;
+            pillActiveIdx += pillDirection;
+            if (pillActiveIdx >= max) { pillActiveIdx = max; pillDirection = -1; }
+            else if (pillActiveIdx <= min) { pillActiveIdx = min; pillDirection = 1; }
+            positionTrack(true);
+            updatePillClasses();
+            resetPillTimer();
+            attachHoverToActive();
+        }
+
+        function onPillEnter() {
+            if (!pillPaused) {
+                pillPaused = true;
+                clearTimeout(pillTimer);
+                pausePillFill();
+            }
+        }
+        function onPillLeave() {
+            if (pillPaused) {
+                pillPaused = false;
+                resumePillFill();
+            }
+        }
+
+        function attachHoverToActive() {
+            pillTrack.querySelectorAll('.pill-card-item').forEach(el => {
+                el.removeEventListener('mouseenter', onPillEnter);
+                el.removeEventListener('mouseleave', onPillLeave);
+            });
+            const active = pillTrack.querySelector('.pill-card-item.pill-active');
+            if (active) {
+                active.addEventListener('mouseenter', onPillEnter);
+                active.addEventListener('mouseleave', onPillLeave);
+            }
+        }
+
+        buildPillCards();
+        positionTrack(false);
+        resetPillTimer();
+        attachHoverToActive();
+        window.addEventListener('resize', () => positionTrack(false));
+
+        function toggleCard(card) {
+            const isExpanded = card.classList.contains('expanded');
+
+            // Close all other cards in the program grid
+            document.querySelectorAll('.module-card').forEach(c => {
+                c.classList.remove('expanded');
+            });
+
+            // Toggle current card
+            if (!isExpanded) {
+                card.classList.add('expanded');
+                // Scroll to card for better experience on mobile/smaller screens
+                setTimeout(() => {
+                    const rect = card.getBoundingClientRect();
+                    const offset = window.pageYOffset + rect.top - (window.innerHeight / 2) + (rect.height / 2);
+                    window.scrollTo({ top: offset, behavior: 'smooth' });
+                }, 400);
+            }
+        }
 
         // --- Contact Form Logic ---
         function handleContactForm(e) {
@@ -1965,6 +2519,24 @@
             document.querySelectorAll('*').forEach(el => {
                 if (el.scrollTop > 0) el.scrollTo({ top: 0, behavior: 'smooth' });
             });
+        });
+
+        // Pomiar wymiarów slotów obrazków
+        window.addEventListener('load', function () {
+            function measure(placeholderId, sizeId) {
+                var el = document.getElementById(placeholderId);
+                if (!el) return;
+                var r = el.getBoundingClientRect();
+                document.getElementById(sizeId).textContent =
+                    Math.round(r.width) + 'px \u00d7 ' + Math.round(r.height) + 'px';
+            }
+            measure('img-placeholder-1', 'img1-size');
+            measure('img-placeholder-2', 'img2-size');
+            // Powtórz po chwili gdy layout się ustabilizuje
+            setTimeout(function () {
+                measure('img-placeholder-1', 'img1-size');
+                measure('img-placeholder-2', 'img2-size');
+            }, 500);
         });
 
     </script>
