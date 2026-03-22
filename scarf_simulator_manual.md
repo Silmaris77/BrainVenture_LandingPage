@@ -1,4 +1,4 @@
-# Instrukcja Symulatora SCARF: Rebalans Punktacji
+# SCARF Strategy Simulator: Przewodnik Operacyjny i Mechanika Punktacji
 
 Niniejszy dokument opisuje mechanikę punktacji oraz pełną bazę scenariuszy symulatora lidera opartego na modelu SCARF.
 
@@ -23,9 +23,9 @@ Zaufanie Zarządu (Board Confidence) posiada asymetryczną logikę wpływu, aby 
 
 ---
 
-## 2. Baza Scenariuszy (Po Rebalansie)
+## 2. Baza Danych Scenariuszy i Poziomy Operacyjne
 
-### Poziom: Junior Leader
+### Poziom: Strategic Baseline (Junior Leader)
 
 | Scenariusz | Wybór | Wpływ SCARF | Zaufanie Zarządu |
 | :--- | :--- | :--- | :--- |
@@ -44,7 +44,7 @@ Zaufanie Zarządu (Board Confidence) posiada asymetryczną logikę wpływu, aby 
 
 *(Pełna lista 30 scenariuszy znajduje się w kodzie aplikacji; powyższe to przykłady obrazujące nową skalę).*
 
-### Poziom: Manager
+### Poziom: Tactical Management (Manager)
 
 | Scenariusz | Wybór | Wpływ SCARF | Zaufanie Zarządu |
 | :--- | :--- | :--- | :--- |
@@ -57,7 +57,7 @@ Zaufanie Zarządu (Board Confidence) posiada asymetryczną logikę wpływu, aby 
 | | C (Zakup nowego) | Rel:+20, Fai:+25 | -30 |
 | | **D (Facylitacja grafiku)** | Fai:+25, Aut:+25, Rel:+20 | +10 |
 
-### Poziom: Director
+### Poziom: Strategic Leadership (Director)
 
 | Scenariusz | Wybór | Wpływ SCARF | Zaufanie Zarządu |
 | :--- | :--- | :--- | :--- |
@@ -70,10 +70,14 @@ Zaufanie Zarządu (Board Confidence) posiada asymetryczną logikę wpływu, aby 
 | | C (Ucieczka na urlop) | Sta:-15, Rel:-15 | -15 |
 | | **D (Tarcza dyrektorska)** | Sta:+20, Cer:+15, Rel:+15 | +15 |
 
----
+## 3. Zasady Projektowania Scenariuszy (Design Principles)
 
-## 3. Zasady Projektowania Scenariuszy
-Przy dodawaniu nowych treści należy pamiętać o "Zatrutym Kielichu" – wyborach, które dają duży zysk w jednym wymiarze (np. Relacje), ale niszczą inny krytyczny zasób (np. Board Confidence lub Fairness).
+Przy dodawaniu nowych treści należy kierować się koncepcją **"Zatrutego Kielicha"** (Poisoned Chalice) – wyborami, które oferują natychmiastowy zysk w jednym wymiarze (np. Relacje), ale niszczą inny krytyczny kapitał (np. Zaufanie Zarządu lub Sprawiedliwość).
+
+### Kluczowe Wytyczne:
+1.  **Dylemat, nie wybór**: Każdy scenariusz powinien stawiać lidera przed trudnym wyborem, gdzie rzadko istnieje "idealna" odpowiedź bez żadnych kosztów.
+2.  **Balans Interesów**: Wybory powinny odzwierciedlać napięcie między potrzebami biologicznymi zespołu (SCARF) a celami biznesowymi organizacji (BOARD).
+3.  **Wybór D (Strategiczny)**: Powinien być najbardziej zbalansowany — dający umiarkowane zyski w wielu wymiarach SCARF przy jednoczesnym utrzymaniu spokoju operacyjnego i zaufania zarządu. To "Złoty Środek" przywództwa neurobiologicznego.
 
 > [!IMPORTANT]
-> Najlepszy lider to taki, który potrafi znaleźć wybór D – dający umiarkowane zyski w wielu wymiarach SCARF przy jednoczesnym utrzymaniu spokoju operacyjnego (Board).
+> Skuteczny lider w BrainVenture™ to taki, który potrafi nawigować w świecie sprzecznych interesów, chroniąc zasoby poznawcze zespołu bez narażania stabilności firmy.

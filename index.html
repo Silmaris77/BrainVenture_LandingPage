@@ -253,32 +253,65 @@
         }
 
         .card.expanded {
-            grid-column: span 3 !important;
             border-color: var(--accent-cyan) !important;
-            background: rgba(14, 42, 71, 0.95);
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
         }
 
-        @media (max-width: 900px) {
-            .card.expanded {
-                grid-column: span 1 !important;
-            }
+        /* --- Module Modal --- */
+        #module-modal {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(10, 15, 30, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #module-modal.active { opacity: 1; }
+
+        .module-modal-panel {
+            background: rgba(14, 42, 71, 0.97);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 40px;
+            padding: 50px 56px;
+            max-width: 780px;
+            width: 100%;
+            max-height: 88vh;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(28px) scale(0.98);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            scrollbar-width: thin;
+            scrollbar-color: rgba(30,115,185,0.3) transparent;
+        }
+        #module-modal.active .module-modal-panel {
+            transform: translateY(0) scale(1);
+        }
+        .modal-close-btn {
+            position: absolute;
+            top: 22px; right: 26px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            width: 38px; height: 38px;
+            color: var(--text-dim);
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: 0.2s;
+        }
+        .modal-close-btn:hover {
+            background: rgba(177,10,74,0.2);
+            border-color: var(--accent-magenta);
+            color: #fff;
         }
 
         .card-details {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            margin-top: 0;
-        }
-
-        .card.expanded .card-details {
-            max-height: 2000px;
-            opacity: 1;
-            margin-top: 30px;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: none;
         }
 
         .expand-hint {
@@ -300,7 +333,7 @@
         }
 
         .card.expanded .expand-hint {
-            opacity: 0;
+            opacity: 0.6;
         }
 
         .detail-section {
@@ -1018,7 +1051,7 @@
                         <div>
                             <div class="section-header" style="text-align: left; margin-bottom: 24px;">
                                 <span>Interaktywna Symulacja</span>
-                                <h2 style="font-size: 2.5rem;">Poziom Wyzwania</h2>
+                                <h2 style="font-size: 2.5rem;">SCARF Challenge</h2>
                             </div>
                             <p style="color: var(--text-dim); font-size: 0.95rem; line-height: 1.7; margin-bottom: 24px;">
                                 Wciel się w rolę lidera i doświadcz na własnej skórze, jak decyzje zarządcze wpływają na mózg Twojego zespołu. Właśnie tego uczą się uczestnicy BrainVenture™:
@@ -1354,7 +1387,7 @@
                             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
                                 <div class="card-icon"
                                     style="margin-bottom: 0; font-size: 2rem; color: var(--accent-magenta);"><i
-                                        class="fa fa-battery-half"></i></div>
+                                        class="fa fa-leaf"></i></div>
                                 <h3 class="card-title" style="margin-bottom: 0;">5. Wellbeing</h3>
                             </div>
                             <p class="card-text">Mózg, który nie wypoczywa, nie myśli. Zarządzanie snem i energią jako
@@ -2459,24 +2492,35 @@
         attachHoverToActive();
         window.addEventListener('resize', () => positionTrack(false));
 
+        function openModuleModal(card) {
+            const iconEl = card.querySelector('.card-icon');
+            const title = card.querySelector('.card-title').textContent.trim();
+            const desc = card.querySelector('.card-text').textContent.trim();
+            const detailsHTML = card.querySelector('.card-details').innerHTML;
+
+            document.getElementById('modal-icon').innerHTML = iconEl.innerHTML;
+            // copy icon color if set
+            const iconStyle = iconEl.getAttribute('style') || '';
+            document.getElementById('modal-icon').setAttribute('style', 'margin-bottom:0; font-size:2.4rem; ' + iconStyle);
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-desc').textContent = desc;
+            document.getElementById('modal-details').innerHTML = detailsHTML;
+
+            const modal = document.getElementById('module-modal');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            requestAnimationFrame(() => modal.classList.add('active'));
+        }
+
+        function closeModuleModal() {
+            const modal = document.getElementById('module-modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+            setTimeout(() => { modal.style.display = 'none'; }, 310);
+        }
+
         function toggleCard(card) {
-            const isExpanded = card.classList.contains('expanded');
-
-            // Close all other cards in the program grid
-            document.querySelectorAll('.module-card').forEach(c => {
-                c.classList.remove('expanded');
-            });
-
-            // Toggle current card
-            if (!isExpanded) {
-                card.classList.add('expanded');
-                // Scroll to card for better experience on mobile/smaller screens
-                setTimeout(() => {
-                    const rect = card.getBoundingClientRect();
-                    const offset = window.pageYOffset + rect.top - (window.innerHeight / 2) + (rect.height / 2);
-                    window.scrollTo({ top: offset, behavior: 'smooth' });
-                }, 400);
-            }
+            openModuleModal(card);
         }
 
         // --- Contact Form Logic ---
@@ -2540,6 +2584,20 @@
         });
 
     </script>
+
+    <!-- Module Detail Modal -->
+    <div id="module-modal" onclick="if(event.target===this) closeModuleModal()">
+        <div class="module-modal-panel">
+            <button class="modal-close-btn" onclick="closeModuleModal()" title="Zamknij"><i class="fa fa-times"></i></button>
+            <div style="display:flex; align-items:center; gap:18px; margin-bottom:24px;">
+                <div class="card-icon" id="modal-icon" style="margin-bottom:0; font-size:2.4rem;"></div>
+                <h2 id="modal-title" style="font-family:var(--font-heading); font-size:1.9rem; font-weight:900; margin:0; color:#fff;"></h2>
+            </div>
+            <p id="modal-desc" style="color:var(--text-dim); font-size:1rem; line-height:1.75; margin-bottom:30px; padding-bottom:28px; border-bottom:1px solid rgba(255,255,255,0.08);"></p>
+            <div id="modal-details"></div>
+        </div>
+    </div>
+
 </body>
 
 </html>
