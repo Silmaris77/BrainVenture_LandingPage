@@ -755,38 +755,17 @@
             color: var(--accent-cyan);
         }
         /* Stress Mode Effect */
-        @keyframes stress-vignette-pulse {
-            0%   { opacity: 0.55; }
-            50%  { opacity: 1; }
-            100% { opacity: 0.55; }
+        body.brain-stress-mode {
+            filter: saturate(0.15) contrast(1.15);
+            transition: filter 0.8s ease;
         }
-        html.brain-stress-mode body {
-            filter: saturate(0.08) contrast(1.2) brightness(0.9);
-            transition: filter 1s ease;
-        }
-        html.brain-stress-mode::after {
+        body.brain-stress-mode::after {
             content: '';
             position: fixed;
             inset: 0;
-            background: radial-gradient(ellipse 100% 100% at 50% 50%,
-                transparent 25%,
-                rgba(200,0,0,0.35) 52%,
-                rgba(230,0,0,0.75) 74%,
-                rgba(220,0,0,1) 100%);
-            animation: stress-vignette-pulse 2s ease-in-out infinite;
+            box-shadow: inset 0 0 180px rgba(200,0,0,0.18);
             pointer-events: none;
-            z-index: 99999;
-        }
-        /* Peripheral blur — attentional narrowing */
-        html.brain-stress-mode::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            backdrop-filter: blur(7px);
-            -webkit-mask-image: radial-gradient(circle 200px at var(--stress-x, 50%) var(--stress-y, 50%), transparent 20%, black 70%);
-            mask-image: radial-gradient(circle 200px at var(--stress-x, 50%) var(--stress-y, 50%), transparent 20%, black 70%);
-            pointer-events: none;
-            z-index: 99997;
+            z-index: 8888;
         }
         /* Dopamine Glow Effect (applied to the card itself) */
         .brain-demo-card.dopamine-active {
@@ -797,109 +776,20 @@
         .brain-demo-card.dopamine-active .demo-icon {
             box-shadow: 0 0 30px rgba(177,10,74,0.5);
         }
-        /* Dopamine card hover warm glow */
-        .dopamine-card-hover {
-            box-shadow: 0 0 0 1px rgba(255,190,60,0.6), 0 0 35px rgba(255,155,30,0.45), 0 0 80px rgba(255,100,0,0.2) !important;
-            border-color: rgba(255,190,60,0.55) !important;
-            transform: translateY(-5px) scale(1.01) !important;
-            transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.25s ease !important;
-        }
-        /* Gold coins */
-        .dopamine-coin {
-            position: fixed;
-            pointer-events: none;
-            z-index: 9000;
-            font-size: 1.4rem;
-            user-select: none;
-            animation: coin-fly var(--coin-dur, 1s) ease-out forwards;
-            transform-origin: center;
-        }
-        @keyframes coin-fly {
-            0%   { transform: translate(0,0) rotate(0deg) scale(1);   opacity: 1; }
-            60%  { opacity: 1; }
-            100% { transform: translate(var(--coin-dx,0px), var(--coin-dy,-120px)) rotate(var(--coin-rot,360deg)) scale(0.5); opacity: 0; }
-        }
-        /* Dollar counter przy kursorze */
-        #dopamine-counter {
-            position: fixed;
-            pointer-events: none;
-            z-index: 9100;
-            display: none;
-            font-family: var(--font-heading);
-            font-size: 1.1rem;
-            font-weight: 900;
-            color: #fbbf24;
-            text-shadow: 0 0 12px rgba(251,191,36,0.8), 0 0 30px rgba(255,150,0,0.5);
-            letter-spacing: 1px;
-            transform: translate(18px, -10px);
-            transition: none;
-        }
-        .dopamine-counter-pop {
-            animation: counter-pop 0.25s ease-out;
-        }
-        @keyframes counter-pop {
-            0%   { transform: translate(18px, -10px) scale(1.5); }
-            100% { transform: translate(18px, -10px) scale(1); }
-        }
-        /* Drżenie amygdali — narastające */
-        @keyframes amygdala-shake-1 {
+        /* Amygdala Shake */
+        @keyframes amygdala-shake {
             0%,100% { transform: translate(0,0) rotate(0deg); }
-            15% { transform: translate(-3px,-2px) rotate(-0.3deg); }
-            35% { transform: translate(3px,2px) rotate(0.3deg); }
-            55% { transform: translate(-2px,1px) rotate(-0.2deg); }
-            75% { transform: translate(2px,-1px) rotate(0.2deg); }
+            10% { transform: translate(-3px,-2px) rotate(-0.4deg); }
+            20% { transform: translate(3px,2px) rotate(0.4deg); }
+            30% { transform: translate(-4px,1px) rotate(-0.8deg); }
+            40% { transform: translate(4px,-1px) rotate(0.8deg); }
+            50% { transform: translate(-2px,3px) rotate(-0.4deg); }
+            60% { transform: translate(2px,-3px) rotate(0.4deg); }
+            80% { transform: translate(-1px,1px) rotate(-0.2deg); }
         }
-        @keyframes amygdala-shake-2 {
-            0%,100% { transform: translate(0,0) rotate(0deg); }
-            10% { transform: translate(-5px,-3px) rotate(-0.6deg); }
-            25% { transform: translate(6px,4px) rotate(0.7deg); }
-            40% { transform: translate(-7px,2px) rotate(-1deg); }
-            55% { transform: translate(7px,-3px) rotate(1deg); }
-            70% { transform: translate(-4px,5px) rotate(-0.6deg); }
-            85% { transform: translate(4px,-4px) rotate(0.5deg); }
+        .amygdala-shaking {
+            animation: amygdala-shake 0.12s infinite;
         }
-        @keyframes amygdala-shake-3 {
-            0%,100% { transform: translate(0,0) rotate(0deg); }
-            8%  { transform: translate(-9px,-5px) rotate(-1.2deg); }
-            20% { transform: translate(10px,6px) rotate(1.4deg); }
-            33% { transform: translate(-11px,3px) rotate(-1.8deg); }
-            46% { transform: translate(12px,-5px) rotate(2deg); }
-            60% { transform: translate(-8px,7px) rotate(-1.4deg); }
-            73% { transform: translate(8px,-6px) rotate(1.2deg); }
-            86% { transform: translate(-5px,3px) rotate(-0.8deg); }
-        }
-        .amygdala-phase-1 { animation: amygdala-shake-1 0.18s infinite; }
-        .amygdala-phase-2 { animation: amygdala-shake-2 0.13s infinite; }
-        .amygdala-phase-3 { animation: amygdala-shake-3 0.09s infinite; }
-        /* Żółty błysk alarmu */
-        @keyframes amygdala-flash {
-            0%,100% { opacity: 0; }
-            50% { opacity: 1; }
-        }
-        #amygdala-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 99998;
-        }
-        #amygdala-overlay.active { display: block; }
-        #amygdala-overlay .flash-layer {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse 80% 80% at 50% 50%, transparent 50%, rgba(251,191,36,0.25) 100%);
-            animation: amygdala-flash 0.35s ease-in-out infinite;
-        }
-        /* Pulsujące bicie serca */
-        @keyframes amygdala-heartbeat {
-            0%   { transform: scale(1); }
-            14%  { transform: scale(1.004); }
-            28%  { transform: scale(1); }
-            42%  { transform: scale(1.007); }
-            56%  { transform: scale(1); }
-            100% { transform: scale(1); }
-        }
-        .amygdala-heartbeat { animation: amygdala-heartbeat 0.6s ease-in-out infinite; }
 
         /* --- Dopamine Full-Page Effect --- */
         body.dopamine-full-active::before {
@@ -1079,8 +969,6 @@
 
     <canvas id="neural-canvas"></canvas>
     <canvas id="dopamine-canvas" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:8000;display:none;"></canvas>
-    <div id="amygdala-overlay"><div class="flash-layer"></div></div>
-    <div id="dopamine-counter"></div>
     <div class="ambient-glow"
         style="top: 0; left: 0; background: radial-gradient(circle, rgba(30, 115, 185, 0.05) 0%, transparent 70%);">
     </div>
@@ -1091,15 +979,16 @@
     <div class="container">
         <nav>
             <a href="#" class="logo" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
-                <img src="Images/brainventure_logo.png" alt="BrainVenture" style="height: 132px; width: auto;">
+                <span
+                    style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 900; background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan), var(--accent-magenta)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -1px;">BrainVenture™</span>
                 <span
                     style="font-size: 0.55rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dim); padding: 2px 6px; border: 1px solid var(--glass-border); border-radius: 4px;">Beta</span>
             </a>
             <div class="nav-links">
-                <a href="#dla-kogo">Dla kogo</a>
-                <a href="#ekosystem">Ekosystem</a>
+                <a href="#about">Metodyka</a>
                 <a href="#lab">Laboratorium</a>
                 <a href="#modules">Program</a>
+                <a href="#online">Ekosystem</a>
                 <a href="#contact">Kontakt</a>
             </div>
         </nav>
@@ -1107,9 +996,9 @@
         <header class="hero-section">
             <span class="neuro-label">The Future of Leadership Architecture</span>
             <h1>Gdy nauka spotyka <span>przywództwo</span></h1>
-            <p class="hero-desc" style="font-family: 'Roboto', sans-serif;">Nowy wymiar programu rozwojowego dla liderów jutra.
-Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę zawodową i angażującą formę nauki.
-</p>
+            <p class="hero-desc" style="font-family: 'Roboto', sans-serif;">BrainVenture™ to transformacyjne doświadczenie, które zmienia sposób myślenia o
+                nowoczesnym przywództwie. Przekrocz granice teoretycznych szkoleń i wejdź do jedynego w Polsce
+                laboratorium decyzji opartych na neuronauce.</p>
 
             <p
                 style="font-size: 0.85rem; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 3px; font-weight: 700; margin-bottom: 25px; opacity: 0.8;">
@@ -1129,12 +1018,6 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                 </div>
             </div>
 
-            <p class="hero-desc" style="font-family: 'Roboto', sans-serif;">
-                <strong style="color: #fff;">BrainVenture</strong> — Twój przewodnik w ekscytującej podróży przez zakamarki ludzkiej psychiki.
-                Od zrozumienia biologicznych mechanizmów zachowań, <br>po wdrożenie przemyślanych strategii podejmowania decyzji biznesowych.<br>
-                Spójna ścieżka transformacji, która zamienia intuicyjne reakcje w świadome budowanie odporności, zaangażowania i trafnych decyzji w skali całej organizacji.
-            </p>
-
             <div>
                 <a href="#contact"
                     style="background: linear-gradient(135deg, var(--accent-magenta), var(--accent-blue)); color: #fff; padding: 22px 60px; border-radius: 100px; font-weight: 900; text-decoration: none; font-size: 1.1rem; box-shadow: 0 15px 40px rgba(177,10,74,0.4); display: inline-block; letter-spacing: 0.5px;">Zarezerwuj
@@ -1142,117 +1025,145 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
             </div>
         </header>
 
-        <div id="dla-kogo" class="section-header" style="margin-bottom: 40px; margin-top: 60px;">
-            <span>Dla kogo</span>
-            <h2>Kto skorzysta z BrainVenture™?</h2>
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1400px; margin: 0 auto 80px;">
-
-            <!-- TOP MANAGEMENT -->
-            <div style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 30px; padding: 36px 40px; backdrop-filter: blur(20px); transition: 0.3s;">
-                <p style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-cyan); margin-bottom: 14px;">Top Management</p>
-                <p style="color: var(--text-dim); font-size: 0.95rem; line-height: 1.75;">Dla liderów kształtujących strategię. Pomaga zrozumieć, jak decyzje na szczycie wpływają na biologię i efektywność całego systemu organizacyjnego.</p>
-            </div>
-
-            <!-- MENEDŻEROWIE I LIDERZY -->
-            <div style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 30px; padding: 36px 40px; backdrop-filter: blur(20px); transition: 0.3s;">
-                <p style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-cyan); margin-bottom: 14px;">Menedżerowie i Liderzy</p>
-                <p style="color: var(--text-dim); font-size: 0.95rem; line-height: 1.75;">Dla osób zarządzających ludźmi w zmiennym środowisku. Dostarcza narzędzi do budowania zaangażowania i dbania o zespół bez straty na wynikach.</p>
-            </div>
-
-            <!-- PROJECT MANAGERS -->
-            <div style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 30px; padding: 36px 40px; backdrop-filter: blur(20px); transition: 0.3s;">
-                <p style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-cyan); margin-bottom: 14px;">Project Managers</p>
-                <p style="color: var(--text-dim); font-size: 0.95rem; line-height: 1.75;">Dla prowadzących złożone procesy. Uczy, jak budować autorytet bez formalnej podległości i zarządzać energią zespołu w długich cyklach projektowych.</p>
-            </div>
-
-            <!-- DZIAŁY HR I L&D -->
-            <div style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 30px; padding: 36px 40px; backdrop-filter: blur(20px); transition: 0.3s;">
-                <p style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-cyan); margin-bottom: 14px;">Działy HR i L&amp;D</p>
-                <p style="color: var(--text-dim); font-size: 0.95rem; line-height: 1.75;">Dla profesjonalistów wspierających rozwój kadr. Pozwala lepiej zrozumieć neurobiologiczne fundamenty skutecznego zarządzania i skutecznie wspierać kadrę menedżerską w codziennych wyzwaniach.</p>
-            </div>
-
-        </div>
-
-        <!-- Ekosystem Section -->
-        <div id="ekosystem" style="margin-top: 80px; margin-bottom: 80px;">
-            <div class="section-header" style="text-align: center; margin-bottom: 50px;">
-                <span>Ekosystem</span>
-                <h2 style="font-size: 2.5rem;">BrainVenture™ Ekosystem</h2>
-                <p style="color: var(--text-dim); max-width: 700px; margin: 15px auto 0;">Trzy filary spójnego systemu — gra symulacyjna, warsztaty modułowe i platforma cyfrowa — tworzą kompletną ścieżkę transformacji lidera.</p>
-            </div>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; align-items: start;">
-
-                <!-- Kolumna 1: Gra Symulacyjna -->
-                <div class="card" style="background: linear-gradient(135deg, rgba(14,42,71,0.6), rgba(30,115,185,0.08)); display: flex; flex-direction: column; gap: 18px;">
-                    <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 6px;">
-                        <div class="card-icon" style="margin-bottom: 0; font-size: 2rem; color: var(--accent-cyan);"><i class="fa fa-gamepad"></i></div>
-                        <h3 class="card-title" style="margin-bottom: 0; font-size: 1.4rem;">Gra Symulacyjna</h3>
-                    </div>
-                    <p class="card-text" style="font-size: 0.92rem; font-weight: 600; color: #fff;">Jedyna w Polsce gra symulacyjna wprowadzająca w fascynujący świat neuroprzywództwa.</p>
-                    <p class="card-text" style="font-size: 0.9rem;">BrainVenture stwarza unikalną możliwość poznania najważniejszych odkryć neuronauk oraz sposobów na ich wykorzystanie w realnych sytuacjach zawodowych. A wszystko to w atmosferze dobrej zabawy, wciągającej rywalizacji i dynamicznej, pełnej emocji nauki.</p>
-                    <p class="card-text" style="font-size: 0.9rem;">Uczestnicy wcielają się w role menedżerów rywalizujących o sukces rynkowy. Zdobywają kontrakty, negocjują warunki współpracy, reagują na zdarzenia losowe i podejmują decyzje dotyczące rozwoju zespołu.</p>
-                    <p class="card-text" style="font-size: 0.9rem;">Kluczowym wyzwaniem jest wypracowanie odpowiedniego balansu między koncentracją na biznesie i dbałością o pracowników. Na końcowy sukces wpływa bowiem zrozumienie, jak działa ludzka motywacja i w jaki sposób można wspierać efektywność w środowisku zawodowym.</p>
-                </div>
-
-                <!-- Kolumna 2: Warsztaty Modułowe -->
-                <div class="card" style="background: linear-gradient(135deg, rgba(177,10,74,0.08), rgba(14,42,71,0.6)); border-color: rgba(177,10,74,0.25); display: flex; flex-direction: column; gap: 16px;">
-                    <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 6px;">
-                        <div class="card-icon" style="margin-bottom: 0; font-size: 2rem; color: var(--accent-magenta);"><i class="fa fa-cubes"></i></div>
-                        <h3 class="card-title" style="margin-bottom: 0; font-size: 1.4rem;">Warsztaty Modułowe</h3>
-                    </div>
-                    <p class="card-text" style="font-size: 0.9rem;">Warsztaty praktyczne w architekturze modułowej pogłębiające poszczególne obszary wiedzy o mózgu i jej zastosowanie w codziennej pracy lidera.</p>
-                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px;">
-                        <li style="font-size: 0.88rem; color: var(--text-dim); padding-left: 18px; position: relative; line-height: 1.5;"><span style="position:absolute;left:0;color:var(--accent-magenta);">&#8594;</span><strong style="color:#fff;">Moduł 1: Poznanie</strong> — Jak mózg tworzy Twoją rzeczywistość?</li>
-                        <li style="font-size: 0.88rem; color: var(--text-dim); padding-left: 18px; position: relative; line-height: 1.5;"><span style="position:absolute;left:0;color:var(--accent-magenta);">&#8594;</span><strong style="color:#fff;">Moduł 2: Emocje</strong> — Homo Emotionalis. Czy logika to iluzja?</li>
-                        <li style="font-size: 0.88rem; color: var(--text-dim); padding-left: 18px; position: relative; line-height: 1.5;"><span style="position:absolute;left:0;color:var(--accent-magenta);">&#8594;</span><strong style="color:#fff;">Moduł 3: Decyzje</strong> — Neurobiologia wyboru: od schematów do strategii</li>
-                        <li style="font-size: 0.88rem; color: var(--text-dim); padding-left: 18px; position: relative; line-height: 1.5;"><span style="position:absolute;left:0;color:var(--accent-magenta);">&#8594;</span><strong style="color:#fff;">Moduł 4: Komunikacja</strong> — Neurochemia rozmowy: od oporu do współpracy</li>
-                        <li style="font-size: 0.88rem; color: var(--text-dim); padding-left: 18px; position: relative; line-height: 1.5;"><span style="position:absolute;left:0;color:var(--accent-magenta);">&#8594;</span><strong style="color:#fff;">Moduł 5: Wellbeing</strong> — Mózg, który nie wypoczywa, nie myśli</li>
-                        <li style="font-size: 0.88rem; color: var(--text-dim); padding-left: 18px; position: relative; line-height: 1.5;"><span style="position:absolute;left:0;color:var(--accent-magenta);">&#8594;</span><strong style="color:#fff;">Moduł 6: Przywództwo XXI wieku</strong> — Między kontrolą a transformacją</li>
-                    </ul>
-                    <p class="card-text" style="font-size: 0.88rem; border-left: 3px solid var(--accent-magenta); padding-left: 14px; margin-top: 4px;">Każdy moduł to 1–2-dniowy program skoncentrowany na przełożeniu wiedzy na praktykę biznesową. Stanowi samodzielną, spójną całość. Moduły można realizować jako pełny cykl lub skoncentrować się na wybranych zagadnieniach.</p>
-                </div>
-
-                <!-- Kolumna 3: BrainVenture Online -->
-                <div class="card" style="background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(14,42,71,0.6)); display: flex; flex-direction: column; gap: 16px;">
-                    <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 6px;">
-                        <div class="card-icon" style="margin-bottom: 0; font-size: 2rem; color: #a78bfa;"><i class="fa fa-laptop"></i></div>
-                        <h3 class="card-title" style="margin-bottom: 0; font-size: 1.4rem;">BrainVenture Online</h3>
-                    </div>
-                    <p class="card-text" style="font-size: 0.9rem;">Cyfrowe przedłużenie programu, które pozwala uczestnikom wracać do wiedzy, pogłębiać ją we własnym tempie i stosować w codziennej praktyce.</p>
-                    <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 4px;">
-                        <div style="padding: 16px 18px; background: rgba(30,115,185,0.08); border-left: 3px solid var(--accent-cyan); border-radius: 12px;">
-                            <p style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-cyan); margin-bottom: 6px;">Diagnoza</p>
-                            <p style="font-size: 0.87rem; color: var(--text-dim); line-height: 1.6; margin: 0;">Profil Neurolidera — dynamiczny test oparty na scenariuszach decyzyjnych. Wynikiem jest osobisty Profil Neurolidera — mapa potrzeb rozwojowych i preferowanych wzorców zachowań.</p>
-                        </div>
-                        <div style="padding: 16px 18px; background: rgba(177,10,74,0.07); border-left: 3px solid var(--accent-magenta); border-radius: 12px;">
-                            <p style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-magenta); margin-bottom: 6px;">Nauka</p>
-                            <p style="font-size: 0.87rem; color: var(--text-dim); line-height: 1.6; margin: 0;">Zindywidualizowana ścieżka szkoleniowa. Lekcje ułożone w talie 15–25 interaktywnych kart, z pigułkami wiedzy, quizami i case studies.</p>
-                        </div>
-                        <div style="padding: 16px 18px; background: rgba(167,139,250,0.07); border-left: 3px solid #a78bfa; border-radius: 12px;">
-                            <p style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #a78bfa; margin-bottom: 6px;">Trening</p>
-                            <p style="font-size: 0.87rem; color: var(--text-dim); line-height: 1.6; margin: 0;">Gra Online pozwalająca w bezpiecznych warunkach ugruntować wiedzę i sprawdzić jej poziom w kontekście biznesowym.</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+        <div class="section-header" id="about">
+            <span>Metodyka</span>
+            <h2>Dlaczego BrainVenture™?</h2>
         </div>
 
         <main class="bento-grid">
+            <section class="card col-2"
+                style="background: linear-gradient(145deg, rgba(30, 115, 185, 0.05), transparent); padding-bottom: 20px;">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
+                    <div class="card-icon" style="margin-bottom: 0;"><i class="fa fa-university"></i></div>
+                    <h2 class="card-title" style="margin-bottom: 0; line-height: 1.2;">Dlaczego BrainVenture™?</h2>
+                </div>
+
+                <p class="card-text"
+                    style="font-weight: 600; color: #fff; margin-bottom: 20px; font-size: 1.05rem; margin-top: 15px;">
+                    BrainVenture™ to unikalne podejście do rozwoju liderów, które łączy współczesną wiedzę naukową,
+                    praktykę zawodową i angażującą formę nauki.</p>
+
+                <p class="card-text" style="margin-bottom: 20px;">Programy szkoleniowe oraz gra symulacyjna tworzą
+                    spójną ścieżkę transformacji: od zrozumienia biologicznych mechanizmów zachowań, po wdrożenie
+                    precyzyjnych strategii zarządzania potencjałem ludzkim.</p>
+
+                <p class="card-text" style="margin-bottom: 20px;">To proces, który zamienia intuicyjne reakcje w
+                    świadome budowanie odporności, zaangażowania i trafnych decyzji w skali całej organizacji.</p>
+
+                <p class="card-text" style="margin-bottom: 30px;">Skuteczne przywództwo zaczyna się od zarządzania sobą,
+                    a to nie jest możliwe bez zrozumienia procesów biologicznych, które determinują nasze reakcje.</p>
+
+                <div
+                    style="background: rgba(255,255,255,0.03); border-radius: 30px; padding: 35px 30px; border: 1px solid rgba(255,255,255,0.05); position: relative;">
+                    <h3
+                        style="color: var(--accent-cyan); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; font-weight: 800; margin-bottom: 35px; text-align: left;">
+                        Unikalność Programu</h3>
+
+                    <div
+                        style="position: absolute; left: 45px; top: 95px; bottom: 55px; width: 1px; background: rgba(30, 115, 185, 0.3);">
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 30px;">
+                        <div style="position: relative; padding-left: 50px;">
+                            <div
+                                style="position: absolute; left: 10px; top: 6px; width: 12px; height: 12px; background: var(--accent-blue); border-radius: 50%; box-shadow: 0 0 15px var(--accent-blue);">
+                            </div>
+                            <h4
+                                style="color: #fff; font-size: 0.95rem; margin-bottom: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">
+                                Stworzony przez ekspertów</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-dim); margin: 0; line-height: 1.5;">Synergia
+                                neuropsychologii, coachingu strategicznego i gamifikacji gwarantuje najwyższą jakość
+                                merytoryczną.</p>
+                        </div>
+
+                        <div style="position: relative; padding-left: 50px;">
+                            <div
+                                style="position: absolute; left: 10px; top: 6px; width: 12px; height: 12px; background: var(--accent-blue); border-radius: 50%; box-shadow: 0 0 15px var(--accent-blue);">
+                            </div>
+                            <h4
+                                style="color: #fff; font-size: 0.95rem; margin-bottom: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">
+                                Kompetencje, które robią różnicę</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-dim); margin: 0; line-height: 1.5;">
+                                Rozwijamy umiejętności krytyczne w warunkach BANI: regulację emocjonalną, komunikację
+                                neurobiologiczną i strategiczną odporność psychiczną.</p>
+                        </div>
+
+                        <div style="position: relative; padding-left: 50px;">
+                            <div
+                                style="position: absolute; left: 10px; top: 6px; width: 12px; height: 12px; background: var(--accent-blue); border-radius: 50%; box-shadow: 0 0 15px var(--accent-blue);">
+                            </div>
+                            <h4
+                                style="color: #fff; font-size: 0.95rem; margin-bottom: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">
+                                Wciągająca forma, realne efekty</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-dim); margin: 0; line-height: 1.5;">Dzięki
+                                symulacji wiedza nie zostaje w sali szkoleniowej – staje się nowym nawykiem, który
+                                natychmiast pracuje na ROI Twojej organizacji.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Column Wrapper (Dynamic Perfect Height) -->
+            <div class="col-2" style="display: flex; flex-direction: column; gap: 30px;">
+                <!-- Workshop Variants - High Impact Vertical List -->
+                <section class="card" id="variants"
+                    style="background: rgba(30, 115, 185, 0.1); border: 1px solid rgba(255,255,255,0.05); padding-top: 45px; padding-bottom: 30px; padding-left: 40px; padding-right: 40px; margin: 0; flex-shrink: 0;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
+                        <div class="card-icon" style="margin-bottom: 0;"><i class="fa fa-cubes"></i></div>
+                        <h2 class="card-title" style="margin-bottom: 0; line-height: 1.2;">Jak to zrobić?</h2>
+                    </div>
+                    <div style="display: grid; gap: 15px;">
+                        <div
+                            style="padding: 20px; background: rgba(30, 115, 185, 0.08); border-radius: 20px; border-left: 4px solid var(--accent-cyan);">
+                            <p
+                                style="font-weight: 900; color: var(--accent-cyan); font-size: 1rem; margin-bottom: 8px;">
+                                Wariant I: Inspiracja & Kick-off</p>
+                            <p style="font-size: 0.9rem; color: var(--text-dim); margin: 0; line-height: 1.5;">
+                                Dynamiczne wydarzenie (konferencje, Akademie Menedżera), budujące błyskawiczne
+                                zaangażowanie i świadomość potrzeb.</p>
+                        </div>
+                        <div
+                            style="padding: 20px; background: rgba(30, 115, 185, 0.08); border-radius: 20px; border-left: 4px solid var(--accent-magenta);">
+                            <p
+                                style="font-weight: 900; color: var(--accent-magenta); font-size: 1rem; margin-bottom: 8px;">
+                                Wariant II: Gra + Wybrane Moduły</p>
+                            <p style="font-size: 0.9rem; color: var(--text-dim); margin: 0; line-height: 1.5;">
+                                Połączenie gry symulacyjnej z precyzyjnie dobranymi modułami adresującymi konkretne
+                                deficyty zespołu.</p>
+                        </div>
+                        <div
+                            style="padding: 20px; background: rgba(30, 115, 185, 0.08); border-radius: 20px; border-left: 4px solid #fff;">
+                            <p style="font-weight: 900; color: #fff; font-size: 1rem; margin-bottom: 8px;">Wariant III:
+                                Pełny Cykl Transformacji</p>
+                            <p style="font-size: 0.9rem; color: var(--text-dim); margin: 0; line-height: 1.5;">Budowa
+                                mapy mózgu lidera. Kompleksowa transformacja postaw: od gry jako fundamentu po 6 modułów
+                                merytorycznych.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Cheerful Visual Insight - PRECISION CROP 655x449 -->
+                <section class="card"
+                    style="padding:0; border:none; background:none; overflow: hidden; flex-shrink: 0; margin: 0; display: flex;">
+                    <div
+                        style="width:100%; height:100%; border-radius: 40px; overflow:hidden; border: 1px solid var(--glass-border); display: flex;">
+                        <img src="Images/neuro_leader_655x449.png" alt="Cheerful Neuro Leadership"
+                            style="width:100%; height:100%; object-fit:cover; display: block;">
+                    </div>
+                </section>
+            </div>
+
 
             <!-- Lab Section Header -->
             <div class="col-4" id="lab" style="margin-top: 20px;">
                 <div class="section-header">
-                    <span>Interaktywne Laboratorium</span>
+                    <span> Laboratorium</span>
                     <h2>Sprawdź, czego się nauczysz</h2>
                     <p style="color: var(--text-dim); max-width: 680px; margin: 16px auto 0; font-size: 1rem; line-height: 1.7;">Poniżej znajdziesz próbkę wiedzy i doświadczeń, które zdobywają uczestnicy BrainVenture™ — podczas szkoleń i gry symulacyjnej. To tylko fragment tego, co czeka Twój zespół.</p>
                 </div>
             </div>
 
             <!-- Knowledge Pill Carousel -->
-            <!--
             <section class="card col-4 pill-carousel-section">
                 <div class="pill-carousel-header">
                     <span class="pill-section-label">Próbka wiedzy ze szkoleń</span>
@@ -1262,7 +1173,6 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                     <div class="pill-carousel-track" id="pill-track"></div>
                 </div>
             </section>
-            -->
 
             <!-- SCARF Dynamic Simulator -->
             <section class="card col-4" id="scarf-simulator"
@@ -1424,9 +1334,9 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         </div>
                         <span class="demo-tag" style="color: #f87171;">Kortyzol &amp; Stres</span>
                         <h3>Stres Poznawczy</h3>
-                        <p>Pod wpływem kortyzolu mózg dosłownie zmienia sposób, w jaki widzisz świat. Kora wzrokowa traci nasycenie barwami, pole widzenia zawęża się do tunelu skupionego na zagrożeniu, a peryferyczne bodźce przestają docierać do świadomości. Kora przedczołowa — siedlisko logicznego myślenia — zostaje odcięta od zasobów. Dlatego pod presją czasu lub oceny podejmujemy gorsze decyzje i dosłownie <em>widzimy mniej</em>.</p>
+                        <p>Pod wpływem kortyzolu mózg wchodzi w tryb przetrwania. Kolory bledną, peryferyczne widzenie się zawęża, a kora przedczołowa — odpowiedzialna za logiczne myślenie — traci dostęp do zasobów. To wyjaśnia, dlaczego pod presją podejmujemy gorsze decyzje.</p>
                         <div style="margin-top: 20px; padding: 14px 16px; background: rgba(248,113,113,0.07); border-left: 3px solid #f87171; border-radius: 10px; font-size: 0.8rem; color: var(--text-dim); line-height: 1.6;">
-                            <strong style="color:#f87171;">Efekt:</strong> Desaturacja + pulsująca czerwona winieta + tunelowe widzenie śledzące kursor — przesuń mysz i poczuj, jak zawęża się Twoje pole uwagi.
+                            <strong style="color:#f87171;">Efekt:</strong> Odsaturowanie ekranu + czerwona winieta — dokładnie tak widzi mózg w stanie zagrożenia.
                         </div>
                         <button class="demo-trigger-btn" id="btn-stress" onclick="toggleBrainEffect('stress')">
                             <i class="fa fa-play" id="icon-stress"></i> Aktywuj stres
@@ -1440,9 +1350,9 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         </div>
                         <span class="demo-tag" style="color: #e879a0;">Dopamina &amp; Nagroda</span>
                         <h3>Efekt Dopaminowy</h3>
-                        <p>Dopamina to neuroprzekaźnik <em>antycypacji</em> — uwalnia się nie w momencie nagrody, lecz w oczekiwaniu na nią. To dlatego scrollujemy feed, sprawdzamy wyniki czy klikamy „kup teraz" szybciej niż myślimy. W zarządzaniu działa identycznie: pochwała, autonomia, cel na wyciągnięcie ręki — to paliwo dopaminowe. Mózg pracownika nie odróżnia realnej nagrody od dobrze zaprojektowanego procesu.</p>
+                        <p>Dopamina to nie tylko przyjemność — to neuroprzekaźnik motywacji i antycypacji nagrody. Aktywuje się zanim nagroda nadejdzie. W zarządzaniu: docenianie pracy, autonomia i osiąganie celów uruchamiają ten sam mechanizm co wygrana w grze.</p>
                         <div style="margin-top: 20px; padding: 14px 16px; background: rgba(177,10,74,0.07); border-left: 3px solid #e879a0; border-radius: 10px; font-size: 0.8rem; color: var(--text-dim); line-height: 1.6;">
-                            <strong style="color:#e879a0;">Efekt:</strong> Klikaj w ekran — zdobywasz nagrody, lecą monety, rośnie licznik. Najeżdżaj na karty i obserwuj rozbłysk złotej poświaty. Twój mózg właśnie dostaje dawkę dopaminy.
+                            <strong style="color:#e879a0;">Efekt:</strong> Najeżdź na tę kartę po aktywacji — zobaczysz rozbłysk nagrody.
                         </div>
                         <button class="demo-trigger-btn" id="btn-dopamine" onclick="toggleBrainEffect('dopamine')">
                             <i class="fa fa-play" id="icon-dopamine"></i> Aktywuj dopaminę
@@ -1456,9 +1366,9 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         </div>
                         <span class="demo-tag" style="color: #fbbf24;">Ciało migdałowate</span>
                         <h3>Alarm Amygdali</h3>
-                        <p>Ciało migdałowate reaguje na zagrożenie w 80 ms — zanim kora przedczołowa zdąży pomyśleć. Efektem jest <em>amygdala hijack</em>: drżenie, przyspieszony puls, zawężona uwaga, impulsywne reakcje. W środowisku pracy alarmu nie uruchamiają tylko fizyczne niebezpieczeństwa — wystarczy publiczna krytyka, groźba utraty stanowiska lub nagła zmiana bez wyjaśnienia. Menedżer, który wyzwala ten alarm u pracownika, traci dostęp do jego kory — a więc do kreatywności, lojalności i rozwiązywania problemów.</p>
+                        <p>Ciało migdałowate to system wczesnego ostrzeżenia mózgu. Reaguje na zagrożenie w 80 ms — za nim zdąży myślisz. Drżenie rąk, przyspieszony puls, utrata koncentracji — to ⋯amygdala hijack⋯. W pracy: konflikt, publiczne upokorzenie lub groźba zwolnienia uruchamia ten sygnał.</p>
                         <div style="margin-top: 20px; padding: 14px 16px; background: rgba(251,191,36,0.07); border-left: 3px solid #fbbf24; border-radius: 10px; font-size: 0.8rem; color: var(--text-dim); line-height: 1.6;">
-                            <strong style="color:#fbbf24;">Efekt:</strong> 3 eskalujące fazy drżenia + żółte błyski + narastający rytm serca (120→160→200 BPM). Alarm nie zatrzymuje się sam — tak jak prawdziwy amygdala hijack.
+                            <strong style="color:#fbbf24;">Efekt:</strong> Cała strona zaczyna drżeć — symulując fizyczne doznanie alarmu ciała migdałowatego.
                         </div>
                         <button class="demo-trigger-btn" id="btn-amygdala" onclick="toggleBrainEffect('amygdala')">
                             <i class="fa fa-play" id="icon-amygdala"></i> Aktywuj alarm
@@ -1477,9 +1387,45 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                 </div>
                 <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px; flex-shrink: 0; padding: 40px 20px;">
                     <a href="#contact" style="background: linear-gradient(135deg, var(--accent-magenta), var(--accent-blue)); color: #fff; padding: 18px 44px; border-radius: 100px; font-weight: 900; text-decoration: none; font-size: 1rem; box-shadow: 0 10px 30px rgba(177,10,74,0.35); white-space: nowrap; letter-spacing: 0.3px;">Zarezerwuj Bezpłatne Demo →</a>
-                 
+                    <p style="color: var(--text-dim); font-size: 0.8rem; margin: 0;">Bez zobowiązań · 45 minut · Online lub stacjonarnie</p>
                 </div>
             </div>
+
+            <!-- Team Synergy Visual - PRECISION CROP 655x355 -->
+            <section class="card col-2" style="padding:0; border:none; background:none; display: flex; align-self: stretch;">
+                <div
+                    style="width:100%; height:100%; border-radius: 40px; overflow:hidden; border: 1px solid var(--glass-border); display: flex; flex-grow: 1;">
+                    <img src="Images/team_synergy_655x355.png" alt="Team Neural Synergy"
+                        style="width:100%; height:100%; object-fit:cover; display: block;">
+                </div>
+            </section>
+
+            <!-- For Whom Section -->
+            <section class="card col-2" style="justify-content: center;">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 25px;">
+                    <div class="card-icon" style="margin-bottom: 0; font-size: 2.5rem;"><i class="fa fa-users"></i>
+                    </div>
+                    <h2 class="card-title" style="margin-bottom: 0;">Dla kogo ta inwestycja?</h2>
+                </div>
+                <p class="card-text">BrainVenture™ to idealne rozwiązanie dla organizacji stawiających na nowoczesne
+                    przywództwo:</p>
+                <div class="audience-grid"
+                    style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top:20px;">
+                    <div style="font-size: 0.8rem; border-left: 2px solid var(--accent-cyan); padding-left: 15px;">
+                        <strong style="color:#fff;">Menedżerowie</strong><br>Odkryją mechanizmy budowania zaufania.
+                    </div>
+                    <div style="font-size: 0.8rem; border-left: 2px solid var(--accent-magenta); padding-left: 15px;">
+                        <strong style="color:#fff;">Dyrektorzy</strong><br>Zoptymalizują procesy decyzyjne.
+                    </div>
+                    <div style="font-size: 0.8rem; border-left: 2px solid var(--accent-blue); padding-left: 15px;">
+                        <strong style="color:#fff;">HR & L&D</strong><br>Zbudują kulturę zaangażowania.
+                    </div>
+                    <div style="font-size: 0.8rem; border-left: 2px solid #fff; padding-left: 15px;">
+                        <strong style="color:#fff;">Liderzy Projektów</strong><br>Zapanują nad dynamiką zespołu.
+                    </div>
+                </div>
+            </section>
+
 
             <!-- Modules (Program) Section -->
             <div class="col-4" id="modules" style="margin-top: 60px;">
@@ -1703,6 +1649,63 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         </section>
                     </div>
 
+                <!-- BrainVenture™ Online Section -->
+                <div class="col-4" id="online" style="margin-top: 80px; margin-bottom: 40px;">
+                    <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+                        <span>Rozwój Bez Granic</span>
+                        <h2 style="font-size: 2.5rem;">BrainVenture™ On-line</h2>
+                        <p style="color: var(--text-dim); max-width: 700px; margin: 15px auto 0;">Cyfrowe przedłużenie
+                            programu, które pozwala uczestnikom pogłębiać wiedzę we własnym tempie i stosować ją w
+                            codziennej praktyce.</p>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+                        <!-- Diagnoza -->
+                        <div class="card"
+                            style="background: linear-gradient(135deg, rgba(30, 115, 185, 0.1), transparent);">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                                <div class="card-icon" style="margin-bottom: 0; font-size: 2rem;"><i
+                                        class="fa fa-sliders"></i></div>
+                                <h3 class="card-title" style="margin-bottom: 0;">1. Diagnoza</h3>
+                            </div>
+                            <p
+                                style="color: var(--accent-cyan); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">
+                                Profil Neurolidera</p>
+                            <p class="card-text" style="font-size: 0.9rem;">Dynamiczny test oparty na scenariuszach
+                                decyzyjnych. Wynikiem jest osobista mapa potrzeb rozwojowych i wzorców zachowań.</p>
+                        </div>
+                        <!-- Nauka -->
+                        <div class="card"
+                            style="background: linear-gradient(135deg, rgba(177, 10, 74, 0.1), transparent); border-color: var(--accent-magenta);">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                                <div class="card-icon"
+                                    style="margin-bottom: 0; font-size: 2rem; color: var(--accent-magenta);"><i
+                                        class="fa fa-book"></i></div>
+                                <h3 class="card-title" style="margin-bottom: 0;">2. Nauka</h3>
+                            </div>
+                            <p
+                                style="color: var(--accent-magenta); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">
+                                Mikrodawki Wiedzy</p>
+                            <p class="card-text" style="font-size: 0.9rem;">Lekcje ułożone w interaktywne talie kart.
+                                Pigułki wiedzy, quizy i case studies dostępne 24/7 na dowolnym urządzeniu.</p>
+                        </div>
+                        <!-- Trening -->
+                        <div class="card"
+                            style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), transparent);">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
+                                <div class="card-icon" style="margin-bottom: 0; font-size: 2rem;"><i
+                                        class="fa fa-gamepad"></i></div>
+                                <h3 class="card-title" style="margin-bottom: 0;">3. Trening</h3>
+                            </div>
+                            <p
+                                style="color: var(--text-dim); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">
+                                Gra Online</p>
+                            <p class="card-text" style="font-size: 0.9rem;">Poligon doświadczalny w formie symulacji
+                                (solo lub multiplayer). Pozwala ugruntować wiedzę w bezpiecznym środowisku.</p>
+                        </div>
+                    </div>
+                </div>
+
         </main>
 
         <section id="contact"
@@ -1777,11 +1780,12 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
 
         <footer>
             <div style="margin-bottom: 30px; display: flex; justify-content: center;">
-                <img src="Images/brainventure_logo.png" alt="BrainVenture" style="height: 216px; width: auto; opacity: 0.85;">
+                <span
+                    style="font-family: var(--font-heading); font-size: 1.8rem; font-weight: 900; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-magenta)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -1px;">BrainVenture™</span>
             </div>
             <p style="color: var(--text-dim); font-size: 1rem; margin-bottom: 10px;">Gdy nauka spotyka przywództwo.</p>
             <p style="font-size: 0.75rem; color: rgba(255,255,255,0.2); margin-top: 40px;">© 2025 BrainVenture™ Landing
-                Page Prototype</p>
+                Page Prototype | Created by Antigravity</p>
         </footer>
     </div>
 
@@ -2558,7 +2562,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
         let pillFill = null;
 
         function buildPillCards() {
-            if (!pillTrack) return;
+            pillTrack.innerHTML = '';
             knowledgePills.forEach((p, i) => {
                 const div = document.createElement('div');
                 div.className = 'pill-card-item' + (i === pillActiveIdx ? ' pill-active' : '');
@@ -2679,12 +2683,10 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
         }
 
         buildPillCards();
-        if (pillTrack) {
         positionTrack(false);
         resetPillTimer();
         attachHoverToActive();
         window.addEventListener('resize', () => positionTrack(false));
-        }
 
         function openModuleModal(card) {
             const iconEl = card.querySelector('.card-icon');
@@ -2738,14 +2740,16 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
             icon.className = 'fa fa-stop';
 
             if (name === 'stress') {
-                document.documentElement.classList.add('brain-stress-mode');
+                document.body.classList.add('brain-stress-mode');
             }
             if (name === 'dopamine') {
                 document.body.classList.add('dopamine-full-active');
                 startDopamineBurst();
             }
             if (name === 'amygdala') {
-                startAmygdalaSequence();
+                document.querySelector('.container').classList.add('amygdala-shaking');
+                // auto-stop after 3s
+                amygdalaTimer = setTimeout(() => turnOffBrainEffect('amygdala'), 3000);
             }
         }
 
@@ -2757,19 +2761,15 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
             if (icon) { icon.className = 'fa fa-play'; }
 
             if (name === 'stress') {
-                document.documentElement.classList.remove('brain-stress-mode');
+                document.body.classList.remove('brain-stress-mode');
             }
             if (name === 'dopamine') {
                 document.body.classList.remove('dopamine-full-active');
                 stopDopamineBurst();
             }
             if (name === 'amygdala') {
-                const c = document.querySelector('.container');
-                c.classList.remove('amygdala-phase-1', 'amygdala-phase-2', 'amygdala-phase-3', 'amygdala-heartbeat');
-                const ov = document.getElementById('amygdala-overlay');
-                if (ov) ov.classList.remove('active');
+                document.querySelector('.container').classList.remove('amygdala-shaking');
                 if (amygdalaTimer) { clearTimeout(amygdalaTimer); amygdalaTimer = null; }
-                stopHeartbeat();
             }
         }
 
@@ -2856,8 +2856,6 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
         document.addEventListener('click', e => {
             if (!brainEffects.dopamine) return;
             spawnBurstAt(e.clientX, e.clientY, 20, true);
-            spawnCoins(e.clientX, e.clientY, 5);
-            incrementDopamineCounter();
         });
 
         // Hover on interactive elements → mini burst (only when dopamine active)
@@ -2865,199 +2863,15 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
             .forEach(el => {
                 el.addEventListener('mouseenter', () => {
                     if (!brainEffects.dopamine) return;
+                    const r = el.getBoundingClientRect();
+                    spawnBurstAt(r.left + r.width / 2, r.top + r.height / 2, 8, false);
                 });
             });
 
-        // Hover on cards → warm golden glow (only when dopamine active)
-        document.querySelectorAll('.card').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                if (!brainEffects.dopamine) return;
-                el.classList.add('dopamine-card-hover');
-                spawnCoins(el.getBoundingClientRect().left + el.getBoundingClientRect().width / 2, el.getBoundingClientRect().top + el.getBoundingClientRect().height / 2, 3);
-            });
-            el.addEventListener('mouseleave', () => {
-                el.classList.remove('dopamine-card-hover');
-            });
-        });
-
-        // --- Dollar counter ---
-        let _dopamineTotal = 0;
-        const _dopamineCounterEl = document.getElementById('dopamine-counter');
-
-        document.addEventListener('mousemove', e => {
-            if (!brainEffects.dopamine) return;
-            _dopamineCounterEl.style.left = e.clientX + 'px';
-            _dopamineCounterEl.style.top  = e.clientY + 'px';
-        });
-
-        function playCoinSound(type) {
-            try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                const now = ctx.currentTime;
-
-                if (type === 'milestone') {
-                    // Triumfalny arpeggio przy każdym tysiącu
-                    const notes = [1047, 1319, 1568, 2093]; // C6, E6, G6, C7
-                    notes.forEach((freq, i) => {
-                        const o = ctx.createOscillator();
-                        const g = ctx.createGain();
-                        o.type = 'sine';
-                        o.connect(g); g.connect(ctx.destination);
-                        o.frequency.setValueAtTime(freq, now + i * 0.1);
-                        g.gain.setValueAtTime(0.0, now + i * 0.1);
-                        g.gain.linearRampToValueAtTime(0.18, now + i * 0.1 + 0.01);
-                        g.gain.exponentialRampToValueAtTime(0.001, now + i * 0.1 + 0.5);
-                        o.start(now + i * 0.1);
-                        o.stop(now + i * 0.1 + 0.52);
-                    });
-                    setTimeout(() => ctx.close(), 900);
-                } else if (type === 'click') {
-                    // Stały brzęk monety: zawsze te same dwie częstotliwości
-                    const o1 = ctx.createOscillator();
-                    const o2 = ctx.createOscillator();
-                    const g1 = ctx.createGain();
-                    const g2 = ctx.createGain();
-                    o1.type = 'sine'; o1.frequency.setValueAtTime(1500, now);
-                    o2.type = 'sine'; o2.frequency.setValueAtTime(2250, now + 0.025);
-                    g1.gain.setValueAtTime(0.12, now);
-                    g1.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
-                    g2.gain.setValueAtTime(0.07, now + 0.025);
-                    g2.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
-                    o1.connect(g1); g1.connect(ctx.destination);
-                    o2.connect(g2); g2.connect(ctx.destination);
-                    o1.start(now); o1.stop(now + 0.22);
-                    o2.start(now + 0.025); o2.stop(now + 0.27);
-                    setTimeout(() => ctx.close(), 400);
-                }
-            } catch(e) {}
-        }
-
-        function incrementDopamineCounter() {
-            _dopamineTotal += 100;
-            _dopamineCounterEl.textContent = '+$' + _dopamineTotal.toLocaleString();
-            _dopamineCounterEl.classList.remove('dopamine-counter-pop');
-            void _dopamineCounterEl.offsetWidth; // reflow
-            _dopamineCounterEl.classList.add('dopamine-counter-pop');
-            if (_dopamineTotal % 1000 === 0) {
-                playCoinSound('milestone');
-            } else {
-                playCoinSound('click');
-            }
-        }
-
-        // --- Coin helpers ---
-        function spawnCoins(x, y, count) {
-            const COIN_GLYPHS = ['💰', '🪙', '⭐', '✨', '💵'];
-            for (let i = 0; i < count; i++) {
-                const el = document.createElement('div');
-                el.className = 'dopamine-coin';
-                el.textContent = COIN_GLYPHS[Math.floor(Math.random() * COIN_GLYPHS.length)];
-                const dx = (Math.random() - 0.5) * 160;
-                const dy = -(60 + Math.random() * 130);
-                const rot = (Math.random() - 0.5) * 720;
-                const dur = 0.7 + Math.random() * 0.6;
-                el.style.left = x + 'px';
-                el.style.top  = y + 'px';
-                el.style.setProperty('--coin-dx', dx + 'px');
-                el.style.setProperty('--coin-dy', dy + 'px');
-                el.style.setProperty('--coin-rot', rot + 'deg');
-                el.style.setProperty('--coin-dur', dur + 's');
-                document.body.appendChild(el);
-                setTimeout(() => el.remove(), dur * 1000 + 100);
-            }
-        }
-
         // Brain lab button toggles boost mode + background glow
-        function startAmygdalaSequence() {
-            const c = document.querySelector('.container');
-            const ov = document.getElementById('amygdala-overlay');
-            ov.classList.add('active');
-            // Faza 1: delikatne drżenie (0–1s)
-            c.classList.add('amygdala-phase-1');
-            playHeartbeat(120);
-            amygdalaTimer = setTimeout(() => {
-                // Faza 2: silniejsze drżenie + bicie serca (1–2s)
-                c.classList.remove('amygdala-phase-1');
-                c.classList.add('amygdala-phase-2', 'amygdala-heartbeat');
-                playHeartbeat(160);
-                amygdalaTimer = setTimeout(() => {
-                    // Faza 3: maksymalne drżenie — zostaje aż user wyłączy
-                    c.classList.remove('amygdala-phase-2');
-                    c.classList.add('amygdala-phase-3');
-                    playHeartbeat(200);
-                    amygdalaTimer = null;
-                }, 1000);
-            }, 1000);
-        }
-
-        let _heartbeatInterval = null;
-        let _heartbeatCtx = null;
-        let _heartbeatActive = false;
-
-        function playHeartbeat(bpm) {
-            // Stop any existing loop first
-            _heartbeatActive = false;
-            if (_heartbeatInterval) { clearInterval(_heartbeatInterval); _heartbeatInterval = null; }
-            if (_heartbeatCtx) {
-                try { _heartbeatCtx.suspend(); } catch(e) {}
-                try { _heartbeatCtx.close(); } catch(e) {}
-                _heartbeatCtx = null;
-            }
-
-            try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                _heartbeatCtx = ctx;
-                _heartbeatActive = true;
-
-                const beat = (time, gain) => {
-                    const o = ctx.createOscillator();
-                    const g = ctx.createGain();
-                    o.connect(g); g.connect(ctx.destination);
-                    o.frequency.setValueAtTime(55, time);
-                    o.frequency.exponentialRampToValueAtTime(35, time + 0.08);
-                    g.gain.setValueAtTime(gain, time);
-                    g.gain.exponentialRampToValueAtTime(0.001, time + 0.12);
-                    o.start(time); o.stop(time + 0.13);
-                };
-
-                const playOnce = () => {
-                    if (!_heartbeatActive) return;
-                    const now = ctx.currentTime;
-                    const ivl = 60 / bpm;
-                    beat(now, 0.7);
-                    beat(now + ivl * 0.15, 0.4);
-                };
-
-                playOnce();
-                _heartbeatInterval = setInterval(playOnce, (60 / bpm) * 1000);
-            } catch(e) {}
-        }
-
-        function stopHeartbeat() {
-            _heartbeatActive = false;
-            if (_heartbeatInterval) { clearInterval(_heartbeatInterval); _heartbeatInterval = null; }
-            if (_heartbeatCtx) {
-                try { _heartbeatCtx.suspend(); } catch(e) {}
-                try { _heartbeatCtx.close(); } catch(e) {}
-                _heartbeatCtx = null;
-            }
-        }
-
-        function startDopamineBurst() {
-            _dBoost = true;
-            _dopamineTotal = 0;
-            _dopamineCounterEl.style.display = 'block';
-            _dopamineCounterEl.textContent = '+$0';
-        }
-
-        // Track cursor for stress peripheral blur
-        document.addEventListener('mousemove', e => {
-            document.documentElement.style.setProperty('--stress-x', e.clientX + 'px');
-            document.documentElement.style.setProperty('--stress-y', e.clientY + 'px');
-        });
+        function startDopamineBurst() { _dBoost = true; }
         function stopDopamineBurst()  {
             _dBoost = false;
-            _dopamineCounterEl.style.display = 'none';
             document.querySelectorAll('.neuro-floater').forEach(el => el.remove());
         }
 
