@@ -687,6 +687,138 @@
         .diff-btn.manager .diff-level-dots span:nth-child(-n+2) { background: #fbbf24; }
         .diff-btn.director .diff-level-dots span { background: #f87171; }
 
+        /* --- Brain Effects Section --- */
+        .brain-demo-card {
+            cursor: pointer;
+            user-select: none;
+        }
+        .brain-demo-card .demo-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 24px;
+            flex-shrink: 0;
+            transition: 0.4s;
+        }
+        .brain-demo-card .demo-tag {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .brain-demo-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 14px;
+        }
+        .brain-demo-card p {
+            color: var(--text-dim);
+            font-size: 0.88rem;
+            line-height: 1.7;
+            flex: 1;
+        }
+        .demo-trigger-btn {
+            margin-top: 28px;
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.04);
+            color: #fff;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            letter-spacing: 0.3px;
+        }
+        .demo-trigger-btn:hover {
+            background: rgba(255,255,255,0.08);
+        }
+        .demo-trigger-btn.active {
+            background: rgba(30,115,185,0.15);
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+        /* Stress Mode Effect */
+        body.brain-stress-mode {
+            filter: saturate(0.15) contrast(1.15);
+            transition: filter 0.8s ease;
+        }
+        body.brain-stress-mode::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            box-shadow: inset 0 0 180px rgba(200,0,0,0.18);
+            pointer-events: none;
+            z-index: 8888;
+        }
+        /* Dopamine Glow Effect (applied to the card itself) */
+        .brain-demo-card.dopamine-active {
+            border-color: #B10A4A !important;
+            box-shadow: 0 0 0 1px #B10A4A, 0 0 60px rgba(177,10,74,0.35) !important;
+            transform: translateY(-10px) scale(1.02) !important;
+        }
+        .brain-demo-card.dopamine-active .demo-icon {
+            box-shadow: 0 0 30px rgba(177,10,74,0.5);
+        }
+        /* Amygdala Shake */
+        @keyframes amygdala-shake {
+            0%,100% { transform: translate(0,0) rotate(0deg); }
+            10% { transform: translate(-3px,-2px) rotate(-0.4deg); }
+            20% { transform: translate(3px,2px) rotate(0.4deg); }
+            30% { transform: translate(-4px,1px) rotate(-0.8deg); }
+            40% { transform: translate(4px,-1px) rotate(0.8deg); }
+            50% { transform: translate(-2px,3px) rotate(-0.4deg); }
+            60% { transform: translate(2px,-3px) rotate(0.4deg); }
+            80% { transform: translate(-1px,1px) rotate(-0.2deg); }
+        }
+        .amygdala-shaking {
+            animation: amygdala-shake 0.12s infinite;
+        }
+
+        /* --- Dopamine Full-Page Effect --- */
+        body.dopamine-full-active::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse 90% 70% at 50% 50%,
+                rgba(177,10,74,0.12) 0%,
+                rgba(251,191,36,0.07) 50%,
+                transparent 75%);
+            pointer-events: none;
+            z-index: 7999;
+            animation: dopamine-pulse-bg 1.6s ease-in-out infinite alternate;
+        }
+        @keyframes dopamine-pulse-bg {
+            from { opacity: 0.4; }
+            to   { opacity: 1; }
+        }
+        .neuro-floater {
+            position: fixed;
+            pointer-events: none;
+            z-index: 8002;
+            animation: neuro-float 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            user-select: none;
+        }
+        @keyframes neuro-float {
+            0%   { transform: translateY(0)     scale(0.5) rotate(0deg);   opacity: 1; }
+            60%  { opacity: 0.9; }
+            100% { transform: translateY(-220px) scale(1.4) rotate(20deg); opacity: 0; }
+        }
+
         /* Knowledge Pill Carousel */
         .pill-carousel-section {
             background: none !important;
@@ -834,6 +966,7 @@
 <body>
 
     <canvas id="neural-canvas"></canvas>
+    <canvas id="dopamine-canvas" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:8000;display:none;"></canvas>
     <div class="ambient-glow"
         style="top: 0; left: 0; background: radial-gradient(circle, rgba(30, 115, 185, 0.05) 0%, transparent 70%);">
     </div>
@@ -852,6 +985,7 @@
             <div class="nav-links">
                 <a href="#about">Metodyka</a>
                 <a href="#lab">Laboratorium</a>
+                <a href="#brain-lab">Neuronauka</a>
                 <a href="#modules">Program</a>
                 <a href="#online">Ekosystem</a>
                 <a href="#contact">Kontakt</a>
@@ -1181,6 +1315,67 @@
                 </div>
                 </div><!-- /simulator-main -->
             </section>
+
+            <!-- Brain Effects Section -->
+            <div class="col-4" id="brain-lab" style="margin-top: 10px;">
+                <div class="section-header" style="margin-bottom: 40px;">
+                    <span>Neuronauka w praktyce</span>
+                    <h2>Jak działa Twój mózg?</h2>
+                    <p style="color: var(--text-dim); max-width: 620px; margin: 14px auto 0; font-size: 0.95rem; line-height: 1.7;">Trzy interaktywne demonstracje. Każda symuluje inny mechanizm neurobiologiczny, który codziennie wpływa na Ciebie i Twój zespół. Kliknij przycisk, żeby tego doświadczyć.</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+
+                    <!-- Card 1: Cognitive Stress -->
+                    <section class="card brain-demo-card" id="card-stress" style="display: flex; flex-direction: column;">
+                        <div class="demo-icon" style="background: rgba(200,50,50,0.12); color: #f87171;">
+                            <i class="fa fa-tint"></i>
+                        </div>
+                        <span class="demo-tag" style="color: #f87171;">Kortyzol &amp; Stres</span>
+                        <h3>Stres Poznawczy</h3>
+                        <p>Pod wpływem kortyzolu mózg wchodzi w tryb przetrwania. Kolory bledną, peryferyczne widzenie się zawęża, a kora przedczołowa — odpowiedzialna za logiczne myślenie — traci dostęp do zasobów. To wyjaśnia, dlaczego pod presją podejmujemy gorsze decyzje.</p>
+                        <div style="margin-top: 20px; padding: 14px 16px; background: rgba(248,113,113,0.07); border-left: 3px solid #f87171; border-radius: 10px; font-size: 0.8rem; color: var(--text-dim); line-height: 1.6;">
+                            <strong style="color:#f87171;">Efekt:</strong> Odsaturowanie ekranu + czerwona winieta — dokładnie tak widzi mózg w stanie zagrożenia.
+                        </div>
+                        <button class="demo-trigger-btn" id="btn-stress" onclick="toggleBrainEffect('stress')">
+                            <i class="fa fa-play" id="icon-stress"></i> Aktywuj stres
+                        </button>
+                    </section>
+
+                    <!-- Card 2: Dopamine Glow -->
+                    <section class="card brain-demo-card" id="card-dopamine" style="display: flex; flex-direction: column;">
+                        <div class="demo-icon" style="background: rgba(177,10,74,0.12); color: #e879a0;">
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <span class="demo-tag" style="color: #e879a0;">Dopamina &amp; Nagroda</span>
+                        <h3>Efekt Dopaminowy</h3>
+                        <p>Dopamina to nie tylko przyjemność — to neuroprzekaźnik motywacji i antycypacji nagrody. Aktywuje się zanim nagroda nadejdzie. W zarządzaniu: docenianie pracy, autonomia i osiąganie celów uruchamiają ten sam mechanizm co wygrana w grze.</p>
+                        <div style="margin-top: 20px; padding: 14px 16px; background: rgba(177,10,74,0.07); border-left: 3px solid #e879a0; border-radius: 10px; font-size: 0.8rem; color: var(--text-dim); line-height: 1.6;">
+                            <strong style="color:#e879a0;">Efekt:</strong> Najeżdź na tę kartę po aktywacji — zobaczysz rozbłysk nagrody.
+                        </div>
+                        <button class="demo-trigger-btn" id="btn-dopamine" onclick="toggleBrainEffect('dopamine')">
+                            <i class="fa fa-play" id="icon-dopamine"></i> Aktywuj dopaminę
+                        </button>
+                    </section>
+
+                    <!-- Card 3: Amygdala Alarm -->
+                    <section class="card brain-demo-card" id="card-amygdala" style="display: flex; flex-direction: column;">
+                        <div class="demo-icon" style="background: rgba(251,191,36,0.12); color: #fbbf24;">
+                            <i class="fa fa-bolt"></i>
+                        </div>
+                        <span class="demo-tag" style="color: #fbbf24;">Ciało migdałowate</span>
+                        <h3>Alarm Amygdali</h3>
+                        <p>Ciało migdałowate to system wczesnego ostrzeżenia mózgu. Reaguje na zagrożenie w 80 ms — za nim zdąży myślisz. Drżenie rąk, przyspieszony puls, utrata koncentracji — to ⋯amygdala hijack⋯. W pracy: konflikt, publiczne upokorzenie lub groźba zwolnienia uruchamia ten sygnał.</p>
+                        <div style="margin-top: 20px; padding: 14px 16px; background: rgba(251,191,36,0.07); border-left: 3px solid #fbbf24; border-radius: 10px; font-size: 0.8rem; color: var(--text-dim); line-height: 1.6;">
+                            <strong style="color:#fbbf24;">Efekt:</strong> Cała strona zaczyna drżeć — symulując fizyczne doznanie alarmu ciała migdałowatego.
+                        </div>
+                        <button class="demo-trigger-btn" id="btn-amygdala" onclick="toggleBrainEffect('amygdala')">
+                            <i class="fa fa-play" id="icon-amygdala"></i> Aktywuj alarm
+                        </button>
+                    </section>
+
+                </div>
+            </div>
 
             <!-- Bridge block after simulator -->
             <div class="col-4" style="display: flex; align-items: stretch; gap: 30px;">
@@ -2521,6 +2716,162 @@
 
         function toggleCard(card) {
             openModuleModal(card);
+        }
+
+        // --- Brain Effects Demo ---
+        const brainEffects = { stress: false, dopamine: false, amygdala: false };
+        let amygdalaTimer = null;
+
+        function toggleBrainEffect(name) {
+            const isActive = brainEffects[name];
+            // turn off all first
+            turnOffBrainEffect('stress');
+            turnOffBrainEffect('dopamine');
+            turnOffBrainEffect('amygdala');
+            if (!isActive) turnOnBrainEffect(name);
+        }
+
+        function turnOnBrainEffect(name) {
+            brainEffects[name] = true;
+            const btn = document.getElementById('btn-' + name);
+            const icon = document.getElementById('icon-' + name);
+            btn.classList.add('active');
+            icon.className = 'fa fa-stop';
+
+            if (name === 'stress') {
+                document.body.classList.add('brain-stress-mode');
+            }
+            if (name === 'dopamine') {
+                document.body.classList.add('dopamine-full-active');
+                startDopamineBurst();
+            }
+            if (name === 'amygdala') {
+                document.querySelector('.container').classList.add('amygdala-shaking');
+                // auto-stop after 3s
+                amygdalaTimer = setTimeout(() => turnOffBrainEffect('amygdala'), 3000);
+            }
+        }
+
+        function turnOffBrainEffect(name) {
+            brainEffects[name] = false;
+            const btn = document.getElementById('btn-' + name);
+            const icon = document.getElementById('icon-' + name);
+            if (btn) { btn.classList.remove('active'); }
+            if (icon) { icon.className = 'fa fa-play'; }
+
+            if (name === 'stress') {
+                document.body.classList.remove('brain-stress-mode');
+            }
+            if (name === 'dopamine') {
+                document.body.classList.remove('dopamine-full-active');
+                stopDopamineBurst();
+            }
+            if (name === 'amygdala') {
+                document.querySelector('.container').classList.remove('amygdala-shaking');
+                if (amygdalaTimer) { clearTimeout(amygdalaTimer); amygdalaTimer = null; }
+            }
+        }
+
+        function dopamineEnter() {
+            document.getElementById('card-dopamine').classList.add('dopamine-active');
+        }
+        function dopamineLeave() {
+            if (brainEffects.dopamine)
+                document.getElementById('card-dopamine').classList.remove('dopamine-active');
+        }
+
+        // --- Dopamine Burst Engine (always-on — hover & click rewards) ---
+        const DOPAMINE_COLORS = ['#1E73B9', '#B10A4A', '#fbbf24', '#e879a0', '#06b6d4', '#a78bfa'];
+        const NEURO_SYMBOLS = ['✦', '⚡', '◆', '✸', '⊕', '❋', '◈'];
+
+        const _dCanvas = document.getElementById('dopamine-canvas');
+        _dCanvas.style.display = 'block';
+        const _dCtx = _dCanvas.getContext('2d');
+        let _dParticles = [];
+        let _dBoost = false;
+
+        function _dResize() { _dCanvas.width = window.innerWidth; _dCanvas.height = window.innerHeight; }
+        _dResize();
+        window.addEventListener('resize', _dResize);
+
+        function spawnBurstAt(x, y, baseCount, withFloater) {
+            const count = _dBoost ? Math.round(baseCount * 2.2) : baseCount;
+            for (let i = 0; i < count; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = 1.4 + Math.random() * 3.8;
+                const color = DOPAMINE_COLORS[Math.floor(Math.random() * DOPAMINE_COLORS.length)];
+                _dParticles.push({
+                    x, y,
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    r: 1.8 + Math.random() * 3,
+                    color, life: 1,
+                    decay: 0.016 + Math.random() * 0.02
+                });
+            }
+            if (withFloater) {
+                const num = _dBoost ? 3 : 1;
+                for (let i = 0; i < num; i++) {
+                    const sym = NEURO_SYMBOLS[Math.floor(Math.random() * NEURO_SYMBOLS.length)];
+                    const el = document.createElement('div');
+                    el.className = 'neuro-floater';
+                    el.textContent = sym;
+                    el.style.left = (x - 10 + (Math.random() - 0.5) * 50) + 'px';
+                    el.style.top  = (y - 10) + 'px';
+                    const fc = DOPAMINE_COLORS[Math.floor(Math.random() * DOPAMINE_COLORS.length)];
+                    el.style.color = fc;
+                    el.style.textShadow = '0 0 16px ' + fc + ', 0 0 32px ' + fc;
+                    el.style.fontSize = (0.85 + Math.random() * 1.1) + 'rem';
+                    el.style.fontWeight = 'bold';
+                    document.body.appendChild(el);
+                    setTimeout(() => el.remove(), 2500);
+                }
+            }
+        }
+
+        // Always-running render loop
+        (function _dLoop() {
+            _dCtx.clearRect(0, 0, _dCanvas.width, _dCanvas.height);
+            _dParticles = _dParticles.filter(p => p.life > 0.01);
+            for (const p of _dParticles) {
+                p.x += p.vx; p.y += p.vy;
+                p.vx *= 0.97; p.vy *= 0.97;
+                p.life -= p.decay;
+                const a  = Math.max(0, Math.floor(p.life * 255)).toString(16).padStart(2, '0');
+                const ga = Math.max(0, Math.floor(p.life * 45)).toString(16).padStart(2, '0');
+                _dCtx.beginPath();
+                _dCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                _dCtx.fillStyle = p.color + a;
+                _dCtx.fill();
+                _dCtx.beginPath();
+                _dCtx.arc(p.x, p.y, p.r * 3.5, 0, Math.PI * 2);
+                _dCtx.fillStyle = p.color + ga;
+                _dCtx.fill();
+            }
+            requestAnimationFrame(_dLoop);
+        })();
+
+        // Click anywhere → medium burst with floater (only when dopamine active)
+        document.addEventListener('click', e => {
+            if (!brainEffects.dopamine) return;
+            spawnBurstAt(e.clientX, e.clientY, 20, true);
+        });
+
+        // Hover on interactive elements → mini burst (only when dopamine active)
+        document.querySelectorAll('a, button, .bento-card, .module-card, .difficulty-card, .pill-item, .demo-trigger-btn, .cta-button, .nav-link')
+            .forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    if (!brainEffects.dopamine) return;
+                    const r = el.getBoundingClientRect();
+                    spawnBurstAt(r.left + r.width / 2, r.top + r.height / 2, 8, false);
+                });
+            });
+
+        // Brain lab button toggles boost mode + background glow
+        function startDopamineBurst() { _dBoost = true; }
+        function stopDopamineBurst()  {
+            _dBoost = false;
+            document.querySelectorAll('.neuro-floater').forEach(el => el.remove());
         }
 
         // --- Contact Form Logic ---
