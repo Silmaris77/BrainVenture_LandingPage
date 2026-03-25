@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Chart.js for SCARF Simulator -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>emailjs.init('iysuaFSw8Se3g4uwR');</script>
     <style>
         :root {
             --bg-color: #1a2741;
@@ -1239,33 +1242,37 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
             <h2>Kto skorzysta z BrainVenture™?</h2>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1400px; margin: 0 auto 80px;">
+        <section style="border-radius: 40px; border: 1px solid var(--glass-border); position: relative; min-height: 550px; background: url('Images/AdobeStock_440516409%20kopia.png') no-repeat -150px center / contain; background-color: rgba(10,20,40,1); margin: 0 auto 80px; max-width: 1400px; overflow: hidden;">
+            <div style="display: flex; justify-content: flex-end; min-height: 550px;">
+                <div style="width: 63%; padding: 50px 50px 50px 30px; display: flex; flex-direction: column; gap: 28px; justify-content: center; background: linear-gradient(to left, rgba(10,20,40,0.95) 55%, rgba(10,20,40,0.7) 80%, transparent 100%);">
 
-            <!-- TOP MANAGEMENT -->
-            <div style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 30px; padding: 36px 40px; backdrop-filter: blur(20px); transition: 0.3s;">
-                <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-cyan); margin-bottom: 14px;">Top Management</p>
-                <p style="color: var(--text-dim); font-size: 0.95rem; line-height: 1.75;">Liderzy kształtujący strategię <span style="color: var(--accent-cyan);">&#10132;</span> zrozumieją, jak decyzje na szczycie wpływają na biologię i efektywność całego systemu organizacyjnego.</p>
+                    <!-- TOP MANAGEMENT -->
+                    <div>
+                        <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-cyan); margin-bottom: 8px;">Top Management</p>
+                        <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.7;">Liderzy kształtujący strategię <span style="color: var(--accent-cyan);">&#10132;</span> zrozumieją, jak decyzje na szczycie wpływają na biologię i efektywność całego systemu organizacyjnego.</p>
+                    </div>
+
+                    <!-- MENEDŻEROWIE I LIDERZY -->
+                    <div>
+                        <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-cyan); margin-bottom: 8px;">Menedżerowie i Liderzy</p>
+                        <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.7;">Osoby zarządzające ludźmi w zmiennym środowisku <span style="color: var(--accent-cyan);">&#10132;</span> uzyskają narzędzia do budowania zaangażowania i dbania o zespół bez straty na wynikach.</p>
+                    </div>
+
+                    <!-- PROJECT MANAGERS -->
+                    <div>
+                        <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-cyan); margin-bottom: 8px;">Project Managers</p>
+                        <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.7;">Menedżerowie zarządzający złożonymi procesami <span style="color: var(--accent-cyan);">&#10132;</span> nauczą się, jak budować autorytet bez formalnej podległości i zarządzać energią zespołu w długich cyklach projektowych.</p>
+                    </div>
+
+                    <!-- DZIAŁY HR I L&D -->
+                    <div>
+                        <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-cyan); margin-bottom: 8px;">Działy HR i L&amp;D</p>
+                        <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.7;">Profesjonaliści wspierający rozwój kadr <span style="color: var(--accent-cyan);">&#10132;</span> uzyskają lepsze zrozumienie neurobiologicznych fundamentów skutecznego zarządzania i będą mogli skutecznie wspierać kadrę menedżerską w codziennych wyzwaniach.</p>
+                    </div>
+
+                </div>
             </div>
-
-            <!-- MENEDŻEROWIE I LIDERZY -->
-            <div style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 30px; padding: 36px 40px; backdrop-filter: blur(20px); transition: 0.3s;">
-                <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-cyan); margin-bottom: 14px;">Menedżerowie i Liderzy</p>
-                <p style="color: var(--text-dim); font-size: 0.95rem; line-height: 1.75;">Osoby zarządzające ludźmi w zmiennym środowisku <span style="color: var(--accent-cyan);">&#10132;</span> uzyskają narzędzia do budowania zaangażowania i dbania o zespół bez straty na wynikach.</p>
-            </div>
-
-            <!-- PROJECT MANAGERS -->
-            <div style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 30px; padding: 36px 40px; backdrop-filter: blur(20px); transition: 0.3s;">
-                <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-cyan); margin-bottom: 14px;">Project Managers</p>
-                <p style="color: var(--text-dim); font-size: 0.95rem; line-height: 1.75;">Menedżerowie zarządzający złożonymi procesami <span style="color: var(--accent-cyan);">&#10132;</span> nauczą się, jak budować autorytet bez formalnej podległości i zarządzać energią zespołu w długich cyklach projektowych.</p>
-            </div>
-
-            <!-- DZIAŁY HR I L&D -->
-            <div style="background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 30px; padding: 36px 40px; backdrop-filter: blur(20px); transition: 0.3s;">
-                <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-cyan); margin-bottom: 14px;">Działy HR i L&amp;D</p>
-                <p style="color: var(--text-dim); font-size: 0.95rem; line-height: 1.75;">Profesjonaliści wspierający rozwój kadr <span style="color: var(--accent-cyan);">&#10132;</span> uzyskają lepsze zrozumienie neurobiologicznych fundamentów skutecznego zarządzania i będą mogli skutecznie wspierać kadrę menedżerską w codziennych wyzwaniach.</p>
-            </div>
-
-        </div>
+        </section>
 
         <!-- Ekosystem Section -->
         <div id="ekosystem" style="margin-top: 80px; margin-bottom: 80px;">
@@ -1798,16 +1805,16 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
         </main>
 
         <section id="contact"
-            style="margin-top: 100px; border-radius: 40px; border: 1px solid var(--glass-border); overflow: hidden; position: relative; display: grid; grid-template-columns: 1fr 1fr; min-height: 600px;">
+            style="margin-top: 100px; border-radius: 40px; border: 1px solid var(--glass-border); position: relative; min-height: 600px; background: url('Images/Depositphotos_72019277_web.jpg') no-repeat right center / contain; background-color: rgba(10,20,40,1);">
 
             <!-- Left: content -->
-            <div style="padding: 80px 60px; background: rgba(10, 20, 40, 0.92); display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 2;">
-                <h2 style="font-family: var(--font-heading); font-size: 2.6rem; font-weight: 900; margin-bottom: 16px; text-align: left;">Zbuduj zespół jutra</h2>
-                <p class="card-text" style="margin-bottom: 36px; text-align: left;">Umów bezpłatne demo i sprawdź, jak BrainVenture™ może wspierać rozwój Twojego zespołu.</p>
+            <div style="padding: 80px 60px; background: linear-gradient(to right, rgba(10,20,40,0.95) 50%, rgba(10,20,40,0.6) 70%, transparent 100%); border-radius: 40px; display: flex; flex-direction: column; justify-content: center; min-height: 600px;">
+                <h2 style="font-family: var(--font-heading); font-size: 2.6rem; font-weight: 900; margin-bottom: 16px; text-align: left; max-width: 560px;">Zbuduj zespół jutra</h2>
+                <p class="card-text" style="margin-bottom: 36px; text-align: left; max-width: 560px;">Umów bezpłatne demo i sprawdź, jak BrainVenture™ może wspierać rozwój Twojego zespołu.</p>
 
                 <!-- Contact Form -->
                 <form id="contact-form"
-                    style="display: grid; gap: 16px; text-align: left;"
+                    style="display: grid; gap: 16px; text-align: left; max-width: 560px;"
                     onsubmit="handleContactForm(event)">
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                         <div>
@@ -1861,14 +1868,6 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         <p style="font-size: 1rem;">+48 662 268 010</p>
                     </div>
                 </div>
-            </div>
-
-            <!-- Right: photo -->
-            <div style="position: relative; overflow: hidden;">
-                <img src="Images/Depositphotos_72019277_web.jpg" alt=""
-                    style="width: 100%; height: 100%; object-fit: cover; object-position: 110% 70%; display: block;">
-                <!-- subtle dark gradient on the left edge to blend with content -->
-                <div style="position: absolute; top: 0; left: 0; width: 40%; height: 100%; background: linear-gradient(to right, rgba(10,20,40,0.92), transparent);"></div>
             </div>
 
         </section>
@@ -3162,8 +3161,29 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
         // --- Contact Form Logic ---
         function handleContactForm(e) {
             e.preventDefault();
-            document.getElementById('contact-form').style.display = 'none';
-            document.getElementById('form-success').style.display = 'block';
+            const form = document.getElementById('contact-form');
+            const btn = form.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+
+            btn.disabled = true;
+            btn.innerHTML = 'Wysyłanie...';
+
+            const templateParams = {
+                name: form.querySelector('[name="name"]').value,
+                company: form.querySelector('[name="company"]').value,
+                email: form.querySelector('[name="email"]').value,
+            };
+
+            emailjs.send('service_f6jk09n', 'template_m3pvn2n', templateParams)
+                .then(() => {
+                    form.style.display = 'none';
+                    document.getElementById('form-success').style.display = 'block';
+                })
+                .catch(() => {
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                    alert('Wystąpił błąd. Prosimy skontaktować się bezpośrednio: jstrzemecka@blueaccelerator.com');
+                });
         }
 
         // --- Scroll to Top Logic ---
