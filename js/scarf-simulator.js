@@ -630,6 +630,8 @@ function updateScarfUI() {
     container.innerHTML = '';
     const nextBtnEl = document.getElementById('next-situation-btn');
     if (nextBtnEl) nextBtnEl.style.visibility = 'hidden';
+    const nextBtnMobile = document.getElementById('next-situation-btn-mobile');
+    if (nextBtnMobile) nextBtnMobile.style.visibility = 'hidden';
 
     s.choices.forEach((c, i) => {
         const b = document.createElement('button');
@@ -685,6 +687,13 @@ function updateScarfUI() {
                 ? '<i class="fa fa-flag-checkered" style="margin-right:8px;"></i> Zobacz wyniki'
                 : '<i class="fa fa-arrow-right" style="margin-right:8px;"></i> Następna sytuacja';
             nextBtn.style.visibility = 'visible';
+            const mobileBtn = document.getElementById('next-situation-btn-mobile');
+            if (mobileBtn) {
+                mobileBtn.innerHTML = isLast
+                    ? '<i class="fa fa-flag-checkered" style="color:rgba(255,255,255,0.7);font-size:0.85rem;"></i>'
+                    : '<i class="fa fa-arrow-right" style="color:rgba(255,255,255,0.7);font-size:0.85rem;"></i>';
+                mobileBtn.style.visibility = 'visible';
+            }
         };
         container.appendChild(b);
     });
@@ -716,7 +725,7 @@ window.addEventListener('resize', () => {
         const dx = e.changedTouches[0].clientX - touchStartX;
         const dy = e.changedTouches[0].clientY - touchStartY;
         const nextBtn = document.getElementById('next-situation-btn');
-        if (dx > 60 && Math.abs(dy) < 80 && nextBtn && nextBtn.style.visibility === 'visible') {
+        if (dx > 60 && Math.abs(dy) < 80 && nextBtn && (nextBtn.style.visibility === 'visible' || (document.getElementById('next-situation-btn-mobile') || {}).style?.visibility === 'visible')) {
             updateScarfUI();
         }
     }, { passive: true });

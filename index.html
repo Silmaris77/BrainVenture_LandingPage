@@ -962,27 +962,18 @@
             .simulator-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
             .scenario-box { height: auto !important; overflow: visible !important; padding-right: 0 !important; }
             #next-situation-btn {
-                width: 40px !important;
-                height: 40px !important;
-                border-radius: 50% !important;
+                display: none !important;
+                height: 0 !important;
+                margin: 0 !important;
                 padding: 0 !important;
-                font-size: 0 !important;
-                margin: 12px 0 0 auto !important;
-                background: rgba(255,255,255,0.05) !important;
-                border: 1px solid rgba(255,255,255,0.14) !important;
-                box-shadow: none !important;
-                opacity: 0.55;
+                border: none !important;
+                visibility: hidden !important;
+            }
+            #next-situation-btn-mobile {
                 display: flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-                gap: 0 !important;
+                opacity: 0.55;
             }
-            #next-situation-btn:active { opacity: 0.9 !important; }
-            #next-situation-btn i {
-                font-size: 0.9rem !important;
-                margin-right: 0 !important;
-                color: rgba(255,255,255,0.7) !important;
-            }
+            #next-situation-btn-mobile:active { opacity: 0.9 !important; }
             #scarf-simulator.mobile-simulator-active #difficulty-overlay {
                 display: none !important;
             }
@@ -2219,6 +2210,10 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                     <!-- Right: Radar Chart -->
                     <div id="viz-container"
                         style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); padding: 20px 40px; border-radius: 40px; border: 1px solid var(--glass-border); position: relative;">
+                        <button id="next-situation-btn-mobile" onclick="updateScarfUI()"
+                            style="display:none; position:absolute; top:12px; right:12px; width:36px; height:36px; border-radius:50%; padding:0; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.14); cursor:pointer; align-items:center; justify-content:center; visibility:hidden;">
+                            <i class="fa fa-arrow-right" style="color:rgba(255,255,255,0.7); font-size:0.85rem;"></i>
+                        </button>
                         <div class="scenario-progress" style="width: 100%; margin-bottom: 6px;">
                             <div class="u-flex-grow">
                                 <div style="font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; margin-bottom: 5px;">Relacje w Zespole (SCARF)</div>
