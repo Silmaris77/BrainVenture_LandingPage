@@ -179,6 +179,10 @@
             max-width: 1100px;
         }
 
+        header.hero-section > .hero-desc {
+            max-width: 1100px;
+        }
+
         .neuro-label {
             display: inline-block;
             font-size: 0.85rem;
@@ -446,14 +450,22 @@
             font-size: 2.5rem;
             margin-bottom: 25px;
             color: var(--accent-cyan);
+            line-height: 1;
+            display: flex;
+            align-items: center;
         }
 
         .card-title {
             font-family: var(--font-heading);
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: #fff;
             margin-bottom: 20px;
+        }
+
+        /* Tytuł w flex row — zerujemy margin żeby ikona i tekst były wycentrowane */
+        .module-card .card-title {
+            margin: 0 !important;
         }
 
         .card-text {
@@ -1299,9 +1311,9 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
             <!-- Koniec obszaru z filmem -->
 
             <p class="hero-desc" style="font-family: 'Roboto', sans-serif;">
-                <strong style="color: #fff;">BrainVenture</strong> — Twój przewodnik w ekscytującej podróży przez zakamarki ludzkiej psychiki.
-                Od zrozumienia biologicznych mechanizmów zachowań, <br>po wdrożenie przemyślanych strategii podejmowania decyzji biznesowych.<br>
-                Spójna ścieżka transformacji, która zamienia intuicyjne reakcje w świadome budowanie odporności, zaangażowania i trafnych decyzji w skali całej organizacji.
+                <strong style="color: #fff;">BrainVenture</strong> — Twój przewodnik w ekscytującej podróży przez zakamarki ludzkiej psychiki.<br>
+                Od zrozumienia biologicznych mechanizmów zachowań, po wdrożenie przemyślanych strategii podejmowania decyzji biznesowych.
+                Spójna ścieżka transformacji, która zamienia intuicyjne reakcje <br>w świadome budowanie odporności, zaangażowania i trafnych decyzji w skali całej organizacji.
             </p>
 
             <div>
@@ -1361,7 +1373,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                 <div class="card" style="background: linear-gradient(135deg, rgba(14,42,71,0.6), rgba(30,115,185,0.08)); display: flex; flex-direction: column; gap: 18px;">
                     <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 6px;">
                         <div class="card-icon" style="margin-bottom: 0; font-size: 2rem; color: var(--accent-cyan);"><i class="fa fa-gamepad"></i></div>
-                        <h3 class="card-title" class="u-card-title">Gra Symulacyjna</h3>
+                        <h3 class="card-title" style="margin: 0;">Gra Symulacyjna</h3>
                     </div>
                     <p class="card-text" style="font-size: 0.92rem; font-weight: 600; color: #fff;">Jedyna w Polsce gra symulacyjna wprowadzająca w fascynujący świat neuroprzywództwa.</p>
                     <p class="card-text" style="font-size: 0.9rem;">BrainVenture stwarza unikalną możliwość poznania najważniejszych odkryć neuronauk oraz sposobów na ich wykorzystanie w realnych sytuacjach zawodowych. A wszystko to w atmosferze dobrej zabawy, wciągającej rywalizacji i dynamicznej, pełnej emocji nauki.</p>
@@ -1373,7 +1385,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                 <div class="card" style="background: linear-gradient(135deg, rgba(177,10,74,0.08), rgba(14,42,71,0.6)); border-color: rgba(177,10,74,0.25); display: flex; flex-direction: column; gap: 16px;">
                     <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 6px;">
                         <div class="card-icon" style="margin-bottom: 0; font-size: 2rem; color: var(--accent-magenta);"><i class="fa fa-cubes"></i></div>
-                        <h3 class="card-title" class="u-card-title">Warsztaty Modułowe</h3>
+                        <h3 class="card-title" style="margin: 0;">Warsztaty Modułowe</h3>
                     </div>
                     <p class="card-text" style="font-size: 0.9rem;">Warsztaty praktyczne w architekturze modułowej pogłębiające poszczególne obszary wiedzy o mózgu i jej zastosowanie w codziennej pracy lidera.</p>
                     <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px;">
@@ -1391,7 +1403,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                 <div class="card" style="background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(14,42,71,0.6)); display: flex; flex-direction: column; gap: 16px;">
                     <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 6px;">
                         <div class="card-icon" style="margin-bottom: 0; font-size: 2rem; color: #a78bfa;"><i class="fa fa-laptop"></i></div>
-                        <h3 class="card-title" class="u-card-title">BrainVenture Online</h3>
+                        <h3 class="card-title" style="margin: 0;">BrainVenture Online</h3>
                     </div>
                     <p class="card-text" style="font-size: 0.9rem;">Cyfrowe przedłużenie programu, które pozwala uczestnikom wracać do wiedzy, pogłębiać ją we własnym tempie i stosować w codziennej praktyce.</p>
                     <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 4px;">
@@ -1457,7 +1469,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                             <div style="display: flex; flex-direction: column; gap: 12px;">
                                 <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 0.88rem; color: var(--text-dim);">
                                     <span style="color: var(--accent-cyan); flex-shrink: 0; margin-top: 2px;">✓</span>
-                                    <span><strong style="color: #fff;">Jak rozpoznawać sygnały mózgu</strong> — kiedy pracownik odbiera sytuację jako zagrożenie w modelu SCARF, a kiedy jako nagrodę</span>
+                                    <span><strong style="color: #fff;">Jak rozpoznawać sygnały mózgu</strong> — kiedy pracownik odbiera sytuację jako zagrożenie, a kiedy jako nagrodę</span>
                                 </div>
                                 <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 0.88rem; color: var(--text-dim);">
                                     <span style="color: var(--accent-cyan); flex-shrink: 0; margin-top: 2px;">✓</span>
@@ -1597,7 +1609,12 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         </div>
                         <span class="demo-tag" style="color: #f87171;">Kortyzol &amp; Stres</span>
                         <h3>Stres Poznawczy</h3>
-                        <p>Pod wpływem kortyzolu mózg dosłownie zmienia sposób, w jaki widzisz świat. Kora wzrokowa traci nasycenie barwami, pole widzenia zawęża się do tunelu skupionego na zagrożeniu, a peryferyczne bodźce przestają docierać do świadomości. Kora przedczołowa — siedlisko logicznego myślenia — zostaje odcięta od zasobów. Dlatego pod presją czasu lub oceny podejmujemy gorsze decyzje i dosłownie <em>widzimy mniej</em>.</p>
+                        <p>Pod wpływem kortyzolu zmienia się sposób, w jaki widzisz sytuację.
+Pole uwagi zawęża się do tunelu skupionego na zagrożeniu.
+Mniej istotne bodźce przestają docierać tak wyraźnie.
+Trudniej też o spokojne, logiczne myślenie.
+Kora przedczołowa – baza dla logicznego myślenia - działa mniej efektywnie.
+Dlatego pod presją częściej widzimy mniej i podejmujemy gorsze decyzje.</p>
                         <div style="margin-top: 20px; padding: 14px 16px; background: rgba(248,113,113,0.07); border-left: 3px solid #f87171; border-radius: 10px; font-size: 0.8rem; color: var(--text-dim); line-height: 1.6;">
                             <strong style="color:#f87171;">Efekt:</strong> Desaturacja + pulsująca czerwona winieta + tunelowe widzenie śledzące kursor — przesuń mysz i poczuj, jak zawęża się Twoje pole uwagi.
                         </div>
@@ -1613,7 +1630,11 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         </div>
                         <span class="demo-tag" style="color: #e879a0;">Dopamina &amp; Nagroda</span>
                         <h3>Efekt Dopaminowy</h3>
-                        <p>Dopamina to neuroprzekaźnik <em>antycypacji</em> — uwalnia się nie w momencie nagrody, lecz w oczekiwaniu na nią. To dlatego scrollujemy feed, sprawdzamy wyniki czy klikamy „kup teraz" szybciej niż myślimy. W zarządzaniu działa identycznie: pochwała, autonomia, cel na wyciągnięcie ręki — to paliwo dopaminowe. Mózg pracownika nie odróżnia realnej nagrody od dobrze zaprojektowanego procesu.</p>
+                        <p>Dopamina to neuroprzekaźnik antycypacji. Uwalnia się nie w momencie otrzymania nagrody, ale w oczekiwaniu na nią.
+To dlatego tak łatwo angażujemy się w działania oparte na „sprawdzaniu”, „klikaniu” czy „czekaniu na wynik”.
+To mechanizm, który napędza działanie.
+<br>Pochwała, autonomia i jasny cel działają szczególnie silnie.
+Dobrze zaprojektowany proces może angażować równie mocno jak sama nagroda.</p>
                         <div style="margin-top: 20px; padding: 14px 16px; background: rgba(177,10,74,0.07); border-left: 3px solid #e879a0; border-radius: 10px; font-size: 0.8rem; color: var(--text-dim); line-height: 1.6;">
                             <strong style="color:#e879a0;">Efekt:</strong> Klikaj w ekran — zdobywasz nagrody, lecą monety, rośnie licznik. Najeżdżaj na karty i obserwuj rozbłysk złotej poświaty. Twój mózg właśnie dostaje dawkę dopaminy.
                         </div>
@@ -1629,7 +1650,14 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         </div>
                         <span class="demo-tag" style="color: #fbbf24;">Ciało migdałowate</span>
                         <h3>Alarm Amygdali</h3>
-                        <p>Ciało migdałowate reaguje na zagrożenie w 80 ms — zanim kora przedczołowa zdąży pomyśleć. Efektem jest <em>amygdala hijack</em>: drżenie, przyspieszony puls, zawężona uwaga, impulsywne reakcje. W środowisku pracy alarmu nie uruchamiają tylko fizyczne niebezpieczeństwa — wystarczy publiczna krytyka, groźba utraty stanowiska lub nagła zmiana bez wyjaśnienia. Menedżer, który wyzwala ten alarm u pracownika, traci dostęp do jego kory — a więc do kreatywności, lojalności i rozwiązywania problemów.</p>
+                        <p>Ciało migdałowate to mózgowy detektor zagrożeń.
+Reakcja emocjonalna pojawia się, zanim kora przedczołowa zdąży te zagrożenia przeanalizować.
+Efektem może być tzw. amygdala hijack: drżenie, przyspieszony puls, zawężona uwaga.
+
+W środowisku pracy alarmu nie uruchamiają tylko fizyczne niebezpieczeństwa. 
+Wystarczy krytyka, presja albo nagła zmiana.
+W takim stanie spada dostęp do logicznego myślenia.
+A razem z nim — kreatywność, współpraca i trafne decyzje.</p>
                         <div style="margin-top: 20px; padding: 14px 16px; background: rgba(251,191,36,0.07); border-left: 3px solid #fbbf24; border-radius: 10px; font-size: 0.8rem; color: var(--text-dim); line-height: 1.6;">
                             <strong style="color:#fbbf24;">Efekt:</strong> 3 eskalujące fazy drżenia + żółte błyski + narastający rytm serca (120→160→200 BPM). Alarm nie zatrzymuje się sam — tak jak prawdziwy amygdala hijack.
                         </div>
@@ -1664,9 +1692,9 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         <!-- Moduł 1 -->
                         <section class="card module-card" onclick="toggleCard(this)">
                             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-                                <div class="card-icon" class="u-heading-large"><i
+                                <div class="card-icon" style="margin-bottom: 0;"><i
                                         class="fa fa-eye"></i></div>
-                                <h3 class="card-title" class="u-card-title">1. Poznanie</h3>
+                                <h3 class="card-title">Poznanie</h3>
                             </div>
                             <p class="card-text">Jak mózg tworzy Twoją rzeczywistość? Dekonstrukcja filtrów
                                 percepcyjnych i pułapek myślenia.</p>
@@ -1700,9 +1728,9 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         <!-- Moduł 2 -->
                         <section class="card module-card" onclick="toggleCard(this)">
                             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-                                <div class="card-icon" class="u-heading-large"><i
+                                <div class="card-icon" style="margin-bottom: 0;"><i
                                         class="fa fa-heartbeat" style="color: var(--accent-magenta);"></i></div>
-                                <h3 class="card-title" class="u-card-title">2. Emocje</h3>
+                                <h3 class="card-title">Emocje</h3>
                             </div>
                             <p class="card-text">Homo Emotionalis. Czy logika to iluzja? Mechanizmy powstawania emocji i
                                 ich wpływ na korę.</p>
@@ -1735,9 +1763,9 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         <!-- Moduł 3 -->
                         <section class="card module-card" onclick="toggleCard(this)">
                             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-                                <div class="card-icon" class="u-heading-large"><i
+                                <div class="card-icon" style="margin-bottom: 0;"><i
                                         class="fa fa-balance-scale"></i></div>
-                                <h3 class="card-title" class="u-card-title">3. Decyzje</h3>
+                                <h3 class="card-title">Decyzje</h3>
                             </div>
                             <p class="card-text">Neurobiologia wyboru. Od automatycznych schematów do świadomych
                                 strategii.</p>
@@ -1771,9 +1799,9 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         <!-- Moduł 4 -->
                         <section class="card module-card" onclick="toggleCard(this)">
                             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-                                <div class="card-icon" class="u-heading-large"><i
+                                <div class="card-icon" style="margin-bottom: 0;"><i
                                         class="fa fa-comments-o" style="color: var(--accent-cyan);"></i></div>
-                                <h3 class="card-title" class="u-card-title">4. Komunikacja</h3>
+                                <h3 class="card-title">Komunikacja</h3>
                             </div>
                             <p class="card-text">Neurochemia rozmowy. Jak słowa aktywują neuroprzekaźniki, budując
                                 otwartość lub opór.</p>
@@ -1808,10 +1836,9 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         <section class="card module-card" onclick="toggleCard(this)"
                             style="border-color: var(--accent-magenta);">
                             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-                                <div class="card-icon"
-                                    style="margin-bottom: 0; font-size: 2rem; color: var(--accent-magenta);"><i
-                                        class="fa fa-leaf"></i></div>
-                                <h3 class="card-title" class="u-card-title">5. Wellbeing</h3>
+                                <div class="card-icon" style="margin-bottom: 0;"><i
+                                        class="fa fa-leaf" style="color: var(--accent-magenta);"></i></div>
+                                <h3 class="card-title">Wellbeing</h3>
                             </div>
                             <p class="card-text">Mózg, który nie wypoczywa, nie myśli. Zarządzanie snem i energią jako
                                 paliwem.</p>
@@ -1843,9 +1870,9 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         <!-- Moduł 6 -->
                         <section class="card module-card" onclick="toggleCard(this)">
                             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-                                <div class="card-icon" class="u-heading-large"><i
+                                <div class="card-icon" style="margin-bottom: 0;"><i
                                         class="fa fa-lightbulb-o" style="color: var(--accent-cyan);"></i></div>
-                                <h3 class="card-title" class="u-card-title">6. Przywództwo XXI w.</h3>
+                                <h3 class="card-title">Przywództwo XXI w.</h3>
                             </div>
                             <p class="card-text">Między kontrolą a transformacją. Budowanie środowiska opartego na
                                 sprawczości i zaufaniu.</p>
