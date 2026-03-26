@@ -960,6 +960,36 @@
 
             /* SCARF Simulator */
             .simulator-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+            .scenario-box { height: auto !important; overflow: visible !important; padding-right: 0 !important; }
+            #next-situation-btn {
+                position: absolute !important;
+                right: 6px !important;
+                top: 50% !important;
+                transform: translateY(-50%) !important;
+                width: 36px !important;
+                height: 36px !important;
+                border-radius: 50% !important;
+                padding: 0 !important;
+                font-size: 0 !important;
+                margin: 0 !important;
+                background: rgba(255,255,255,0.04) !important;
+                border: 1px solid rgba(255,255,255,0.1) !important;
+                box-shadow: none !important;
+                opacity: 0.45;
+                transition: opacity 0.25s;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                gap: 0 !important;
+            }
+            #next-situation-btn:active {
+                opacity: 0.85 !important;
+            }
+            #next-situation-btn i {
+                font-size: 0.85rem !important;
+                margin-right: 0 !important;
+                color: rgba(255,255,255,0.7) !important;
+            }
             #scarf-simulator.mobile-simulator-active #difficulty-overlay {
                 display: none !important;
             }
@@ -2181,14 +2211,16 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                             kluczowy specjalista, Marek, przyszedł do pracy z planem na ważny projekt. Ty jednak właśnie
                             otrzymałeś pilne polecenie od zarządu, które zmienia priorytety.</p>
 
-                        <div id="choices-container">
-                            <!-- Injected by JS -->
+                        <div id="choices-wrapper" style="position: relative;">
+                            <div id="choices-container">
+                                <!-- Injected by JS -->
+                            </div>
+                            <button id="next-situation-btn" class="choice-btn"
+                                style="background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan)); border-color: var(--accent-cyan); color: #fff; font-weight: 700; justify-content: center; margin-top: 8px; visibility: hidden; width: 100%;"
+                                onclick="updateScarfUI()">
+                                <i class="fa fa-arrow-right" style="margin-right:8px;"></i> Następna sytuacja
+                            </button>
                         </div>
-                        <button id="next-situation-btn" class="choice-btn"
-                            style="background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan)); border-color: var(--accent-cyan); color: #fff; font-weight: 700; justify-content: center; margin-top: 8px; visibility: hidden; width: 100%;"
-                            onclick="updateScarfUI()">
-                            <i class="fa fa-arrow-right" style="margin-right:8px;"></i> Następna sytuacja
-                        </button>
                     </div>
 
                     <!-- Right: Radar Chart -->

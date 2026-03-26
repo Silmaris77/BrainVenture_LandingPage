@@ -700,6 +700,27 @@ window.addEventListener('resize', () => {
     setMobileScarfState(true);
 });
 
+// Swipe right to advance to next scenario on mobile
+(function () {
+    let touchStartX = 0;
+    let touchStartY = 0;
+    const simulator = document.getElementById('scarf-simulator');
+    if (!simulator) return;
+
+    simulator.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    simulator.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        const nextBtn = document.getElementById('next-situation-btn');
+        if (dx > 60 && Math.abs(dy) < 80 && nextBtn && nextBtn.style.visibility === 'visible') {
+            updateScarfUI();
+        }
+    }, { passive: true });
+})();
 
 document.addEventListener('mousemove', (e) => {
     document.querySelectorAll('.card').forEach(card => {
