@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ffprobe -v quiet -print_format json -show_streams \"c:\\\\Users\\\\pksia\\\\Dropbox\\\\.streamlit\\\\Brainventure_kurs\\\\Brainventure_LandingPage\\\\BrainVideo.mp4\")"
+    ]
+  }
+}
