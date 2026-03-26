@@ -34,7 +34,20 @@ scrollToTopBtn.addEventListener('click', () => {
     });
 });
 
-// Pomiar wymiarów slotów obrazków
+// --- Hero video — mobile autoplay fallback ---
+(function () {
+    const vid = document.getElementById('hero-video');
+    if (!vid) return;
+    // Wymuś play (potrzebne na iOS Safari i niektórych Android)
+    const tryPlay = () => vid.play().catch(() => {});
+    if (document.readyState === 'complete') {
+        tryPlay();
+    } else {
+        window.addEventListener('load', tryPlay);
+    }
+    // Drugi strzał po pierwszym dotyku użytkownika (ostateczny fallback)
+    document.addEventListener('touchstart', tryPlay, { once: true });
+})();
 window.addEventListener('load', function () {
     function measure(placeholderId, sizeId) {
         var el = document.getElementById(placeholderId);

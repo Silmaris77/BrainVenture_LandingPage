@@ -168,6 +168,7 @@
             border-radius: 32px;
             padding: 20px 20px 15px;
             margin-bottom: 40px;
+            background: linear-gradient(135deg, rgba(14,22,40,0.95) 0%, rgba(14,42,71,0.9) 100%);
         }
 
         #hero-top > *:not(#hero-video):not(#hero-video-overlay) {
@@ -1282,7 +1283,7 @@
 
             <!-- Obszar z filmem: kończy się pod statystykami -->
             <div id="hero-top">
-                <video id="hero-video" autoplay muted loop playsinline>
+                <video id="hero-video" autoplay muted loop playsinline preload="auto">
                     <source src="BrainVideo.mp4" type="video/mp4">
                 </video>
                 <div id="hero-video-overlay"></div>
