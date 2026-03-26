@@ -1,3 +1,23 @@
+// --- Radar chart auto-center plugin ---
+const radarCenterPlugin = {
+    id: 'radarCenter',
+    afterLayout: function(chart) {
+        const r = chart.scales.r;
+        if (!r || chart._radarCenteredFlag) return;
+        const diff = r.xCenter - chart.width / 2;
+        if (Math.abs(diff) < 1) return;
+        chart._radarCenteredFlag = true;
+        const p = chart.options.layout.padding || {};
+        if (diff > 0) {
+            p.right = (p.right || 0) + Math.round(diff * 2);
+        } else {
+            p.left = (p.left || 0) + Math.round(-diff * 2);
+        }
+        chart.options.layout.padding = p;
+        chart.update('none');
+    }
+};
+
 // --- SCARF Simulator Logic ---
 let scarfValues = { Status: 30, Certainty: 30, Autonomy: 30, Relatedness: 30, Fairness: 30 };
 let boardConfidence = 50;
@@ -412,6 +432,7 @@ function initScarfChart() {
     const ctx = document.getElementById('radarChart').getContext('2d');
     scarfChart = new Chart(ctx, {
         type: 'radar',
+        plugins: [radarCenterPlugin],
         data: {
             labels: ['Status', 'Pewność', 'Autonomia', 'Relacyjność', 'Sprawiedliwość'],
             datasets: [{
@@ -426,7 +447,6 @@ function initScarfChart() {
         },
         options: {
             animation: { duration: 1000, easing: 'easeOutElastic' },
-            layout: { padding: { left: 30, right: 30, top: 10, bottom: 10 } },
             scales: {
                 r: {
                     angleLines: { color: 'rgba(255,255,255,0.1)' },
@@ -471,12 +491,41 @@ function updateScarfUI() {
         // Hide simulator content on results
         document.getElementById('simulator-main').style.display = 'none';
 
-        // Move radar chart into results overlay
-        const chartCanvas = document.getElementById('radarChart');
-        const resultsChartWrapper = document.getElementById('results-chart-wrapper');
-        if (chartCanvas && resultsChartWrapper) {
-            resultsChartWrapper.appendChild(chartCanvas);
-        }
+        // Draw a fresh results chart on the dedicated canvas
+        const dynamicColor = avgScarf > 50 ? '#1E73B9' : '#B10A4A';
+        const dynamicBg = avgScarf > 50 ? 'rgba(30, 115, 185, 0.35)' : 'rgba(177, 10, 74, 0.35)';
+        const resultsCtx = document.getElementById('resultsRadarChart').getContext('2d');
+        new Chart(resultsCtx, {
+            type: 'radar',
+            plugins: [radarCenterPlugin],
+            data: {
+                labels: ['Status', 'Pewność', 'Autonomia', 'Relacyjność', 'Sprawiedliwość'],
+                datasets: [{
+                    data: ['Status', 'Certainty', 'Autonomy', 'Relatedness', 'Fairness'].map(k => scarfValues[k]),
+                    backgroundColor: dynamicBg,
+                    borderColor: dynamicColor,
+                    borderWidth: 3,
+                    pointBackgroundColor: dynamicColor,
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                animation: { duration: 1000, easing: 'easeOutElastic' },
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: 'rgba(255,255,255,0.1)' },
+                        grid: { color: 'rgba(255,255,255,0.1)' },
+                        pointLabels: { color: '#94a3b8', font: { size: 10, weight: '700' } },
+                        ticks: { display: false },
+                        min: 0,
+                        max: 100
+                    }
+                },
+                plugins: { legend: { display: false } }
+            }
+        });
 
         let archetype = "Lider Adaptacyjny";
         let description = "";

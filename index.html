@@ -1016,7 +1016,7 @@
                 padding: 0 10px;
             }
             #results-overlay #results-chart-wrapper {
-                max-width: 200px !important;
+                max-width: 320px !important;
             }
             #difficulty-overlay {
                 padding: 24px 20px;
@@ -1335,15 +1335,14 @@
         #results-overlay {
             position: relative;
             width: 100%;
-            min-height: 600px;
-            background: rgba(13, 17, 26, 0.98);
+            min-height: 400px;
+            background: transparent;
             display: none;
             z-index: 100;
             justify-content: center;
             align-items: center;
             border-radius: 40px;
-            backdrop-filter: blur(10px);
-            padding: 40px;
+            padding: 30px 40px;
             text-align: center;
         }
         #results-overlay > div {
@@ -2140,11 +2139,13 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                 <div id="results-overlay">
                     <div>
                         <h2
-                            style="font-family: var(--font-heading); font-size: 2.5rem; color: var(--accent-cyan); margin-bottom: 20px;">
+                            style="font-family: var(--font-heading); font-size: 1.8rem; color: var(--accent-cyan); margin-bottom: 10px;">
                             Symulacja Zakończona!</h2>
-                        <div id="results-chart-wrapper" style="max-width: 400px; margin: 0 auto 20px;"></div>
+                        <div id="results-chart-wrapper" style="width: 100%; max-width: 460px; height: 280px; margin: 0 auto 10px;">
+                            <canvas id="resultsRadarChart"></canvas>
+                        </div>
                         <p id="results-final-desc"
-                            style="color: var(--text-dim); margin-bottom: 30px; font-size: 1.1rem;"></p>
+                            style="color: var(--text-dim); margin-bottom: 20px; font-size: 1rem;"></p>
                         <button onclick="location.reload()"
                             style="background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue)); border:none; padding: 15px 40px; border-radius: 30px; color:white; font-weight:700; cursor:pointer;">Zagraj
                             Ponownie</button>
