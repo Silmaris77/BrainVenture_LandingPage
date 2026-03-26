@@ -151,6 +151,10 @@
             letter-spacing: 1.5px;
         }
 
+        .nav-links a i {
+            display: none;
+        }
+
         .nav-links a:hover {
             color: var(--accent-cyan);
             text-shadow: 0 0 10px var(--accent-cyan);
@@ -792,43 +796,39 @@
             .container { padding: 16px 14px; }
 
             /* Nav – logo małe, linki pod spodem */
-            nav { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 16px; }
-            .logo img { height: 64px; }
+            nav { flex-direction: column; align-items: flex-start; gap: 0; margin-bottom: 12px; }
+            .logo { display: none !important; }
             .mobile-cta {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-                min-height: 46px;
-                padding: 12px 18px;
-                border-radius: 18px;
-                border: 1px solid rgba(177, 10, 74, 0.35);
-                background: linear-gradient(135deg, rgba(177,10,74,0.22), rgba(14,42,71,0.7));
-                color: #fff;
-                text-decoration: none;
-                font-size: 0.82rem;
-                font-weight: 800;
-                letter-spacing: 0.08em;
-                text-transform: uppercase;
+                display: none;
             }
             .nav-links {
                 width: 100%;
-                justify-content: flex-start;
-                gap: 8px;
-                padding: 8px;
-                overflow-x: auto;
+                justify-content: space-around;
+                gap: 0;
+                padding: 6px 4px;
                 flex-wrap: nowrap;
-                border-radius: 18px;
-                scroll-snap-type: x proximity;
+                border-radius: 16px;
+                overflow: hidden;
             }
             .nav-links a {
-                font-size: 0.72rem;
+                font-size: 0.58rem;
                 white-space: nowrap;
-                padding: 10px 12px;
-                border-radius: 14px;
-                background: rgba(255,255,255,0.04);
-                border: 1px solid rgba(255,255,255,0.06);
-                scroll-snap-align: start;
+                padding: 8px 4px;
+                border-radius: 12px;
+                background: none;
+                border: none;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 3px;
+                letter-spacing: 0.5px;
+                flex: 1;
+                min-width: 0;
+            }
+            .nav-links a i {
+                font-size: 1rem;
+                color: var(--accent-cyan);
+                display: block;
             }
 
             /* Hero */
@@ -1011,22 +1011,18 @@
                 gap: 10px;
             }
             .difficulty-copy .section-header {
-                margin-bottom: 12px !important;
+                margin-bottom: 8px !important;
             }
             .difficulty-copy .section-header h2 {
                 font-size: 1.5rem !important;
             }
             .difficulty-copy > p {
                 font-size: 0.88rem !important;
-                margin-bottom: 12px !important;
+                margin-bottom: 0 !important;
                 line-height: 1.6 !important;
             }
             .difficulty-points {
-                gap: 8px;
-            }
-            .difficulty-point {
-                font-size: 0.84rem;
-                line-height: 1.55;
+                display: none;
             }
             .difficulty-actions {
                 gap: 8px;
@@ -1046,8 +1042,7 @@
                 font-size: 0.9rem !important;
             }
             .diff-btn small {
-                font-size: 0.76rem !important;
-                line-height: 1.45 !important;
+                display: none;
             }
             #viz-container {
                 padding: 16px 12px !important;
@@ -1839,11 +1834,11 @@
             </a>
             <a href="#contact" class="mobile-cta">Umów demo</a>
             <div class="nav-links">
-                <a href="#dla-kogo">Dla kogo</a>
-                <a href="#ekosystem">Ekosystem</a>
-                <a href="#lab">Laboratorium</a>
-                <a href="#modules">Program</a>
-                <a href="#contact">Kontakt</a>
+                <a href="#dla-kogo"><i class="fa fa-users"></i><span>Dla kogo</span></a>
+                <a href="#ekosystem"><i class="fa fa-sitemap"></i><span>Ekosystem</span></a>
+                <a href="#lab"><i class="fa fa-flask"></i><span>Lab</span></a>
+                <a href="#modules"><i class="fa fa-th-list"></i><span>Program</span></a>
+                <a href="#contact"><i class="fa fa-envelope"></i><span>Kontakt</span></a>
             </div>
         </nav>
 
