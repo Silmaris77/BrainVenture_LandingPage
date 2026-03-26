@@ -959,7 +959,7 @@
             .section-header span { font-size: 0.76rem; letter-spacing: 1.6px; }
 
             /* SCARF Simulator */
-            .simulator-grid { grid-template-columns: 1fr; gap: 16px; }
+            .simulator-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
             #scarf-simulator.mobile-simulator-active #difficulty-overlay {
                 display: none !important;
             }
@@ -1005,22 +1005,64 @@
                 cursor: pointer;
             }
             .difficulty-layout {
-                gap: 18px;
+                gap: 16px;
             }
             .difficulty-copy {
-                gap: 14px;
+                gap: 10px;
+            }
+            .difficulty-copy .section-header {
+                margin-bottom: 12px !important;
+            }
+            .difficulty-copy .section-header h2 {
+                font-size: 1.5rem !important;
+            }
+            .difficulty-copy > p {
+                font-size: 0.88rem !important;
+                margin-bottom: 12px !important;
+                line-height: 1.6 !important;
             }
             .difficulty-points {
-                gap: 10px;
+                gap: 8px;
             }
             .difficulty-point {
-                font-size: 0.9rem;
-                line-height: 1.6;
+                font-size: 0.84rem;
+                line-height: 1.55;
             }
             .difficulty-actions {
-                gap: 10px;
+                gap: 8px;
             }
-            #viz-container { padding: 24px 16px !important; }
+            .diff-btn {
+                padding: 12px 14px 12px 16px !important;
+                border-radius: 16px !important;
+                gap: 12px !important;
+            }
+            .diff-icon {
+                width: 38px !important;
+                height: 38px !important;
+                border-radius: 10px !important;
+                font-size: 1.1rem !important;
+            }
+            .diff-btn strong {
+                font-size: 0.9rem !important;
+            }
+            .diff-btn small {
+                font-size: 0.76rem !important;
+                line-height: 1.45 !important;
+            }
+            #viz-container {
+                padding: 16px 12px !important;
+                border-radius: 20px !important;
+            }
+            #viz-container > div:first-child {
+                max-width: 220px !important;
+            }
+            #viz-container > div:last-child {
+                margin-top: 12px !important;
+            }
+            #viz-container #feedback-text {
+                font-size: 0.78rem !important;
+                min-height: 2em !important;
+            }
 
             /* Brain demo cards – już 1 kolumna przez tablet query */
             .brain-demo-card { padding: 24px 20px !important; }
