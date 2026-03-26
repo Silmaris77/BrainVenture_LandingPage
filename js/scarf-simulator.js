@@ -629,7 +629,7 @@ function updateScarfUI() {
     const container = document.getElementById('choices-container');
     container.innerHTML = '';
     const nextBtnEl = document.getElementById('next-situation-btn');
-    if (nextBtnEl) nextBtnEl.style.visibility = 'hidden';
+    if (nextBtnEl) { nextBtnEl.style.visibility = 'hidden'; nextBtnEl.classList.remove('visible'); }
 
     s.choices.forEach((c, i) => {
         const b = document.createElement('button');
@@ -685,6 +685,7 @@ function updateScarfUI() {
                 ? '<i class="fa fa-flag-checkered" style="margin-right:8px;"></i> Zobacz wyniki'
                 : '<i class="fa fa-arrow-right" style="margin-right:8px;"></i> Następna sytuacja';
             nextBtn.style.visibility = 'visible';
+            nextBtn.classList.add('visible');
         };
         container.appendChild(b);
     });
@@ -716,7 +717,7 @@ window.addEventListener('resize', () => {
         const dx = e.changedTouches[0].clientX - touchStartX;
         const dy = e.changedTouches[0].clientY - touchStartY;
         const nextBtn = document.getElementById('next-situation-btn');
-        if (dx > 60 && Math.abs(dy) < 80 && nextBtn && nextBtn.style.visibility === 'visible') {
+        if (dx > 60 && Math.abs(dy) < 80 && nextBtn && nextBtn.classList.contains('visible')) {
             updateScarfUI();
         }
     }, { passive: true });
