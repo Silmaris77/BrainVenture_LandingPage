@@ -156,6 +156,10 @@
             text-shadow: 0 0 10px var(--accent-cyan);
         }
 
+        .mobile-cta {
+            display: none;
+        }
+
         header.hero-section {
             text-align: center;
             margin-bottom: 60px;
@@ -219,6 +223,185 @@
             margin: 0 auto 30px;
             font-weight: 300;
             line-height: 1.6;
+        }
+
+        .hero-intro {
+            max-width: 780px;
+        }
+
+        .hero-summary {
+            max-width: 920px;
+        }
+
+        .hero-primary-cta {
+            background: linear-gradient(135deg, var(--accent-magenta), var(--accent-blue));
+            color: #fff;
+            padding: 22px 60px;
+            border-radius: 100px;
+            font-weight: 900;
+            text-decoration: none;
+            font-size: 1.1rem;
+            box-shadow: 0 15px 40px rgba(177,10,74,0.4);
+            display: inline-block;
+            letter-spacing: 0.5px;
+        }
+
+        .audience-section {
+            border-radius: 40px;
+            border: 1px solid var(--glass-border);
+            position: relative;
+            min-height: 550px;
+            background: url('Images/AdobeStock_440516409%20kopia.png') no-repeat -150px center / contain;
+            background-color: rgba(10,20,40,1);
+            margin: 0 auto 80px;
+            max-width: 1400px;
+            overflow: hidden;
+        }
+
+        .audience-shell {
+            display: flex;
+            justify-content: flex-end;
+            min-height: 550px;
+        }
+
+        .audience-content {
+            width: 63%;
+            padding: 50px 50px 50px 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            justify-content: center;
+            background: linear-gradient(to left, rgba(10,20,40,0.95) 55%, rgba(10,20,40,0.7) 80%, transparent 100%);
+        }
+
+        .audience-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .ecosystem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            align-items: start;
+        }
+
+        .ecosystem-card {
+            gap: 18px;
+        }
+
+        .brain-lab-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .contact-panel {
+            padding: 80px 60px;
+            background: linear-gradient(to right, rgba(10,20,40,0.95) 50%, rgba(10,20,40,0.6) 70%, transparent 100%);
+            border-radius: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 600px;
+        }
+
+        .contact-form-grid {
+            display: grid;
+            gap: 16px;
+            text-align: left;
+            max-width: 560px;
+        }
+
+        .contact-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .contact-meta {
+            display:flex;
+            gap:40px;
+            flex-wrap:wrap;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .module-card {
+            min-height: 320px;
+            padding-bottom: 76px;
+        }
+
+        .module-card .card-text {
+            font-size: 0.98rem;
+        }
+
+        .module-card .card-details {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .difficulty-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            width: 100%;
+            align-items: end;
+        }
+
+        .difficulty-copy {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .difficulty-points {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .difficulty-point {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.88rem;
+            color: var(--text-dim);
+        }
+
+        .difficulty-point-mark {
+            color: var(--accent-cyan);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .difficulty-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .scenario-progress {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .mobile-simulator-header {
+            display: none;
+        }
+
+        .mobile-step-back {
+            display: none;
         }
 
         /* --- UI Elements --- */
@@ -572,6 +755,36 @@
             div[style*="display: flex; align-items: stretch"] { flex-direction: column !important; }
 
             .module-modal-panel { padding: 32px 24px; }
+
+            .hero-summary {
+                font-size: 1rem;
+                max-width: 760px;
+            }
+
+            .hero-primary-cta {
+                padding: 18px 40px;
+                font-size: 1rem;
+            }
+
+            .audience-section {
+                background-position: -300px center;
+            }
+
+            .audience-content {
+                width: 70%;
+                padding: 42px 36px 42px 24px;
+                gap: 20px;
+            }
+
+            .modules-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .difficulty-layout {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                align-items: stretch;
+            }
         }
 
         /* ===== MOBILE ===== */
@@ -581,27 +794,86 @@
             /* Nav – logo małe, linki pod spodem */
             nav { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 16px; }
             .logo img { height: 64px; }
+            .mobile-cta {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                min-height: 46px;
+                padding: 12px 18px;
+                border-radius: 18px;
+                border: 1px solid rgba(177, 10, 74, 0.35);
+                background: linear-gradient(135deg, rgba(177,10,74,0.22), rgba(14,42,71,0.7));
+                color: #fff;
+                text-decoration: none;
+                font-size: 0.82rem;
+                font-weight: 800;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+            }
             .nav-links {
                 width: 100%;
                 justify-content: flex-start;
-                gap: 10px;
-                padding: 8px 14px;
+                gap: 8px;
+                padding: 8px;
                 overflow-x: auto;
                 flex-wrap: nowrap;
-                border-radius: 20px;
+                border-radius: 18px;
+                scroll-snap-type: x proximity;
             }
-            .nav-links a { font-size: 0.72rem; white-space: nowrap; }
+            .nav-links a {
+                font-size: 0.72rem;
+                white-space: nowrap;
+                padding: 10px 12px;
+                border-radius: 14px;
+                background: rgba(255,255,255,0.04);
+                border: 1px solid rgba(255,255,255,0.06);
+                scroll-snap-align: start;
+            }
 
             /* Hero */
-            header.hero-section { margin-bottom: 40px; padding-top: 10px; }
+            header.hero-section { margin-bottom: 32px; padding-top: 8px; }
+            #hero-top {
+                padding: 18px 16px 16px;
+                border-radius: 24px;
+                margin-bottom: 24px;
+            }
+            #hero-video {
+                opacity: 0.42;
+            }
+            #hero-video-overlay {
+                background: rgba(14, 22, 40, 0.72);
+            }
             h1 { font-size: clamp(1.9rem, 8vw, 2.8rem); letter-spacing: -1px; line-height: 1.2; }
             .hero-desc { font-size: 0.95rem; line-height: 1.6; }
+            .hero-intro {
+                max-width: none;
+                margin-bottom: 20px;
+            }
+            .hero-summary {
+                font-size: 0.92rem;
+                line-height: 1.7;
+                max-width: none;
+                margin-bottom: 22px;
+            }
             .neuro-label { font-size: 0.7rem; letter-spacing: 2px; }
+            #hero-top > p[style*="letter-spacing: 3px"] {
+                font-size: 0.72rem !important;
+                letter-spacing: 1.6px !important;
+                margin-bottom: 18px !important;
+            }
+            .hero-primary-cta {
+                width: 100%;
+                padding: 16px 22px;
+                font-size: 0.95rem;
+                text-align: center;
+            }
 
             /* Stat boxes w rzędzie */
-            .stats-row { gap: 10px; }
-            .stat-box { width: calc(50% - 5px); padding: 14px 12px; border-radius: 18px; }
+            .stats-row { gap: 10px; margin-bottom: 0; }
+            .stat-box { width: calc(50% - 5px); padding: 12px 10px; border-radius: 18px; }
             .stat-num { font-size: 2rem; }
+            .stat-lab { font-size: 0.74rem; }
 
             /* Bento → 1 kolumna */
             .bento-grid { grid-template-columns: 1fr; gap: 12px; }
@@ -611,18 +883,211 @@
             .card { padding: 26px 22px; border-radius: 24px; }
             .card-title { font-size: 1.4rem; }
             .card-text { font-size: 0.95rem; }
+            .modules-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            .module-card {
+                min-height: auto;
+                padding: 22px 18px 58px;
+                border-radius: 22px;
+            }
+            .module-card .card-icon {
+                font-size: 1.9rem !important;
+            }
+            .module-card .card-title {
+                font-size: 1.2rem;
+            }
+            .module-card .card-text {
+                font-size: 0.92rem;
+                line-height: 1.65;
+            }
+            .module-card .card-details {
+                margin-top: 18px;
+                padding-top: 18px;
+            }
+            .module-card .detail-section {
+                margin-bottom: 18px;
+            }
+            .module-card .detail-title {
+                font-size: 0.92rem;
+                gap: 8px;
+                margin-bottom: 10px;
+            }
+            .module-card .reflection-list li,
+            .module-card .business-case,
+            .module-card .card-details .card-text {
+                font-size: 0.88rem !important;
+                line-height: 1.65;
+            }
+            .module-card .business-case {
+                padding: 16px;
+                border-radius: 16px;
+            }
+            .module-card .expand-hint {
+                right: 18px;
+                bottom: 18px;
+                font-size: 0.68rem;
+                letter-spacing: 0.8px;
+            }
+            .ecosystem-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            .ecosystem-card {
+                gap: 14px;
+            }
+            .audience-item p:first-child,
+            .ecosystem-card p[style*="text-transform: uppercase"],
+            #contact p[style*="text-transform: uppercase"] {
+                letter-spacing: 1.4px !important;
+                font-size: 0.74rem !important;
+            }
+            .ecosystem-card .card-text {
+                font-size: 0.92rem !important;
+                line-height: 1.65;
+            }
+            .ecosystem-card ul {
+                gap: 8px !important;
+            }
+            .ecosystem-card > div[style*="padding: 16px 18px"] {
+                padding: 14px 14px !important;
+            }
 
             /* Section headers */
             .section-header h2 { font-size: 2rem; }
-            .section-header span { font-size: 0.7rem; }
+            .section-header span { font-size: 0.76rem; letter-spacing: 1.6px; }
 
             /* SCARF Simulator */
             .simulator-grid { grid-template-columns: 1fr; gap: 16px; }
+            #scarf-simulator.mobile-simulator-active #difficulty-overlay {
+                display: none !important;
+            }
+            #scarf-simulator.mobile-simulator-active #simulator-main {
+                display: block !important;
+            }
+            #scarf-simulator.mobile-simulator-active #results-overlay {
+                display: flex;
+            }
+            #difficulty-overlay {
+                padding: 24px 20px;
+            }
+            .mobile-simulator-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+                margin-bottom: 20px;
+                padding-bottom: 14px;
+                border-bottom: 1px solid rgba(255,255,255,0.08);
+            }
+            .mobile-simulator-header p {
+                margin: 0;
+                color: var(--text-dim);
+                font-size: 0.8rem;
+                text-transform: uppercase;
+                letter-spacing: 1.4px;
+                line-height: 1.4;
+            }
+            .mobile-step-back {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                padding: 10px 14px;
+                border-radius: 14px;
+                border: 1px solid rgba(255,255,255,0.08);
+                background: rgba(255,255,255,0.04);
+                color: #fff;
+                font-size: 0.78rem;
+                font-weight: 700;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                cursor: pointer;
+            }
+            .difficulty-layout {
+                gap: 18px;
+            }
+            .difficulty-copy {
+                gap: 14px;
+            }
+            .difficulty-points {
+                gap: 10px;
+            }
+            .difficulty-point {
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
+            .difficulty-actions {
+                gap: 10px;
+            }
             #viz-container { padding: 24px 16px !important; }
 
             /* Brain demo cards – już 1 kolumna przez tablet query */
             .brain-demo-card { padding: 24px 20px !important; }
             .demo-trigger-btn { font-size: 0.85rem; padding: 12px 20px; }
+            .brain-lab-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            #difficulty-overlay h2,
+            #simulator-main h2 {
+                font-size: 1.5rem !important;
+                line-height: 1.2;
+            }
+            #difficulty-overlay small,
+            #difficulty-overlay div[style*="font-size: 0.88rem"],
+            #difficulty-overlay p,
+            #simulator-main p,
+            #simulator-main #feedback-text {
+                font-size: 0.92rem !important;
+                line-height: 1.65 !important;
+            }
+            #phase-label,
+            #simulator-main div[style*="font-size: 0.6rem"] {
+                font-size: 0.68rem !important;
+                letter-spacing: 1.2px !important;
+            }
+            .scenario-progress {
+                flex-direction: column;
+                gap: 12px;
+                margin-bottom: 20px;
+            }
+            #simulator-main {
+                padding-top: 4px;
+            }
+            #simulator-main > .section-header {
+                margin-bottom: 24px !important;
+            }
+            #simulator-main > .section-header span {
+                display: none;
+            }
+            #simulator-main > .section-header p {
+                margin-top: 10px !important;
+            }
+            .choice-btn {
+                padding: 14px 12px;
+                gap: 12px;
+                font-size: 0.9rem;
+                border-radius: 14px;
+            }
+            .choice-btn span.letter {
+                width: 24px;
+                height: 24px;
+                font-size: 0.72rem;
+            }
+            .brain-demo-card p {
+                font-size: 0.92rem;
+                line-height: 1.65;
+            }
+            .brain-demo-card .demo-tag,
+            #brain-lab p[style*="font-size: 0.7rem"],
+            #brain-lab p[style*="font-size: 0.8rem"] {
+                letter-spacing: 1.2px !important;
+            }
+            .brain-demo-card > div[style*="margin-top: 20px"] {
+                margin-top: 16px !important;
+                padding: 12px 14px !important;
+            }
 
             /* Moduły → 1 kolumna */
             div[style*="grid-template-columns: repeat(3, 1fr)"] { grid-template-columns: 1fr !important; }
@@ -634,9 +1099,69 @@
             div[style*="display: flex; align-items: stretch"] { flex-direction: column !important; gap: 16px !important; }
             div[style*="padding: 40px 50px"] { padding: 24px 20px !important; }
 
+            .contact-panel {
+                min-height: auto;
+                padding: 28px 20px;
+                border-radius: 28px;
+                background: linear-gradient(to bottom, rgba(10,20,40,0.97), rgba(10,20,40,0.88));
+            }
+            .contact-form-grid {
+                max-width: none;
+            }
+            .contact-form-row {
+                grid-template-columns: 1fr;
+            }
+            .contact-meta {
+                gap: 18px;
+                padding-top: 22px;
+                margin-top: 22px;
+            }
+            .contact-meta p:last-child {
+                font-size: 0.94rem !important;
+            }
+            #contact {
+                min-height: auto !important;
+                background: rgba(10,20,40,0.98) !important;
+                border-radius: 28px !important;
+            }
+            #contact h2 {
+                max-width: none !important;
+                font-size: 2rem !important;
+                line-height: 1.15;
+            }
+            #contact .card-text {
+                max-width: none !important;
+                margin-bottom: 28px !important;
+            }
+
             /* Footer */
             footer { margin-top: 60px; padding: 50px 0 30px; }
             footer img { height: 120px !important; }
+
+            .audience-section {
+                min-height: auto;
+                background: rgba(10,20,40,0.96);
+                border-radius: 28px;
+                margin-bottom: 56px;
+            }
+
+            .audience-shell {
+                min-height: auto;
+            }
+
+            .audience-content {
+                width: 100%;
+                padding: 24px 20px;
+                gap: 18px;
+                background: none;
+            }
+
+            .audience-item {
+                padding: 14px 14px 14px 16px;
+                border-radius: 16px;
+                background: rgba(255,255,255,0.03);
+                border-left: 3px solid var(--accent-cyan);
+            }
 
             /* Modal */
             .module-modal-panel { padding: 24px 16px; border-radius: 24px; max-height: 92vh; }
@@ -1270,6 +1795,7 @@
             <a href="#" class="logo" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
                 <img src="Images/brainventure_logo.png" alt="BrainVenture" style="height: 72px; width: auto;">
             </a>
+            <a href="#contact" class="mobile-cta">Umów demo</a>
             <div class="nav-links">
                 <a href="#dla-kogo">Dla kogo</a>
                 <a href="#ekosystem">Ekosystem</a>
@@ -1289,7 +1815,7 @@
                 <div id="hero-video-overlay"></div>
                 <span class="neuro-label">The Future of Leadership Architecture</span>
                 <h1>Gdy nauka spotyka <span>przywództwo</span></h1>
-                <p class="hero-desc" style="font-family: 'Roboto', sans-serif;">Nowy wymiar programu rozwojowego dla liderów jutra.
+                <p class="hero-desc hero-intro" style="font-family: 'Roboto', sans-serif;">Nowy wymiar programu rozwojowego dla liderów jutra.
 Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę zawodową i angażującą formę nauki.
 </p>
                 <p style="font-size: 0.85rem; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 3px; font-weight: 700; margin-bottom: 25px; opacity: 0.8;">
@@ -1311,15 +1837,14 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
             </div>
             <!-- Koniec obszaru z filmem -->
 
-            <p class="hero-desc" style="font-family: 'Roboto', sans-serif;">
+            <p class="hero-desc hero-summary" style="font-family: 'Roboto', sans-serif;">
                 <strong style="color: #fff;">BrainVenture</strong> — Twój przewodnik w ekscytującej podróży przez zakamarki ludzkiej psychiki.<br>
                 Od zrozumienia biologicznych mechanizmów zachowań, po wdrożenie przemyślanych strategii podejmowania decyzji biznesowych.
                 Spójna ścieżka transformacji, która zamienia intuicyjne reakcje <br>w świadome budowanie odporności, zaangażowania i trafnych decyzji w skali całej organizacji.
             </p>
 
             <div>
-                <a href="#contact"
-                    style="background: linear-gradient(135deg, var(--accent-magenta), var(--accent-blue)); color: #fff; padding: 22px 60px; border-radius: 100px; font-weight: 900; text-decoration: none; font-size: 1.1rem; box-shadow: 0 15px 40px rgba(177,10,74,0.4); display: inline-block; letter-spacing: 0.5px;">Zarezerwuj
+                <a href="#contact" class="hero-primary-cta">Zarezerwuj
                     Bezpłatne Demo</a>
             </div>
         </header>
@@ -1329,30 +1854,30 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
             <h2>Kto skorzysta z BrainVenture™?</h2>
         </div>
 
-        <section style="border-radius: 40px; border: 1px solid var(--glass-border); position: relative; min-height: 550px; background: url('Images/AdobeStock_440516409%20kopia.png') no-repeat -150px center / contain; background-color: rgba(10,20,40,1); margin: 0 auto 80px; max-width: 1400px; overflow: hidden;">
-            <div style="display: flex; justify-content: flex-end; min-height: 550px;">
-                <div style="width: 63%; padding: 50px 50px 50px 30px; display: flex; flex-direction: column; gap: 28px; justify-content: center; background: linear-gradient(to left, rgba(10,20,40,0.95) 55%, rgba(10,20,40,0.7) 80%, transparent 100%);">
+        <section class="audience-section">
+            <div class="audience-shell">
+                <div class="audience-content">
 
                     <!-- TOP MANAGEMENT -->
-                    <div>
+                    <div class="audience-item">
                         <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-cyan); margin-bottom: 8px;">Top Management</p>
                         <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.7;">Liderzy kształtujący strategię <span style="color: var(--accent-cyan);">&#10132;</span> zrozumieją, jak decyzje na szczycie wpływają na biologię i efektywność całego systemu organizacyjnego.</p>
                     </div>
 
                     <!-- MENEDŻEROWIE I LIDERZY -->
-                    <div>
+                    <div class="audience-item">
                         <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-cyan); margin-bottom: 8px;">Menedżerowie i Liderzy</p>
                         <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.7;">Osoby zarządzające ludźmi w zmiennym środowisku <span style="color: var(--accent-cyan);">&#10132;</span> uzyskają narzędzia do budowania zaangażowania i dbania o zespół bez straty na wynikach.</p>
                     </div>
 
                     <!-- PROJECT MANAGERS -->
-                    <div>
+                    <div class="audience-item">
                         <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-cyan); margin-bottom: 8px;">Project Managers</p>
                         <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.7;">Menedżerowie zarządzający złożonymi procesami <span style="color: var(--accent-cyan);">&#10132;</span> nauczą się, jak budować autorytet bez formalnej podległości i zarządzać energią zespołu w długich cyklach projektowych.</p>
                     </div>
 
                     <!-- DZIAŁY HR I L&D -->
-                    <div>
+                    <div class="audience-item">
                         <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-cyan); margin-bottom: 8px;">Działy HR i L&amp;D</p>
                         <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.7;">Profesjonaliści wspierający rozwój kadr <span style="color: var(--accent-cyan);">&#10132;</span> uzyskają lepsze zrozumienie neurobiologicznych fundamentów skutecznego zarządzania i będą mogli skutecznie wspierać kadrę menedżerską w codziennych wyzwaniach.</p>
                     </div>
@@ -1368,10 +1893,10 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                 <h2 style="font-size: 2.5rem;">Ekosystem BrainVenture™ </h2>
                 <p style="color: var(--text-dim); max-width: 700px; margin: 15px auto 0;">Trzy filary tworzą kompletną ścieżkę transformacji lidera.</p>
             </div>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; align-items: start;">
+            <div class="ecosystem-grid">
 
                 <!-- Kolumna 1: Gra Symulacyjna -->
-                <div class="card" style="background: linear-gradient(135deg, rgba(14,42,71,0.6), rgba(30,115,185,0.08)); display: flex; flex-direction: column; gap: 18px;">
+                <div class="card ecosystem-card" style="background: linear-gradient(135deg, rgba(14,42,71,0.6), rgba(30,115,185,0.08)); display: flex; flex-direction: column; gap: 18px;">
                     <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 6px;">
                         <div class="card-icon" style="margin-bottom: 0; font-size: 2rem; color: var(--accent-cyan);"><i class="fa fa-gamepad"></i></div>
                         <h3 class="card-title" style="margin: 0;">Gra Symulacyjna</h3>
@@ -1383,7 +1908,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                 </div>
 
                 <!-- Kolumna 2: Warsztaty Modułowe -->
-                <div class="card" style="background: linear-gradient(135deg, rgba(177,10,74,0.08), rgba(14,42,71,0.6)); border-color: rgba(177,10,74,0.25); display: flex; flex-direction: column; gap: 16px;">
+                <div class="card ecosystem-card" style="background: linear-gradient(135deg, rgba(177,10,74,0.08), rgba(14,42,71,0.6)); border-color: rgba(177,10,74,0.25); display: flex; flex-direction: column; gap: 16px;">
                     <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 6px;">
                         <div class="card-icon" style="margin-bottom: 0; font-size: 2rem; color: var(--accent-magenta);"><i class="fa fa-cubes"></i></div>
                         <h3 class="card-title" style="margin: 0;">Warsztaty Modułowe</h3>
@@ -1401,7 +1926,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                 </div>
 
                 <!-- Kolumna 3: BrainVenture Online -->
-                <div class="card" style="background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(14,42,71,0.6)); display: flex; flex-direction: column; gap: 16px;">
+                <div class="card ecosystem-card" style="background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(14,42,71,0.6)); display: flex; flex-direction: column; gap: 16px;">
                     <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 6px;">
                         <div class="card-icon" style="margin-bottom: 0; font-size: 2rem; color: #a78bfa;"><i class="fa fa-laptop"></i></div>
                         <h3 class="card-title" style="margin: 0;">BrainVenture Online</h3>
@@ -1456,10 +1981,10 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
 
                 <!-- Difficulty Selection -->
                 <div id="difficulty-overlay">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; width: 100%; align-items: end;">
+                    <div class="difficulty-layout">
 
                         <!-- Left: context -->
-                        <div>
+                        <div class="difficulty-copy">
                             <div class="section-header" style="text-align: left; margin-bottom: 24px;">
 
                                 <h2 style="font-size: 1.4rem; font-weight: 800;">SCARF Challenge</h2>
@@ -1467,24 +1992,24 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                             <p style="color: var(--text-dim); font-size: 0.95rem; line-height: 1.7; margin-bottom: 24px;">
                                 Wciel się w rolę lidera i przekonaj się, jak decyzje menedżerskie wpływają na mózg, emocje i zaangażowanie Twojego zespołu.
                             </p>
-                            <div style="display: flex; flex-direction: column; gap: 12px;">
-                                <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 0.88rem; color: var(--text-dim);">
-                                    <span style="color: var(--accent-cyan); flex-shrink: 0; margin-top: 2px;">✓</span>
+                            <div class="difficulty-points">
+                                <div class="difficulty-point">
+                                    <span class="difficulty-point-mark">✓</span>
                                     <span><strong style="color: #fff;">Jak rozpoznawać sygnały mózgu</strong> — kiedy pracownik odbiera sytuację jako zagrożenie, a kiedy jako nagrodę</span>
                                 </div>
-                                <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 0.88rem; color: var(--text-dim);">
-                                    <span style="color: var(--accent-cyan); flex-shrink: 0; margin-top: 2px;">✓</span>
+                                <div class="difficulty-point">
+                                    <span class="difficulty-point-mark">✓</span>
                                     <span><strong style="color: #fff;">Jak decyzje menedżerskie wpływają na zespół</strong> — nawet pozornie drobne działania mogą podnosić poziom stresu, obniżać kreatywność i osłabiać zaangażowanie</span>
                                 </div>
-                                <div style="display: flex; align-items: flex-start; gap: 12px; font-size: 0.88rem; color: var(--text-dim);">
-                                    <span style="color: var(--accent-cyan); flex-shrink: 0; margin-top: 2px;">✓</span>
+                                <div class="difficulty-point">
+                                    <span class="difficulty-point-mark">✓</span>
                                     <span><strong style="color: #fff;">Jak budować środowisko wysokiej efektywności</strong> — wzmacniając zaufanie, autonomię i poczucie bezpieczeństwa psychologicznego</span>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Right: 3 stacked cards -->
-                        <div style="display: flex; flex-direction: column; gap: 14px;">
+                        <div class="difficulty-actions">
                             <button class="diff-btn junior" onclick="selectDifficulty('junior')">
                                 <div class="diff-icon" style="background: rgba(74, 222, 128, 0.15); color: #4ade80;"><i class="fa fa-leaf"></i></div>
                                 <div class="u-flex-grow">
@@ -1529,6 +2054,12 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                 </div>
 
                 <div id="simulator-main" style="display:none; width:100%;">
+                <div class="mobile-simulator-header">
+                    <p>Etap 2: decyzje i reakcja mózgu</p>
+                    <button type="button" class="mobile-step-back" onclick="returnToDifficultySelection()">
+                        <i class="fa fa-angle-left"></i> Poziomy
+                    </button>
+                </div>
                 <div class="section-header" style="text-align: left; margin-bottom: 40px;">
                     <span>Interaktywne Laboratorium</span>
                     <h2 style="font-size: 2.2rem;">SCARF Dynamic Simulator</h2>
@@ -1542,7 +2073,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         <div style="font-size: 0.75rem; color: var(--accent-cyan); letter-spacing: 2px; font-weight: 700; margin-bottom: 10px;"
                             id="phase-label">SYTUACJA 1 / 10</div>
 
-                        <div style="display: flex; gap: 20px; margin-bottom: 25px;">
+                        <div class="scenario-progress">
                             <div class="u-flex-grow">
                                 <div
                                     style="font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; margin-bottom: 5px;">
@@ -1601,7 +2132,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                     <p style="color: var(--text-dim); max-width: 620px; margin: 14px auto 0; font-size: 0.95rem; line-height: 1.7;">Trzy interaktywne demonstracje. Każda symuluje inny mechanizm neurobiologiczny, który codziennie wpływa na Ciebie i Twój zespół. Kliknij przycisk, żeby tego doświadczyć.</p> -->
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+                <div class="brain-lab-grid">
 
                     <!-- Card 1: Cognitive Stress -->
                     <section class="card brain-demo-card" id="card-stress" style="display: flex; flex-direction: column;">
@@ -1689,7 +2220,7 @@ A razem z nim — kreatywność, współpraca i trafne decyzje.</p>
                    
                     <h2>Program</h2>
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                <div class="modules-grid">
                         <!-- Moduł 1 -->
                         <section class="card module-card" onclick="toggleCard(this)">
                             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
@@ -1910,15 +2441,15 @@ A razem z nim — kreatywność, współpraca i trafne decyzje.</p>
             style="margin-top: 100px; border-radius: 40px; border: 1px solid var(--glass-border); position: relative; min-height: 600px; background: url('Images/Depositphotos_72019277_web.jpg') no-repeat right center / contain; background-color: rgba(10,20,40,1);">
 
             <!-- Left: content -->
-            <div style="padding: 80px 60px; background: linear-gradient(to right, rgba(10,20,40,0.95) 50%, rgba(10,20,40,0.6) 70%, transparent 100%); border-radius: 40px; display: flex; flex-direction: column; justify-content: center; min-height: 600px;">
+            <div class="contact-panel">
                 <h2 style="font-family: var(--font-heading); font-size: 2.6rem; font-weight: 900; margin-bottom: 16px; text-align: left; max-width: 560px;">Zbuduj zespół jutra</h2>
                 <p class="card-text" style="margin-bottom: 36px; text-align: left; max-width: 560px;">Umów bezpłatne demo i sprawdź, jak BrainVenture™ może wspierać rozwój Twojego zespołu.</p>
 
                 <!-- Contact Form -->
                 <form id="contact-form"
-                    style="display: grid; gap: 16px; text-align: left; max-width: 560px;"
+                    class="contact-form-grid"
                     onsubmit="handleContactForm(event)">
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                    <div class="contact-form-row">
                         <div>
                             <label
                                 class="u-label">Imię
@@ -1954,7 +2485,7 @@ A razem z nim — kreatywność, współpraca i trafne decyzje.</p>
                         Skontaktujemy się wkrótce.</p>
                 </div>
 
-                <div style="display:flex; gap:40px; flex-wrap:wrap; padding-top: 30px; margin-top: 30px; border-top: 1px solid var(--glass-border);">
+                <div class="contact-meta">
                     <div>
                         <p style="font-weight:700; color:var(--accent-cyan); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px;">e-mail:</p>
                         <p style="font-size: 1rem;">jstrzemecka@blueaccelerator.com</p>

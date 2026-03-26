@@ -352,6 +352,30 @@ let currentScenariosPool = [];
 let scarfCurrent = 0;
 let scarfChart;
 
+function isMobileScarfFlow() {
+    return window.matchMedia('(max-width: 600px)').matches;
+}
+
+function setMobileScarfState(isSimulatorVisible) {
+    const simulator = document.getElementById('scarf-simulator');
+    if (!simulator) return;
+
+    if (isMobileScarfFlow() && isSimulatorVisible) {
+        simulator.classList.add('mobile-simulator-active');
+    } else {
+        simulator.classList.remove('mobile-simulator-active');
+    }
+}
+
+function returnToDifficultySelection() {
+    if (!isMobileScarfFlow()) return;
+
+    document.getElementById('results-overlay').style.display = 'none';
+    document.getElementById('simulator-main').style.display = 'none';
+    document.getElementById('difficulty-overlay').style.display = 'flex';
+    setMobileScarfState(false);
+}
+
 function selectDifficulty(level) {
     const settings = difficultySettings[level];
     Object.keys(scarfValues).forEach(k => scarfValues[k] = settings.start);
@@ -367,6 +391,7 @@ function selectDifficulty(level) {
     document.getElementById('difficulty-overlay').style.display = 'none';
     document.getElementById('results-overlay').style.display = 'none';
     document.getElementById('simulator-main').style.display = 'block';
+    setMobileScarfState(true);
     initScarfChart();
     updateScarfUI();
 }
@@ -434,6 +459,7 @@ function updateScarfUI() {
         const avgScarf = Object.values(scarfValues).reduce((a, b) => a + b) / 5;
         const finalBoard = boardConfidence;
         document.getElementById('results-overlay').style.display = 'flex';
+        setMobileScarfState(true);
 
         let archetype = "Lider Adaptacyjny";
         let description = "";
@@ -523,6 +549,16 @@ function updateScarfUI() {
         container.appendChild(b);
     });
 }
+
+window.addEventListener('resize', () => {
+    const simulatorMain = document.getElementById('simulator-main');
+    if (!simulatorMain || simulatorMain.style.display !== 'block') {
+        setMobileScarfState(false);
+        return;
+    }
+
+    setMobileScarfState(true);
+});
 
 
 document.addEventListener('mousemove', (e) => {
