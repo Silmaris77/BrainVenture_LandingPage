@@ -13,6 +13,8 @@
         rel="stylesheet">
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Utility classes -->
+    <link rel="stylesheet" href="index-additions.css">
     <!-- Chart.js for SCARF Simulator -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- EmailJS -->
@@ -596,6 +598,36 @@
 
             /* Dopamine canvas – nie blokuje dotyku */
             #dopamine-canvas { pointer-events: none; }
+        }
+
+        /* ===== WIDE DESKTOP (1440px+) ===== */
+        @media (min-width: 1440px) {
+            .container { max-width: 1400px; margin-left: auto; margin-right: auto; }
+            h1 { font-size: 6.5rem; }
+            .section-header h2 { font-size: 3.2rem; }
+        }
+
+        /* ===== MID TABLET (900–1100px): siatki 3→2 kolumny ===== */
+        @media (max-width: 1100px) {
+            div[style*="grid-template-columns: repeat(3, 1fr)"] {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            /* contact section padding */
+            #contact > div:first-child { padding: 60px 44px !important; }
+        }
+
+        /* ===== SMALL PHONE (≤480px) ===== */
+        @media (max-width: 480px) {
+            /* Formularz: imię + firma → 1 kolumna */
+            div[style*="grid-template-columns: 1fr 1fr; gap: 16px"] {
+                grid-template-columns: 1fr !important;
+            }
+            /* Stat boxes → pełna szerokość */
+            .stat-box { width: 100% !important; }
+            /* Contact padding */
+            #contact > div:first-child { padding: 36px 20px !important; }
+            /* Nagłówek contact */
+            #contact h2 { font-size: 2rem !important; }
         }
 
         /* --- SCARF Simulator Specific Styles --- */
@@ -1287,7 +1319,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                 <div class="card" style="background: linear-gradient(135deg, rgba(14,42,71,0.6), rgba(30,115,185,0.08)); display: flex; flex-direction: column; gap: 18px;">
                     <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 6px;">
                         <div class="card-icon" style="margin-bottom: 0; font-size: 2rem; color: var(--accent-cyan);"><i class="fa fa-gamepad"></i></div>
-                        <h3 class="card-title" style="margin-bottom: 0; font-size: 1.4rem;">Gra Symulacyjna</h3>
+                        <h3 class="card-title" class="u-card-title">Gra Symulacyjna</h3>
                     </div>
                     <p class="card-text" style="font-size: 0.92rem; font-weight: 600; color: #fff;">Jedyna w Polsce gra symulacyjna wprowadzająca w fascynujący świat neuroprzywództwa.</p>
                     <p class="card-text" style="font-size: 0.9rem;">BrainVenture stwarza unikalną możliwość poznania najważniejszych odkryć neuronauk oraz sposobów na ich wykorzystanie w realnych sytuacjach zawodowych. A wszystko to w atmosferze dobrej zabawy, wciągającej rywalizacji i dynamicznej, pełnej emocji nauki.</p>
@@ -1299,16 +1331,16 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                 <div class="card" style="background: linear-gradient(135deg, rgba(177,10,74,0.08), rgba(14,42,71,0.6)); border-color: rgba(177,10,74,0.25); display: flex; flex-direction: column; gap: 16px;">
                     <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 6px;">
                         <div class="card-icon" style="margin-bottom: 0; font-size: 2rem; color: var(--accent-magenta);"><i class="fa fa-cubes"></i></div>
-                        <h3 class="card-title" style="margin-bottom: 0; font-size: 1.4rem;">Warsztaty Modułowe</h3>
+                        <h3 class="card-title" class="u-card-title">Warsztaty Modułowe</h3>
                     </div>
                     <p class="card-text" style="font-size: 0.9rem;">Warsztaty praktyczne w architekturze modułowej pogłębiające poszczególne obszary wiedzy o mózgu i jej zastosowanie w codziennej pracy lidera.</p>
                     <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px;">
-                        <li style="font-size: 0.88rem; color: var(--text-dim); padding-left: 18px; position: relative; line-height: 1.5;"><span style="position:absolute;left:0;color:var(--accent-magenta);">&#8594;</span><strong style="color:#fff;">Moduł 1: Poznanie</strong> — Jak mózg tworzy Twoją rzeczywistość?</li>
-                        <li style="font-size: 0.88rem; color: var(--text-dim); padding-left: 18px; position: relative; line-height: 1.5;"><span style="position:absolute;left:0;color:var(--accent-magenta);">&#8594;</span><strong style="color:#fff;">Moduł 2: Emocje</strong> — Homo Emotionalis. Czy logika to iluzja?</li>
-                        <li style="font-size: 0.88rem; color: var(--text-dim); padding-left: 18px; position: relative; line-height: 1.5;"><span style="position:absolute;left:0;color:var(--accent-magenta);">&#8594;</span><strong style="color:#fff;">Moduł 3: Decyzje</strong> — Neurobiologia wyboru: od schematów do strategii</li>
-                        <li style="font-size: 0.88rem; color: var(--text-dim); padding-left: 18px; position: relative; line-height: 1.5;"><span style="position:absolute;left:0;color:var(--accent-magenta);">&#8594;</span><strong style="color:#fff;">Moduł 4: Komunikacja</strong> — Neurochemia rozmowy: od oporu do współpracy</li>
-                        <li style="font-size: 0.88rem; color: var(--text-dim); padding-left: 18px; position: relative; line-height: 1.5;"><span style="position:absolute;left:0;color:var(--accent-magenta);">&#8594;</span><strong style="color:#fff;">Moduł 5: Wellbeing</strong> — Mózg, który nie wypoczywa, nie myśli</li>
-                        <li style="font-size: 0.88rem; color: var(--text-dim); padding-left: 18px; position: relative; line-height: 1.5;"><span style="position:absolute;left:0;color:var(--accent-magenta);">&#8594;</span><strong style="color:#fff;">Moduł 6: Przywództwo XXI wieku</strong> — Między kontrolą a transformacją</li>
+                        <li class="u-list-item"><span class="u-list-marker">&#8594;</span><strong style="color:#fff;">Moduł 1: Poznanie</strong> — Jak mózg tworzy Twoją rzeczywistość?</li>
+                        <li class="u-list-item"><span class="u-list-marker">&#8594;</span><strong style="color:#fff;">Moduł 2: Emocje</strong> — Homo Emotionalis. Czy logika to iluzja?</li>
+                        <li class="u-list-item"><span class="u-list-marker">&#8594;</span><strong style="color:#fff;">Moduł 3: Decyzje</strong> — Neurobiologia wyboru: od schematów do strategii</li>
+                        <li class="u-list-item"><span class="u-list-marker">&#8594;</span><strong style="color:#fff;">Moduł 4: Komunikacja</strong> — Neurochemia rozmowy: od oporu do współpracy</li>
+                        <li class="u-list-item"><span class="u-list-marker">&#8594;</span><strong style="color:#fff;">Moduł 5: Wellbeing</strong> — Mózg, który nie wypoczywa, nie myśli</li>
+                        <li class="u-list-item"><span class="u-list-marker">&#8594;</span><strong style="color:#fff;">Moduł 6: Przywództwo XXI wieku</strong> — Między kontrolą a transformacją</li>
                     </ul>
                     <p class="card-text" style="font-size: 0.88rem; border-left: 3px solid var(--accent-magenta); padding-left: 14px; margin-top: 4px;">Każdy moduł to 1–2-dniowy program skoncentrowany na przełożeniu wiedzy na praktykę biznesową. Stanowi samodzielną, spójną całość. Moduły można realizować jako pełny cykl lub skoncentrować się na wybranych zagadnieniach.</p>
                 </div>
@@ -1317,7 +1349,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                 <div class="card" style="background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(14,42,71,0.6)); display: flex; flex-direction: column; gap: 16px;">
                     <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 6px;">
                         <div class="card-icon" style="margin-bottom: 0; font-size: 2rem; color: #a78bfa;"><i class="fa fa-laptop"></i></div>
-                        <h3 class="card-title" style="margin-bottom: 0; font-size: 1.4rem;">BrainVenture Online</h3>
+                        <h3 class="card-title" class="u-card-title">BrainVenture Online</h3>
                     </div>
                     <p class="card-text" style="font-size: 0.9rem;">Cyfrowe przedłużenie programu, które pozwala uczestnikom wracać do wiedzy, pogłębiać ją we własnym tempie i stosować w codziennej praktyce.</p>
                     <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 4px;">
@@ -1400,7 +1432,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         <div style="display: flex; flex-direction: column; gap: 14px;">
                             <button class="diff-btn junior" onclick="selectDifficulty('junior')">
                                 <div class="diff-icon" style="background: rgba(74, 222, 128, 0.15); color: #4ade80;"><i class="fa fa-leaf"></i></div>
-                                <div style="flex: 1;">
+                                <div class="u-flex-grow">
                                     <strong style="display: block; font-family: var(--font-heading); font-size: 1rem; margin-bottom: 4px;">Junior Lider</strong>
                                     <small style="color: var(--text-dim); font-size: 0.8rem; line-height: 1.5;">Wyzwania 1:1, budowanie autorytetu, empatyczny feedback, skuteczny onboarding.</small>
                                 </div>
@@ -1409,7 +1441,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
 
                             <button class="diff-btn manager" onclick="selectDifficulty('manager')">
                                 <div class="diff-icon" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24;"><i class="fa fa-briefcase"></i></div>
-                                <div style="flex: 1;">
+                                <div class="u-flex-grow">
                                     <strong style="display: block; font-family: var(--font-heading); font-size: 1rem; margin-bottom: 4px;">Menedżer Zespołu</strong>
                                     <small style="color: var(--text-dim); font-size: 0.8rem; line-height: 1.5;">Dynamika grupowa, konflikty o zasoby, deadline’y,  wdrażanie zmian.</small>
                                 </div>
@@ -1418,7 +1450,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
 
                             <button class="diff-btn director" onclick="selectDifficulty('director')">
                                 <div class="diff-icon" style="background: rgba(248, 113, 113, 0.15); color: #f87171;"><i class="fa fa-trophy"></i></div>
-                                <div style="flex: 1;">
+                                <div class="u-flex-grow">
                                     <strong style="display: block; font-family: var(--font-heading); font-size: 1rem; margin-bottom: 4px;">Dyrektor Strategiczny</strong>
                                     <small style="color: var(--text-dim); font-size: 0.8rem; line-height: 1.5;">Zarządzanie kryzysowe, fuzje, restrukturyzacje, presja rynkowa.</small>
                                 </div>
@@ -1456,7 +1488,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                             id="phase-label">SYTUACJA 1 / 10</div>
 
                         <div style="display: flex; gap: 20px; margin-bottom: 25px;">
-                            <div style="flex: 1;">
+                            <div class="u-flex-grow">
                                 <div
                                     style="font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; margin-bottom: 5px;">
                                     Relacje w Zespole (SCARF)</div>
@@ -1464,7 +1496,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                                     <div id="scarf-progress" class="progress-bar"></div>
                                 </div>
                             </div>
-                            <div style="flex: 1;">
+                            <div class="u-flex-grow">
                                 <div
                                     style="font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; margin-bottom: 5px;">
                                     Zaufanie Zarządu (Board)</div>
@@ -1590,9 +1622,9 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         <!-- Moduł 1 -->
                         <section class="card module-card" onclick="toggleCard(this)">
                             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-                                <div class="card-icon" style="margin-bottom: 0; font-size: 2rem;"><i
+                                <div class="card-icon" class="u-heading-large"><i
                                         class="fa fa-eye"></i></div>
-                                <h3 class="card-title" style="margin-bottom: 0; font-size: 1.4rem;">1. Poznanie</h3>
+                                <h3 class="card-title" class="u-card-title">1. Poznanie</h3>
                             </div>
                             <p class="card-text">Jak mózg tworzy Twoją rzeczywistość? Dekonstrukcja filtrów
                                 percepcyjnych i pułapek myślenia.</p>
@@ -1626,9 +1658,9 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         <!-- Moduł 2 -->
                         <section class="card module-card" onclick="toggleCard(this)">
                             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-                                <div class="card-icon" style="margin-bottom: 0; font-size: 2rem;"><i
+                                <div class="card-icon" class="u-heading-large"><i
                                         class="fa fa-heartbeat" style="color: var(--accent-magenta);"></i></div>
-                                <h3 class="card-title" style="margin-bottom: 0; font-size: 1.4rem;">2. Emocje</h3>
+                                <h3 class="card-title" class="u-card-title">2. Emocje</h3>
                             </div>
                             <p class="card-text">Homo Emotionalis. Czy logika to iluzja? Mechanizmy powstawania emocji i
                                 ich wpływ na korę.</p>
@@ -1661,9 +1693,9 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         <!-- Moduł 3 -->
                         <section class="card module-card" onclick="toggleCard(this)">
                             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-                                <div class="card-icon" style="margin-bottom: 0; font-size: 2rem;"><i
+                                <div class="card-icon" class="u-heading-large"><i
                                         class="fa fa-balance-scale"></i></div>
-                                <h3 class="card-title" style="margin-bottom: 0; font-size: 1.4rem;">3. Decyzje</h3>
+                                <h3 class="card-title" class="u-card-title">3. Decyzje</h3>
                             </div>
                             <p class="card-text">Neurobiologia wyboru. Od automatycznych schematów do świadomych
                                 strategii.</p>
@@ -1697,9 +1729,9 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         <!-- Moduł 4 -->
                         <section class="card module-card" onclick="toggleCard(this)">
                             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-                                <div class="card-icon" style="margin-bottom: 0; font-size: 2rem;"><i
+                                <div class="card-icon" class="u-heading-large"><i
                                         class="fa fa-comments-o" style="color: var(--accent-cyan);"></i></div>
-                                <h3 class="card-title" style="margin-bottom: 0; font-size: 1.4rem;">4. Komunikacja</h3>
+                                <h3 class="card-title" class="u-card-title">4. Komunikacja</h3>
                             </div>
                             <p class="card-text">Neurochemia rozmowy. Jak słowa aktywują neuroprzekaźniki, budując
                                 otwartość lub opór.</p>
@@ -1737,7 +1769,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                                 <div class="card-icon"
                                     style="margin-bottom: 0; font-size: 2rem; color: var(--accent-magenta);"><i
                                         class="fa fa-leaf"></i></div>
-                                <h3 class="card-title" style="margin-bottom: 0; font-size: 1.4rem;">5. Wellbeing</h3>
+                                <h3 class="card-title" class="u-card-title">5. Wellbeing</h3>
                             </div>
                             <p class="card-text">Mózg, który nie wypoczywa, nie myśli. Zarządzanie snem i energią jako
                                 paliwem.</p>
@@ -1769,9 +1801,9 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         <!-- Moduł 6 -->
                         <section class="card module-card" onclick="toggleCard(this)">
                             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-                                <div class="card-icon" style="margin-bottom: 0; font-size: 2rem;"><i
+                                <div class="card-icon" class="u-heading-large"><i
                                         class="fa fa-lightbulb-o" style="color: var(--accent-cyan);"></i></div>
-                                <h3 class="card-title" style="margin-bottom: 0; font-size: 1.4rem;">6. Przywództwo XXI w.</h3>
+                                <h3 class="card-title" class="u-card-title">6. Przywództwo XXI w.</h3>
                             </div>
                             <p class="card-text">Między kontrolą a transformacją. Budowanie środowiska opartego na
                                 sprawczości i zaufaniu.</p>
@@ -1819,30 +1851,24 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                         <div>
                             <label
-                                style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-cyan); font-weight: 700; display: block; margin-bottom: 8px;">Imię
+                                class="u-label">Imię
                                 i nazwisko</label>
                             <input type="text" name="name" placeholder="Jan Kowalski" required
-                                style="width: 100%; background: rgba(255,255,255,0.06); border: 1px solid var(--glass-border); border-radius: 15px; padding: 14px 20px; color: #fff; font-size: 0.95rem; outline: none; font-family: var(--font-main); transition: 0.3s;"
-                                onfocus="this.style.borderColor='var(--accent-cyan)'; this.style.background='rgba(30,115,185,0.12)'"
-                                onblur="this.style.borderColor='var(--glass-border)'; this.style.background='rgba(255,255,255,0.06)'">
+                                class="u-input-glass">
                         </div>
                         <div>
                             <label
-                                style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-cyan); font-weight: 700; display: block; margin-bottom: 8px;">Firma</label>
+                                class="u-label">Firma</label>
                             <input type="text" name="company" placeholder="Nazwa firmy" required
-                                style="width: 100%; background: rgba(255,255,255,0.06); border: 1px solid var(--glass-border); border-radius: 15px; padding: 14px 20px; color: #fff; font-size: 0.95rem; outline: none; font-family: var(--font-main); transition: 0.3s;"
-                                onfocus="this.style.borderColor='var(--accent-cyan)'; this.style.background='rgba(30,115,185,0.12)'"
-                                onblur="this.style.borderColor='var(--glass-border)'; this.style.background='rgba(255,255,255,0.06)'">
+                                class="u-input-glass">
                         </div>
                     </div>
                     <div>
                         <label
-                            style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-cyan); font-weight: 700; display: block; margin-bottom: 8px;">Adres
+                            class="u-label">Adres
                             e-mail</label>
                         <input type="email" name="email" placeholder="jan@firma.pl" required
-                            style="width: 100%; background: rgba(255,255,255,0.06); border: 1px solid var(--glass-border); border-radius: 15px; padding: 14px 20px; color: #fff; font-size: 0.95rem; outline: none; font-family: var(--font-main); transition: 0.3s;"
-                            onfocus="this.style.borderColor='var(--accent-cyan)'; this.style.background='rgba(30,115,185,0.12)'"
-                            onblur="this.style.borderColor='var(--glass-border)'; this.style.background='rgba(255,255,255,0.06)'">
+                            class="u-input-glass">
                     </div>
                     <button type="submit"
                         style="background: linear-gradient(135deg, var(--accent-magenta), var(--accent-blue)); color: #fff; border: none; padding: 18px 40px; border-radius: 100px; font-weight: 900; font-size: 1rem; cursor: pointer; letter-spacing: 0.5px; box-shadow: 0 10px 30px rgba(177,10,74,0.4); transition: 0.3s; font-family: var(--font-main);"

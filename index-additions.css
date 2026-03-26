@@ -315,3 +315,85 @@ footer .footer-col h3::after {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* =============================================
+   UTILITY CLASSES — zastępują inline style
+   ============================================= */
+
+/* Kolory tekstu */
+.u-text-cyan    { color: var(--accent-cyan); }
+.u-text-magenta { color: var(--accent-magenta); }
+.u-text-white   { color: #fff; }
+.u-text-dim     { color: var(--text-dim); }
+
+/* Rozmiary tekstu */
+.u-text-xs   { font-size: 0.75rem; }
+.u-text-sm   { font-size: 0.9rem; }
+.u-text-base { font-size: 0.95rem; }
+
+/* Nagłówki kart */
+.u-card-title    { margin-bottom: 0; font-size: 1.4rem; }
+.u-heading-large { margin-bottom: 0; font-size: 2rem; }
+
+/* Label uppercase (etykiety nad inputami, nagłówki sekcji) */
+.u-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-cyan);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Label uppercase — większy odstęp liter (nagłówki w kartach) */
+.u-label-lg {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent-cyan);
+    margin-bottom: 8px;
+}
+
+/* Flex utilities */
+.u-flex-center  { display: flex; align-items: center; }
+.u-flex-grow    { flex: 1; }
+.u-flex-shrink0 { flex-shrink: 0; }
+.u-gap-12       { gap: 12px; }
+.u-gap-14       { gap: 14px; }
+.u-mb-20        { margin-bottom: 20px; }
+
+/* Elementy listy z lewym markerem (moduły SCARF) */
+.u-list-item {
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.5;
+}
+
+.u-list-marker {
+    position: absolute;
+    left: 0;
+    color: var(--accent-magenta);
+}
+
+/* Input glassmorphism (formularz kontaktowy) */
+.u-input-glass {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    padding: 14px 20px;
+    color: #fff;
+    font-size: 0.95rem;
+    outline: none;
+    font-family: var(--font-main);
+    transition: 0.3s;
+}
+
+.u-input-glass:focus {
+    border-color: var(--accent-cyan);
+    background: rgba(30, 115, 185, 0.12);
+}
