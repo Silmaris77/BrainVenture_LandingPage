@@ -373,6 +373,8 @@ function returnToDifficultySelection() {
     document.getElementById('results-overlay').style.display = 'none';
     document.getElementById('simulator-main').style.display = 'none';
     document.getElementById('difficulty-overlay').style.display = 'flex';
+    const sim = document.getElementById('scarf-simulator');
+    if (sim) sim.classList.remove('mobile-results-active');
     setMobileScarfState(false);
 }
 
@@ -424,6 +426,7 @@ function initScarfChart() {
         },
         options: {
             animation: { duration: 1000, easing: 'easeOutElastic' },
+            layout: { padding: { left: 30, right: 30, top: 10, bottom: 10 } },
             scales: {
                 r: {
                     angleLines: { color: 'rgba(255,255,255,0.1)' },
@@ -460,6 +463,20 @@ function updateScarfUI() {
         const finalBoard = boardConfidence;
         document.getElementById('results-overlay').style.display = 'flex';
         setMobileScarfState(true);
+
+        // Mark results active — hides simulator-main on mobile
+        const sim = document.getElementById('scarf-simulator');
+        if (sim) sim.classList.add('mobile-results-active');
+
+        // Hide simulator content on results
+        document.getElementById('simulator-main').style.display = 'none';
+
+        // Move radar chart into results overlay
+        const chartCanvas = document.getElementById('radarChart');
+        const resultsChartWrapper = document.getElementById('results-chart-wrapper');
+        if (chartCanvas && resultsChartWrapper) {
+            resultsChartWrapper.appendChild(chartCanvas);
+        }
 
         let archetype = "Lider Adaptacyjny";
         let description = "";

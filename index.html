@@ -966,8 +966,57 @@
             #scarf-simulator.mobile-simulator-active #simulator-main {
                 display: block !important;
             }
+            #scarf-simulator.mobile-results-active #simulator-main {
+                display: none !important;
+            }
             #scarf-simulator.mobile-simulator-active #results-overlay {
                 display: flex;
+            }
+            #results-overlay {
+                position: static !important;
+                min-height: auto !important;
+                height: auto !important;
+                padding: 24px 16px !important;
+                border-radius: 24px !important;
+                width: 100% !important;
+            }
+            #results-overlay > div {
+                width: 100%;
+            }
+            #results-overlay h2 {
+                font-size: 1.4rem !important;
+                margin-bottom: 8px !important;
+            }
+            #results-overlay .archetype-label {
+                font-size: 0.7rem !important;
+            }
+            #results-overlay strong {
+                font-size: 1.1rem !important;
+                margin: 6px 0 !important;
+            }
+            #results-overlay div[style*="display: flex; gap: 20px"] {
+                gap: 10px !important;
+                margin: 10px 0 !important;
+            }
+            #results-overlay div[style*="padding: 10px 20px"] {
+                padding: 6px 12px !important;
+            }
+            #results-overlay p[style*="margin-top:15px"] {
+                font-size: 0.85rem !important;
+                margin-top: 8px !important;
+            }
+            #results-overlay button {
+                padding: 10px 28px !important;
+                font-size: 0.85rem !important;
+                margin-top: 6px !important;
+            }
+            #results-chart-wrapper {
+                max-width: 100% !important;
+                margin: 8px auto 10px !important;
+                padding: 0 10px;
+            }
+            #results-overlay #results-chart-wrapper {
+                max-width: 200px !important;
             }
             #difficulty-overlay {
                 padding: 24px 20px;
@@ -1102,15 +1151,13 @@
                 margin-top: 10px !important;
             }
             .choice-btn {
-                padding: 14px 12px;
-                gap: 12px;
-                font-size: 0.9rem;
+                padding: 12px 14px;
+                gap: 0;
+                font-size: 0.88rem;
                 border-radius: 14px;
             }
             .choice-btn span.letter {
-                width: 24px;
-                height: 24px;
-                font-size: 0.72rem;
+                display: none !important;
             }
             .brain-demo-card p {
                 font-size: 0.92rem;
@@ -1286,11 +1333,9 @@
         }
 
         #results-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
+            position: relative;
             width: 100%;
-            height: 100%;
+            min-height: 600px;
             background: rgba(13, 17, 26, 0.98);
             display: none;
             z-index: 100;
@@ -1300,6 +1345,21 @@
             backdrop-filter: blur(10px);
             padding: 40px;
             text-align: center;
+        }
+        #results-overlay > div {
+            max-width: 520px;
+            width: 100%;
+        }
+
+        #results-chart-wrapper {
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        #results-chart-wrapper canvas {
+            max-width: 100% !important;
+            height: auto !important;
         }
 
         /* --- Enhancement Styles --- */
@@ -2082,6 +2142,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         <h2
                             style="font-family: var(--font-heading); font-size: 2.5rem; color: var(--accent-cyan); margin-bottom: 20px;">
                             Symulacja Zakończona!</h2>
+                        <div id="results-chart-wrapper" style="max-width: 400px; margin: 0 auto 20px;"></div>
                         <p id="results-final-desc"
                             style="color: var(--text-dim); margin-bottom: 30px; font-size: 1.1rem;"></p>
                         <button onclick="location.reload()"
