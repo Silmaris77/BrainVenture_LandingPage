@@ -1335,8 +1335,11 @@
         #results-overlay {
             position: relative;
             width: 100%;
+            max-width: 560px;
+            margin: 0 auto;
             min-height: 400px;
-            background: transparent;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
             display: none;
             z-index: 100;
             justify-content: center;
@@ -2157,39 +2160,17 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         <i class="fa fa-angle-left"></i> Poziomy
                     </button>
                 </div>
-                <div class="section-header" style="text-align: left; margin-bottom: 40px;">
-                    <span>Interaktywne Laboratorium</span>
-                    <h2 style="font-size: 2.2rem;">SCARF Dynamic Simulator</h2>
-                    <p style="color: var(--text-dim); font-size: 1rem; margin-top: 8px; font-weight: 400;">Sprawdź jak
-                        działa SCARF — podejmuj decyzje i obserwuj reakcję mózgu pracownika w czasie rzeczywistym.</p>
-                </div>
-
                 <div class="simulator-grid">
                     <!-- Left: Scenarios -->
-                    <div class="scenario-box">
+                    <div class="scenario-box" style="height: 720px; overflow: hidden; padding-right: 16px;">
+                        <div class="section-header" style="text-align: left; margin-bottom: 20px;">
+                            <span>Interaktywne Laboratorium</span>
+                            <h2 style="font-size: 2.2rem;">SCARF Dynamic Simulator</h2>
+                            <p style="color: var(--text-dim); font-size: 1rem; margin-top: 8px; font-weight: 400;">Sprawdź jak działa SCARF —<br>podejmuj decyzje i obserwuj reakcję mózgu pracownika.</p>
+                        </div>
                         <div style="font-size: 0.75rem; color: var(--accent-cyan); letter-spacing: 2px; font-weight: 700; margin-bottom: 10px;"
                             id="phase-label">SYTUACJA 1 / 10</div>
 
-                        <div class="scenario-progress">
-                            <div class="u-flex-grow">
-                                <div
-                                    style="font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; margin-bottom: 5px;">
-                                    Relacje w Zespole (SCARF)</div>
-                                <div class="progress-container" style="margin-bottom: 0;">
-                                    <div id="scarf-progress" class="progress-bar"></div>
-                                </div>
-                            </div>
-                            <div class="u-flex-grow">
-                                <div
-                                    style="font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; margin-bottom: 5px;">
-                                    Zaufanie Zarządu (Board)</div>
-                                <div class="progress-container"
-                                    style="margin-bottom: 0; background: rgba(177, 10, 74, 0.1);">
-                                    <div id="board-progress" class="progress-bar"
-                                        style="background: var(--accent-magenta); width: 50%;"></div>
-                                </div>
-                            </div>
-                        </div>
                         <h3 id="scenario-title"
                             style="font-family: var(--font-heading); font-size: 1.6rem; margin-bottom: 15px; color: #fff;">
                             <i class="fa fa-refresh" style="margin-right: 12px; color: var(--accent-cyan);"></i>Poranna
@@ -2203,11 +2184,30 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                         <div id="choices-container">
                             <!-- Injected by JS -->
                         </div>
+                        <button id="next-situation-btn" class="choice-btn"
+                            style="background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan)); border-color: var(--accent-cyan); color: #fff; font-weight: 700; justify-content: center; margin-top: 8px; visibility: hidden; width: 100%;"
+                            onclick="updateScarfUI()">
+                            <i class="fa fa-arrow-right" style="margin-right:8px;"></i> Następna sytuacja
+                        </button>
                     </div>
 
                     <!-- Right: Radar Chart -->
                     <div id="viz-container"
-                        style="display: flex; flex-direction: column; align-items: center; background: rgba(0,0,0,0.2); padding: 40px; border-radius: 40px; border: 1px solid var(--glass-border); position: relative;">
+                        style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0,0,0,0.2); padding: 20px 40px; border-radius: 40px; border: 1px solid var(--glass-border); position: relative;">
+                        <div class="scenario-progress" style="width: 100%; margin-bottom: 6px;">
+                            <div class="u-flex-grow">
+                                <div style="font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; margin-bottom: 5px;">Relacje w Zespole (SCARF)</div>
+                                <div class="progress-container" style="margin-bottom: 0;">
+                                    <div id="scarf-progress" class="progress-bar"></div>
+                                </div>
+                            </div>
+                            <div class="u-flex-grow">
+                                <div style="font-size: 0.6rem; color: var(--text-dim); text-transform: uppercase; margin-bottom: 5px;">Zaufanie Zarządu (Board)</div>
+                                <div class="progress-container" style="margin-bottom: 0; background: rgba(177, 10, 74, 0.1);">
+                                    <div id="board-progress" class="progress-bar" style="background: var(--accent-magenta); width: 50%;"></div>
+                                </div>
+                            </div>
+                        </div>
                         <div id="radar-chart-wrapper" style="width: 100%; max-width: 480px; position: relative;">
                             <canvas id="radarChart"></canvas>
                             <div id="board-impact-area" style="position:absolute; left:0; right:0; display:flex; justify-content:center; align-items:center; height:32px;"></div>

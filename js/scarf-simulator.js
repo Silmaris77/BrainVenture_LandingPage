@@ -628,6 +628,8 @@ function updateScarfUI() {
 
     const container = document.getElementById('choices-container');
     container.innerHTML = '';
+    const nextBtnEl = document.getElementById('next-situation-btn');
+    if (nextBtnEl) nextBtnEl.style.visibility = 'hidden';
 
     s.choices.forEach((c, i) => {
         const b = document.createElement('button');
@@ -676,16 +678,13 @@ function updateScarfUI() {
 
             scarfCurrent++;
 
-            // Show "Next" button instead of auto-advancing
+            // Show pre-placed next button
             const isLast = scarfCurrent >= currentScenariosPool.length;
-            const nextBtn = document.createElement('button');
-            nextBtn.className = 'choice-btn';
-            nextBtn.style.cssText = 'background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan)); border-color: var(--accent-cyan); color: #fff; font-weight: 700; justify-content: center; margin-top: 8px;';
+            const nextBtn = document.getElementById('next-situation-btn');
             nextBtn.innerHTML = isLast
                 ? '<i class="fa fa-flag-checkered" style="margin-right:8px;"></i> Zobacz wyniki'
                 : '<i class="fa fa-arrow-right" style="margin-right:8px;"></i> Następna sytuacja';
-            nextBtn.onclick = updateScarfUI;
-            container.appendChild(nextBtn);
+            nextBtn.style.visibility = 'visible';
         };
         container.appendChild(b);
     });
