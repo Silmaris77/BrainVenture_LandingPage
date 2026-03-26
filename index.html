@@ -1394,14 +1394,12 @@
                 transform: translateY(0);
                 opacity: 0;
             }
-
-            20% {
+            30% {
                 opacity: 1;
             }
-
             100% {
                 transform: translateY(-40px);
-                opacity: 0;
+                opacity: 1;
             }
         }
 
@@ -2210,13 +2208,13 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                     <!-- Right: Radar Chart -->
                     <div id="viz-container"
                         style="display: flex; flex-direction: column; align-items: center; background: rgba(0,0,0,0.2); padding: 40px; border-radius: 40px; border: 1px solid var(--glass-border); position: relative;">
-                        <div style="width: 100%; max-width: 480px;">
+                        <div id="radar-chart-wrapper" style="width: 100%; max-width: 480px; position: relative;">
                             <canvas id="radarChart"></canvas>
+                            <div id="board-impact-area" style="position:absolute; left:0; right:0; display:flex; justify-content:center; align-items:center; height:32px;"></div>
                         </div>
-                        <div style="margin-top: 25px; text-align: center;">
+                        <div style="text-align: center;">
                             <p id="feedback-text"
-                                style="font-size: 0.85rem; color: var(--accent-cyan); font-style: italic; min-height: 3em;">
-                                Podejmij decyzję, by zobaczyć reakcję mózgu pracownika...</p>
+                                style="font-size: 0.85rem; color: var(--accent-cyan); font-style: italic; min-height: 3em;"></p>
                         </div>
                     </div>
                 </div>
