@@ -1301,6 +1301,25 @@
             #contact h2 { font-size: 2rem !important; }
         }
 
+        .card-exercise-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #fff;
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 14px rgba(30, 211, 255, 0.35);
+            z-index: 2;
+        }
+
         /* --- SCARF Simulator Specific Styles --- */
         .simulator-grid {
             display: grid;
@@ -1956,7 +1975,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
 
             <div>
                 <a href="#contact" class="hero-primary-cta">Zarezerwuj
-                    Bezpłatne Demo</a>
+                    Demo</a>
             </div>
         </header>
 
@@ -1983,13 +2002,13 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
 
                     <!-- PROJECT MANAGERS -->
                     <div class="audience-item">
-                        <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-cyan); margin-bottom: 8px;">Project Managers</p>
+                        <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-cyan); margin-bottom: 8px;">Project Managerowie</p>
                         <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.7;">Menedżerowie zarządzający złożonymi procesami <span style="color: var(--accent-cyan);">&#10132;</span> nauczą się, jak budować autorytet bez formalnej podległości i zarządzać energią zespołu w długich cyklach projektowych.</p>
                     </div>
 
                     <!-- DZIAŁY HR I L&D -->
                     <div class="audience-item">
-                        <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-cyan); margin-bottom: 8px;">Działy HR i L&amp;D</p>
+                        <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-cyan); margin-bottom: 8px;">Działy HR</p>
                         <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.7;">Profesjonaliści wspierający rozwój kadr <span style="color: var(--accent-cyan);">&#10132;</span> uzyskają lepsze zrozumienie neurobiologicznych fundamentów skutecznego zarządzania i będą mogli skutecznie wspierać kadrę menedżerską w codziennych wyzwaniach.</p>
                     </div>
 
@@ -2069,7 +2088,6 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                 <div class="section-header">
                
                     <h2>Sprawdź, czego doświadczysz</h2>
-                    <p style="color: var(--text-dim); max-width: 680px; margin: 16px auto 0; font-size: 1rem; line-height: 1.7;">Przetestuj jak działa model SCARF. Uwolnij neuroprzekaźniki.</p>
                 </div>
             </div>
 
@@ -2089,6 +2107,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
             <!-- SCARF Dynamic Simulator -->
             <section class="card col-4" id="scarf-simulator"
                 style="background: rgba(13, 17, 26, 0.4); border-color: var(--accent-cyan); position: relative;">
+                <span class="card-exercise-badge">1</span>
 
                 <!-- Difficulty Selection -->
                 <div id="difficulty-overlay">
@@ -2101,20 +2120,20 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                                 <h2 style="font-size: 1.4rem; font-weight: 800;">SCARF Challenge</h2>
                             </div>
                             <p style="color: var(--text-dim); font-size: 0.95rem; line-height: 1.7; margin-bottom: 24px;">
-                                Wciel się w rolę lidera i przekonaj się, jak decyzje menedżerskie wpływają na mózg, emocje i zaangażowanie Twojego zespołu.
+                                Przekonaj się, jak decyzje menedżerskie wpływają na mózg, emocje i zaangażowanie Twojego zespołu.
                             </p>
                             <div class="difficulty-points">
                                 <div class="difficulty-point">
                                     <span class="difficulty-point-mark">✓</span>
-                                    <span><strong style="color: #fff;">Jak rozpoznawać sygnały mózgu</strong> — kiedy pracownik odbiera sytuację jako zagrożenie, a kiedy jako nagrodę</span>
+                                    <span><strong style="color: #fff;">Dowiedz się, jak rozpoznawać sygnały mózgu</strong> — kiedy Twój pracownik odbiera sytuację jako zagrożenie, a kiedy jako nagrodę</span>
                                 </div>
                                 <div class="difficulty-point">
                                     <span class="difficulty-point-mark">✓</span>
-                                    <span><strong style="color: #fff;">Jak decyzje menedżerskie wpływają na zespół</strong> — nawet pozornie drobne działania mogą podnosić poziom stresu, obniżać kreatywność i osłabiać zaangażowanie</span>
+                                    <span><strong style="color: #fff;">Zobacz, jak Twoje zachowania wpływają na zespół</strong> — nawet pozornie drobne działania mogą podnosić poziom stresu, obniżać kreatywność i osłabiać zaangażowanie</span>
                                 </div>
                                 <div class="difficulty-point">
                                     <span class="difficulty-point-mark">✓</span>
-                                    <span><strong style="color: #fff;">Jak budować środowisko wysokiej efektywności</strong> — wzmacniając zaufanie, autonomię i poczucie bezpieczeństwa psychologicznego</span>
+                                    <span><strong style="color: #fff;">Naucz się budować środowisko wysokiej efektywności</strong> — wzmacniając zaufanie, autonomię i poczucie bezpieczeństwa psychologicznego</span>
                                 </div>
                             </div>
                         </div>
@@ -2242,7 +2261,8 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
             </section>
 
             <!-- Brain Effects Section -->
-            <section class="card col-4" id="brain-lab" style="background: rgba(13, 17, 26, 0.4); border-color: var(--accent-cyan); margin-top: 10px;">
+            <section class="card col-4" id="brain-lab" style="background: rgba(13, 17, 26, 0.4); border-color: var(--accent-cyan); margin-top: 10px; position: relative;">
+                <span class="card-exercise-badge">2</span>
                 <div class="section-header" style="margin-bottom: 40px;">
         
                     <!-- <h2>Jak działa Twój mózg?</h2>
@@ -2326,7 +2346,7 @@ A razem z nim — kreatywność, współpraca i trafne decyzje.</p>
                     <p style="color: var(--text-dim); font-size: 0.95rem; line-height: 1.7; margin: 0;">Gra symulacyjna i 6 modułów merytorycznych tworzą spójną ścieżkę, po której każdy lider wychodzi z konkretnym zestawem narzędzi — nie teorią, ale nawykami.</p>
                 </div>
                 <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px; flex-shrink: 0; padding: 40px 20px;">
-                    <a href="#contact" style="background: linear-gradient(135deg, var(--accent-magenta), var(--accent-blue)); color: #fff; padding: 18px 44px; border-radius: 100px; font-weight: 900; text-decoration: none; font-size: 1rem; box-shadow: 0 10px 30px rgba(177,10,74,0.35); white-space: nowrap; letter-spacing: 0.3px;">Zarezerwuj Bezpłatne Demo →</a>
+                    <a href="#contact" style="background: linear-gradient(135deg, var(--accent-magenta), var(--accent-blue)); color: #fff; padding: 18px 44px; border-radius: 100px; font-weight: 900; text-decoration: none; font-size: 1rem; box-shadow: 0 10px 30px rgba(177,10,74,0.35); white-space: nowrap; letter-spacing: 0.3px;">Zarezerwuj Demo →</a>
                  
                 </div>
             </div> -->
@@ -2595,7 +2615,7 @@ A razem z nim — kreatywność, współpraca i trafne decyzje.</p>
                         Zarezerwuj Demo &rarr;
                     </button>
                     <p style="font-size: 0.72rem; color: rgba(255,255,255,0.35); margin-top: 14px; line-height: 1.6;">
-                        Administratorem danych osobowych jest Blue Accelerator s.c. z siedzibą przy ul. Bursztynowej 7, 05-140 Serock. Dane podane w formularzu będą przetwarzane wyłącznie w celu udzielenia odpowiedzi na przesłane zapytanie (podstawa: art. 6 ust. 1 lit. f RODO – prawnie uzasadniony interes administratora). Przysługuje Ci prawo dostępu, sprostowania i usunięcia danych. Szczegóły: <a href="polityka-prywatnosci.html" style="color: rgba(255,255,255,0.5); text-decoration: underline;">Polityka prywatności</a>.
+                        Administratorem danych osobowych jest Blue Accelerator s.c. z siedzibą przy ul. Bursztynowej 7,<br> 05-140 Serock. Dane podane w formularzu będą przetwarzane wyłącznie w celu udzielenia odpowiedzi na przesłane zapytanie (podstawa: art. 6 ust. 1 lit. f RODO – prawnie uzasadniony interes administratora). Przysługuje Ci prawo dostępu, sprostowania i usunięcia danych. Szczegóły: <a href="polityka-prywatnosci.html" style="color: rgba(255,255,255,0.5); text-decoration: underline;">Polityka prywatności</a>.
                     </p>
                 </form>
 
