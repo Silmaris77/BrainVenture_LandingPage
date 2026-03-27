@@ -1303,21 +1303,36 @@
 
         .card-exercise-badge {
             position: absolute;
-            top: 20px;
-            left: 20px;
-            width: 54px;
-            height: 54px;
+            top: 16px;
+            left: 16px;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: rgba(30, 115, 185, 0.15);
+            border: 1px solid rgba(30, 211, 255, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            font-size: 1.7rem;
+            line-height: 1;
+        }
+        .card-exercise-badge .badge-num {
+            position: absolute;
+            bottom: -4px;
+            right: -4px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
             color: #fff;
             font-family: var(--font-heading);
-            font-size: 1.5rem;
+            font-size: 0.72rem;
             font-weight: 800;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 14px rgba(30, 211, 255, 0.35);
-            z-index: 2;
+            box-shadow: 0 0 8px rgba(30, 211, 255, 0.4);
         }
 
         /* --- SCARF Simulator Specific Styles --- */
@@ -2085,7 +2100,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
 
             <!-- Lab Section Header -->
             <div class="col-4" id="lab" style="margin-top: 20px;">
-                <div class="section-header">
+                <div class="section-header" style="margin-bottom: 0;">
                
                     <h2>Sprawdź, czego doświadczysz</h2>
                 </div>
@@ -2107,7 +2122,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
             <!-- SCARF Dynamic Simulator -->
             <section class="card col-4" id="scarf-simulator"
                 style="background: rgba(13, 17, 26, 0.4); border-color: var(--accent-cyan); position: relative;">
-                <span class="card-exercise-badge">1</span>
+                <div class="card-exercise-badge">🧠<span class="badge-num">1</span></div>
 
                 <!-- Difficulty Selection -->
                 <div id="difficulty-overlay">
@@ -2262,7 +2277,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
 
             <!-- Brain Effects Section -->
             <section class="card col-4" id="brain-lab" style="background: rgba(13, 17, 26, 0.4); border-color: var(--accent-cyan); margin-top: 10px; position: relative;">
-                <span class="card-exercise-badge">2</span>
+                <div class="card-exercise-badge">🧠<span class="badge-num">2</span></div>
                 <div class="section-header" style="margin-bottom: 40px;">
         
                     <!-- <h2>Jak działa Twój mózg?</h2>
