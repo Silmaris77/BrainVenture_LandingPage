@@ -512,9 +512,12 @@
             border: 1px solid var(--accent-cyan);
             border-radius: 40px;
             padding: 50px 56px;
-            max-width: 780px;
+            max-width: 1060px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             width: 100%;
-            max-height: 88vh;
+            max-height: 96vh;
             overflow-y: auto;
             position: relative;
             transform: translateY(28px) scale(0.98);
@@ -891,6 +894,9 @@
                 min-height: auto;
                 padding: 22px 18px 58px;
                 border-radius: 22px;
+            }
+            .module-card [style*="grid-template-columns: 1fr 1fr"] {
+                grid-template-columns: 1fr !important;
             }
             .module-card .card-icon {
                 font-size: 1.9rem !important;
@@ -1887,10 +1893,46 @@
             width: 0%;
         }
 
-        #music-toggle {
+        #music-widget {
             position: fixed;
-            top: 40px;
-            right: 25px;
+            top: 38px;
+            right: 12px;
+            z-index: 999999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        #volume-popup {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(10, 15, 30, 0.88);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 20px;
+            padding: 10px 8px;
+            backdrop-filter: blur(12px);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-6px);
+            transition: opacity 0.2s, transform 0.2s;
+        }
+        #music-widget:hover #volume-popup {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+        #volume-slider {
+            -webkit-appearance: slider-vertical;
+            appearance: slider-vertical;
+            writing-mode: vertical-lr;
+            direction: rtl;
+            width: 6px;
+            height: 70px;
+            cursor: pointer;
+            accent-color: var(--accent-cyan);
+        }
+        #music-toggle {
             background: rgba(255,255,255,0.07);
             border: 1px solid rgba(255,255,255,0.18);
             color: rgba(255,255,255,0.6);
@@ -1904,7 +1946,6 @@
             cursor: pointer;
             backdrop-filter: blur(10px);
             transition: color 0.3s, border-color 0.3s, background 0.3s;
-            z-index: 999999;
         }
         #music-toggle.playing {
             color: var(--accent-cyan);
@@ -1915,16 +1956,16 @@
 #scroll-to-top {
             position: fixed;
             bottom: 36px;
-            right: 36px;
+            right: 12px;
             background: linear-gradient(135deg, var(--accent-magenta), var(--accent-blue));
             color: white;
-            width: 56px;
-            height: 56px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.1rem;
             cursor: pointer;
             box-shadow: 0 8px 32px rgba(177, 10, 74, 0.5);
             z-index: 999999;
@@ -2414,28 +2455,45 @@ A razem z nim — kreatywność, współpraca i trafne decyzje.</p>
                                 percepcyjnych i pułapek myślenia.</p>
                             <div class="expand-hint">Rozwiń szczegóły <i class="fa fa-chevron-right"></i></div>
                             <div class="card-details">
-                                <div class="detail-section">
-                                    <div class="detail-title"><i class="fa fa-info-circle"></i> O czym to jest?</div>
-                                    <p class="card-text" style="font-size: 0.9rem;">Analizujemy proces kodowania
-                                        informacji, skupiając się na modelu SEEDS® Davida Rocka. Dowiesz się, jak
-                                        systemowe uproszczenia (heurystyki) wpływają na postrzeganie faktów i
-                                        formułowanie opinii.</p>
-                                </div>
-                                <div class="detail-section">
-                                    <div class="detail-title"><i class="fa fa-question-circle"></i> Pytania do refleksji
+                                <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 24px;">
+                                    <div class="detail-section" style="margin-bottom: 0;">
+                                        <div class="detail-title"><i class="fa fa-info-circle"></i> O czym to jest?</div>
+                                        <p class="card-text" style="font-size: 0.9rem;">Każdego dnia mózg przetwarza miliony sygnałów 
+— do świadomości dociera ułamek. Mózg nie jest 
+obiektywnym rejestratorem rzeczywistości – jest 
+jej interpretatorem. Moduł dekonstruuje proces 
+kodowania informacji, skupiając się na modelu 
+SEEDS® Davida Rocka. Analizujemy, jak 
+systemowe uproszczenia (heurystyki) wpływają 
+na postrzeganie faktów, formułowanie opinii  
+i konstruowanie wiedzy o świecie. </p>
                                     </div>
-                                    <ul class="reflection-list">
-                                        <li>Jakie błędy popełniamy oceniając innych i dlaczego robimy to automatycznie?
-                                        </li>
-                                        <li>W jakich sytuacjach zawodowych Twoje przekonania mogą Cię zawodzić?</li>
-                                        <li>Co sprawia, że dwie osoby patrzą na ten sam problem i wyciągają różne
-                                            wnioski?</li>
-                                    </ul>
+                                    <div class="detail-section" style="margin-bottom: 0;">
+                                        <div class="detail-title"><i class="fa fa-question-circle"></i> Pytania do refleksji</div>
+                                        <ul class="reflection-list">
+                                            <li>Jakie błędy popełniamy oceniając innych i dlaczego robimy to automatycznie?</li>
+                                            <li>W jakich sytuacjach Twoje przekonania mogą Cię zawodzić?</li>
+                                            <li>Co sprawia, że dwie osoby patrzą na ten sam problem i wyciągają różne wnioski?</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="business-case">
-                                    <strong>Przykład biznesowy:</strong> Menedżer odrzuca pomysł nowego pracownika, bo
-                                    „to się u nas nie sprawdza”. Reaguje na wzorzec z przeszłości zamiast analizować
-                                    dane.
+                                <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 24px; margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);">
+                                    <div class="detail-section" style="margin-bottom: 0;">
+                                        <div class="detail-title"><i class="fa fa-lightbulb-o"></i> Dlaczego to ważne?</div>
+                                        <p class="card-text" style="font-size: 0.9rem;">Nieświadomość własnych filtrów percepcyjnych 
+prowadzi do kosztownych błędów w ocenie 
+sytuacji zawodowych. Zwiększa ryzyko błędu przy 
+podejmowaniu decyzji biznesowych i osobowych. 
+Lider rozumiejący te mechanizmy potrafi 
+korygować skrzywienia poznawcze, chroniąc 
+organizację przed osłabieniem kapitału 
+intelektualnego i relacyjnego.</p>
+                                    </div>
+                                    <div class="business-case" style="align-self: start;">
+                                        <strong>Przykład biznesowy:</strong> Menedżer odrzuca pomysł nowego pracownika, bo „to się u nas nie sprawdza". Nie 
+analizuje danych — reaguje na wzorzec z przeszłości. Firma traci innowacje, pracownik — 
+motywację do działania.
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -2450,27 +2508,32 @@ A razem z nim — kreatywność, współpraca i trafne decyzje.</p>
                                 ich wpływ na korę.</p>
                             <div class="expand-hint">Rozwiń szczegóły <i class="fa fa-chevron-right"></i></div>
                             <div class="card-details">
-                                <div class="detail-section">
-                                    <div class="detail-title"><i class="fa fa-info-circle"></i> O czym to jest?</div>
-                                    <p class="card-text" style="font-size: 0.9rem;">Skąd biorą się emocje, co robią z
-                                        korą przedczołową i jak kształtują postrzeganie świata. Poznasz mechanizmy
-                                        eskalacji konfliktów i budowania bezpieczeństwa.</p>
-                                </div>
-                                <div class="detail-section">
-                                    <div class="detail-title"><i class="fa fa-question-circle"></i> Pytania do refleksji
+                                <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 24px;">
+                                    <div class="detail-section" style="margin-bottom: 0;">
+                                        <div class="detail-title"><i class="fa fa-info-circle"></i> O czym to jest?</div>
+                                        <p class="card-text" style="font-size: 0.9rem;">Skąd biorą się emocje, co robią z
+                                            korą przedczołową i jak kształtują postrzeganie świata. Poznasz mechanizmy
+                                            eskalacji konfliktów i budowania bezpieczeństwa.</p>
                                     </div>
-                                    <ul class="reflection-list">
-                                        <li>Jak rozpoznajesz, że emocje przejęły kontrolę nad rozmową — u Ciebie lub u
-                                            rozmówcy?</li>
-                                        <li>Jakie emocje dominują w Twoim zespole w obliczu zmiany strategicznej?</li>
-                                        <li>W jaki sposób konflikty w Twojej organizacji są zazwyczaj rozwiązywane?</li>
-                                    </ul>
+                                    <div class="detail-section" style="margin-bottom: 0;">
+                                        <div class="detail-title"><i class="fa fa-question-circle"></i> Pytania do refleksji</div>
+                                        <ul class="reflection-list">
+                                            <li>Jak rozpoznajesz, że emocje przejęły kontrolę nad rozmową — u Ciebie lub u rozmówcy?</li>
+                                            <li>Jakie emocje dominują w Twoim zespole w obliczu zmiany strategicznej?</li>
+                                            <li>W jaki sposób konflikty w Twojej organizacji są zazwyczaj rozwiązywane?</li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="business-case"
-                                    style="border-color: var(--accent-magenta); background: rgba(177, 10, 74, 0.1);">
-                                    <strong>Przykład biznesowy:</strong> Dwaj menedżerowie wchodzą w destrukcyjny
-                                    konflikt o zasoby. Skoncentrowani na obronie własnego ego ("walcz lub uciekaj"),
-                                    tracą cel strategiczny.
+                                <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 24px; margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);">
+                                    <div class="detail-section" style="margin-bottom: 0;">
+                                        <div class="detail-title"><i class="fa fa-lightbulb-o"></i> Dlaczego to ważne?</div>
+                                        <p class="card-text" style="font-size: 0.9rem;"><!-- TODO: uzupełnić treść --></p>
+                                    </div>
+                                    <div class="business-case" style="align-self: start; border-color: var(--accent-magenta); background: rgba(177, 10, 74, 0.1);">
+                                        <strong>Przykład biznesowy:</strong> Dwaj menedżerowie wchodzą w destrukcyjny
+                                        konflikt o zasoby. Skoncentrowani na obronie własnego ego ("walcz lub uciekaj"),
+                                        tracą cel strategiczny.
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -2485,16 +2548,16 @@ A razem z nim — kreatywność, współpraca i trafne decyzje.</p>
                                 strategii.</p>
                             <div class="expand-hint">Rozwiń szczegóły <i class="fa fa-chevron-right"></i></div>
                             <div class="card-details">
-                                <div class="detail-section">
-                                    <div class="detail-title"><i class="fa fa-info-circle"></i> O czym to jest?</div>
-                                    <p class="card-text" style="font-size: 0.9rem;">Eksplorujemy architekturę wyboru –
+                                <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 24px;">
+                                    <div class="detail-section" style="margin-bottom: 0;">
+                                        <div class="detail-title"><i class="fa fa-info-circle"></i> O czym to jest?</div>
+                                        <p class="card-text" style="font-size: 0.9rem;">Eksplorujemy architekturę wyboru –
                                         momenty, w których automatyzmy poznawcze wypierają rzetelną analizę. Uczymy
                                         rozpoznawania stereotypów narzucanych przez otoczenie.</p>
-                                </div>
-                                <div class="detail-section">
-                                    <div class="detail-title"><i class="fa fa-question-circle"></i> Pytania do refleksji
                                     </div>
-                                    <ul class="reflection-list">
+                                    <div class="detail-section" style="margin-bottom: 0;">
+                                        <div class="detail-title"><i class="fa fa-question-circle"></i> Pytania do refleksji</div>
+                                        <ul class="reflection-list">
                                         <li>Jak odróżnisz fakty od interpretacji v codziennych rozmowach i raportach?
                                         </li>
                                         <li>Czy uwzględniasz presję grupy i hierarchię w procesie podejmowania decyzji?
@@ -2502,11 +2565,18 @@ A razem z nim — kreatywność, współpraca i trafne decyzje.</p>
                                         <li>Jakie przekonania w Twojej branży mogą być dzisiaj przestarzałe lub błędne?
                                         </li>
                                     </ul>
+                                    </div>
                                 </div>
-                                <div class="business-case">
+                                <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 24px; margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);">
+                                    <div class="detail-section" style="margin-bottom: 0;">
+                                        <div class="detail-title"><i class="fa fa-lightbulb-o"></i> Dlaczego to ważne?</div>
+                                        <p class="card-text" style="font-size: 0.9rem;"><!-- TODO: uzupełnić treść --></p>
+                                    </div>
+                                    <div class="business-case" style="align-self: start;">
                                     <strong>Przykład biznesowy:</strong> Zarząd podejmuje ryzykowną inwestycję tylko
                                     dlatego, że „wszyscy liderzy rynku tak robią”. Brak krytycznej weryfikacji to
                                     ulegnięcie błędowi stadnemu.
+                                </div>
                                 </div>
                             </div>
                         </section>
@@ -2521,16 +2591,16 @@ A razem z nim — kreatywność, współpraca i trafne decyzje.</p>
                                 otwartość lub opór.</p>
                             <div class="expand-hint">Rozwiń szczegóły <i class="fa fa-chevron-right"></i></div>
                             <div class="card-details">
-                                <div class="detail-section">
-                                    <div class="detail-title"><i class="fa fa-info-circle"></i> O czym to jest?</div>
-                                    <p class="card-text" style="font-size: 0.9rem;">Każda rozmowa zmienia chemię mózgu
+                                <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 24px;">
+                                    <div class="detail-section" style="margin-bottom: 0;">
+                                        <div class="detail-title"><i class="fa fa-info-circle"></i> O czym to jest?</div>
+                                        <p class="card-text" style="font-size: 0.9rem;">Każda rozmowa zmienia chemię mózgu
                                         obu stron. Opierając się na modelu Conversational Intelligence®, pokazujemy, jak
                                         inicjować współpracę zamiast walki o dominację.</p>
-                                </div>
-                                <div class="detail-section">
-                                    <div class="detail-title"><i class="fa fa-question-circle"></i> Pytania do refleksji
                                     </div>
-                                    <ul class="reflection-list">
+                                    <div class="detail-section" style="margin-bottom: 0;">
+                                        <div class="detail-title"><i class="fa fa-question-circle"></i> Pytania do refleksji</div>
+                                        <ul class="reflection-list">
                                         <li>Jakie słowa lub zachowania w Twoim zespole najczęściej wywołują
                                             defensywność?</li>
                                         <li>Czy ludzie w Twojej organizacji mówią Ci prawdę, czy raczej to, co chcesz
@@ -2538,11 +2608,18 @@ A razem z nim — kreatywność, współpraca i trafne decyzje.</p>
                                         <li>Jak budujesz w rozmowach poczucie bezpieczeństwa zachęcające do otwartości?
                                         </li>
                                     </ul>
+                                    </div>
                                 </div>
-                                <div class="business-case">
+                                <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 24px; margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);">
+                                    <div class="detail-section" style="margin-bottom: 0;">
+                                        <div class="detail-title"><i class="fa fa-lightbulb-o"></i> Dlaczego to ważne?</div>
+                                        <p class="card-text" style="font-size: 0.9rem;">Jakość rozmów w organizacji to jakość jej decyzji, relacji i kultury. Lider rozumiejący neurobiologię dialogu buduje środowisko psychologicznego bezpieczeństwa — gdzie ludzie mówią co myślą i angażują się naprawdę — a to klucz do zwinności biznesowej.</p>
+                                    </div>
+                                    <div class="business-case" style="align-self: start;">
                                     <strong>Przykład biznesowy:</strong> Agresywna krytyka lidera podczas review
                                     sprawia, że mózgi zespołu przechodzą w tryb przetrwania (zalew kortyzolu), co
                                     całkowicie blokuje kreatywność.
+                                </div>
                                 </div>
                             </div>
                         </section>
@@ -2558,26 +2635,33 @@ A razem z nim — kreatywność, współpraca i trafne decyzje.</p>
                                 paliwem.</p>
                             <div class="expand-hint">Rozwiń szczegóły <i class="fa fa-chevron-right"></i></div>
                             <div class="card-details">
-                                <div class="detail-section">
-                                    <div class="detail-title"><i class="fa fa-info-circle"></i> O czym to jest?</div>
-                                    <p class="card-text" style="font-size: 0.9rem;">Stres to bilans zasobów
+                                <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 24px;">
+                                    <div class="detail-section" style="margin-bottom: 0;">
+                                        <div class="detail-title"><i class="fa fa-info-circle"></i> O czym to jest?</div>
+                                        <p class="card-text" style="font-size: 0.9rem;">Stres to bilans zasobów
                                         energetycznych. Skupiamy się na podstawach sprawności lidera: precyzyjnym
                                         zarządzaniu snem, ruchem i odżywianiem jako paliwem dla kory.</p>
-                                </div>
-                                <div class="detail-section">
-                                    <div class="detail-title"><i class="fa fa-question-circle"></i> Pytania do refleksji
                                     </div>
-                                    <ul class="reflection-list">
+                                    <div class="detail-section" style="margin-bottom: 0;">
+                                        <div class="detail-title"><i class="fa fa-question-circle"></i> Pytania do refleksji</div>
+                                        <ul class="reflection-list">
                                         <li>Które elementy modelu SCARF® są w Twoim zespole najczęściej naruszane?</li>
                                         <li>Jak Twoja reakcja na stres wspiera lub utrudnia zarządzanie innymi?</li>
                                         <li>Jakie nawyki wspierają Twoją efektywność, a jakie ją realnie obniżają?</li>
                                     </ul>
+                                    </div>
                                 </div>
-                                <div class="business-case"
+                                <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 24px; margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);">
+                                    <div class="detail-section" style="margin-bottom: 0;">
+                                        <div class="detail-title"><i class="fa fa-lightbulb-o"></i> Dlaczego to ważne?</div>
+                                        <p class="card-text" style="font-size: 0.9rem;"><!-- TODO: uzupełnić treść --></p>
+                                    </div>
+                                    <div class="business-case" style="align-self: start;"
                                     style="border-color: var(--accent-magenta); background: rgba(177, 10, 74, 0.1);">
                                     <strong>Przykład biznesowy:</strong> Ekspert po miesiącach presji zaczyna popełniać
                                     błędy. Zarząd błędnie diagnozuje spadek motywacji zamiast wyczerpania zasobów
                                     kognitywnych i naruszenia Autonomii.
+                                </div>
                                 </div>
                             </div>
                         </section>
@@ -2592,26 +2676,33 @@ A razem z nim — kreatywność, współpraca i trafne decyzje.</p>
                                 sprawczości i zaufaniu.</p>
                             <div class="expand-hint">Rozwiń szczegóły <i class="fa fa-chevron-right"></i></div>
                             <div class="card-details">
-                                <div class="detail-section">
-                                    <div class="detail-title"><i class="fa fa-info-circle"></i> O czym to jest?</div>
-                                    <p class="card-text" style="font-size: 0.9rem;">W zmiennym środowisku mózg
+                                <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 24px;">
+                                    <div class="detail-section" style="margin-bottom: 0;">
+                                        <div class="detail-title"><i class="fa fa-info-circle"></i> O czym to jest?</div>
+                                        <p class="card-text" style="font-size: 0.9rem;">W zmiennym środowisku mózg
                                         instynktownie szuka silnych liderów. Moduł pokazuje, dlaczego kontrola musi
                                         ustąpić miejsca sprawczości i bezpieczeństwu psychologicznemu.</p>
-                                </div>
-                                <div class="detail-section">
-                                    <div class="detail-title"><i class="fa fa-question-circle"></i> Pytania do refleksji
                                     </div>
-                                    <ul class="reflection-list">
+                                    <div class="detail-section" style="margin-bottom: 0;">
+                                        <div class="detail-title"><i class="fa fa-question-circle"></i> Pytania do refleksji</div>
+                                        <ul class="reflection-list">
                                         <li>Co łączy, a co różni liderów znanych z historii od liderów jutra?</li>
                                         <li>Dlaczego toksyczne przywództwo jest wciąż tolerowane w świecie biznesu?</li>
                                         <li>Kiedy skuteczność krótkofalowa staje się barierą dla wyników w długim
                                             terminie?</li>
                                     </ul>
+                                    </div>
                                 </div>
-                                <div class="business-case">
+                                <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 24px; margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08);">
+                                    <div class="detail-section" style="margin-bottom: 0;">
+                                        <div class="detail-title"><i class="fa fa-lightbulb-o"></i> Dlaczego to ważne?</div>
+                                        <p class="card-text" style="font-size: 0.9rem;"><!-- TODO: uzupełnić treść --></p>
+                                    </div>
+                                    <div class="business-case" style="align-self: start;">
                                     <strong>Przykład biznesowy:</strong> Firma stawia na lidera dyrektywnego podczas
                                     restrukturyzacji. Efekt: kultura strachu, masowe odejścia specjalistów i zerowy
                                     poziom innowacyjności.
+                                </div>
                                 </div>
                             </div>
                         </section>
@@ -2659,8 +2750,8 @@ A razem z nim — kreatywność, współpraca i trafne decyzje.</p>
                         onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 30px rgba(177,10,74,0.4)'">
                         Zarezerwuj Demo &rarr;
                     </button>
-                    <p style="font-size: 0.72rem; color: rgba(255,255,255,0.35); margin-top: 14px; line-height: 1.6;">
-                        Administratorem danych osobowych jest Blue Accelerator s.c. z siedzibą przy ul. Bursztynowej 7,<br> 05-140 Serock. Dane podane w formularzu będą przetwarzane wyłącznie w celu udzielenia odpowiedzi na przesłane zapytanie (podstawa: art. 6 ust. 1 lit. f RODO – prawnie uzasadniony interes administratora). Przysługuje Ci prawo dostępu, sprostowania i usunięcia danych. Szczegóły: <a href="polityka-prywatnosci.html" style="color: rgba(255,255,255,0.5); text-decoration: underline;">Polityka prywatności</a>.
+                    <p style="font-size: 0.72rem; color: rgba(255,255,255,0.35); margin-top: 14px; line-height: 1.6; text-align: justify;">
+                        Administratorem danych osobowych jest firma Blue Accelerator s.c. z siedzibą przy ul. Bursztynowej 7,<br> 05-140 Serock. Dane podane w formularzu będą przetwarzane wyłącznie w celu udzielenia odpowiedzi na przesłane zapytanie (podstawa: art. 6 ust. 1 lit. f RODO – prawnie uzasadniony interes administratora). Przysługuje Ci prawo dostępu, sprostowania i usunięcia danych. <br>Szczegóły: <a href="polityka-prywatnosci.html" style="color: rgba(255,255,255,0.5); text-decoration: underline;">Polityka prywatności</a>.
                     </p>
                 </form>
 
@@ -2703,28 +2794,60 @@ A razem z nim — kreatywność, współpraca i trafne decyzje.</p>
     <audio id="bg-music" loop>
         <source src="Images/neurorownowaga.mp3" type="audio/mpeg">
     </audio>
-    <button id="music-toggle" aria-label="Włącz muzykę" title="Włącz muzykę">
-        <i class="fa fa-volume-off"></i>
-    </button>
+    <div id="music-widget">
+        <button id="music-toggle" aria-label="Włącz muzykę" title="Włącz muzykę">
+            <i class="fa fa-volume-off"></i>
+        </button>
+        <div id="volume-popup">
+            <input type="range" id="volume-slider" min="0" max="100" value="35" orient="vertical">
+        </div>
+    </div>
 
     <!-- Background Logic -->
     <script>
         (function () {
             const btn = document.getElementById('music-toggle');
             const audio = document.getElementById('bg-music');
+            const slider = document.getElementById('volume-slider');
             audio.volume = 0.35;
+
+            slider.addEventListener('input', () => {
+                audio.volume = slider.value / 100;
+            });
+
+            function setPlaying() {
+                btn.classList.add('playing');
+                btn.querySelector('i').className = 'fa fa-volume-up';
+                btn.title = 'Wyłącz muzykę';
+            }
+            function setStopped() {
+                btn.classList.remove('playing');
+                btn.querySelector('i').className = 'fa fa-volume-off';
+                btn.title = 'Włącz muzykę';
+            }
+
+            // Try autoplay immediately
+            audio.play().then(setPlaying).catch(() => {
+                // Blocked — start on first user interaction anywhere on page
+                const startOnInteraction = () => {
+                    audio.play().then(() => {
+                        setPlaying();
+                        document.removeEventListener('click', startOnInteraction);
+                        document.removeEventListener('touchstart', startOnInteraction);
+                        document.removeEventListener('keydown', startOnInteraction);
+                    });
+                };
+                document.addEventListener('click', startOnInteraction);
+                document.addEventListener('touchstart', startOnInteraction);
+                document.addEventListener('keydown', startOnInteraction);
+            });
 
             btn.addEventListener('click', () => {
                 if (audio.paused) {
-                    audio.play();
-                    btn.classList.add('playing');
-                    btn.querySelector('i').className = 'fa fa-volume-up';
-                    btn.title = 'Wyłącz muzykę';
+                    audio.play().then(setPlaying);
                 } else {
                     audio.pause();
-                    btn.classList.remove('playing');
-                    btn.querySelector('i').className = 'fa fa-volume-off';
-                    btn.title = 'Włącz muzykę';
+                    setStopped();
                 }
             });
         })();

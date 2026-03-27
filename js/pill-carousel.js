@@ -177,6 +177,23 @@ function openModuleModal(card) {
     document.getElementById('modal-desc').textContent = desc;
     document.getElementById('modal-details').innerHTML = detailsHTML;
 
+    // Module-specific background
+    const panel = document.querySelector('.module-modal-panel');
+    const bgMap = {
+        'Poznanie':           'Images/eye_cognition.png',
+        'Emocje':             'Images/Emocje.png',
+        'Decyzje':            'Images/Decyzje.png',
+        'Komunikacja':        'Images/Komunikacja.png',
+        'Wellbeing':          'Images/Wellbeing.png',
+        'Przywództwo XXI w.': 'Images/Przyw%C3%B3dztwoXXw.png'
+    };
+    const bgImg = bgMap[title];
+    if (bgImg) {
+        panel.style.background = 'linear-gradient(135deg, rgba(14,42,71,0.85), rgba(14,42,71,0.9)), url("' + bgImg + '") center/cover no-repeat';
+    } else {
+        panel.style.background = 'rgba(14, 42, 71, 0.97)';
+    }
+
     const modal = document.getElementById('module-modal');
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
