@@ -1887,7 +1887,32 @@
             width: 0%;
         }
 
-        #scroll-to-top {
+        #music-toggle {
+            position: fixed;
+            bottom: 108px;
+            right: 36px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.18);
+            color: rgba(255,255,255,0.6);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: color 0.3s, border-color 0.3s, background 0.3s;
+            z-index: 999999;
+        }
+        #music-toggle.playing {
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+            background: rgba(30, 211, 255, 0.1);
+        }
+
+#scroll-to-top {
             position: fixed;
             bottom: 36px;
             right: 36px;
@@ -2674,7 +2699,36 @@ A razem z nim — kreatywność, współpraca i trafne decyzje.</p>
         <i class="fa fa-arrow-up"></i>
     </button>
 
+    <!-- Background Music -->
+    <audio id="bg-music" loop>
+        <source src="Images/Neurorównowaga.mp3" type="audio/mpeg">
+    </audio>
+    <button id="music-toggle" aria-label="Włącz muzykę" title="Włącz muzykę">
+        <i class="fa fa-volume-off"></i>
+    </button>
+
     <!-- Background Logic -->
+    <script>
+        (function () {
+            const btn = document.getElementById('music-toggle');
+            const audio = document.getElementById('bg-music');
+            audio.volume = 0.35;
+
+            btn.addEventListener('click', () => {
+                if (audio.paused) {
+                    audio.play();
+                    btn.classList.add('playing');
+                    btn.querySelector('i').className = 'fa fa-volume-up';
+                    btn.title = 'Wyłącz muzykę';
+                } else {
+                    audio.pause();
+                    btn.classList.remove('playing');
+                    btn.querySelector('i').className = 'fa fa-volume-off';
+                    btn.title = 'Włącz muzykę';
+                }
+            });
+        })();
+    </script>
     <script src="js/canvas.js"></script>
     <script src="js/scarf-simulator.js"></script>
     <script src="js/pill-carousel.js"></script>
