@@ -189,7 +189,9 @@ function openModuleModal(card) {
     };
     const bgImg = bgMap[title];
     if (bgImg) {
-        panel.style.background = 'linear-gradient(135deg, rgba(14,42,71,0.85), rgba(14,42,71,0.9)), url("' + bgImg + '") center/cover no-repeat';
+        const posMap = { 'Decyzje': 'center 75%', 'Komunikacja': 'center 75%' };
+        const bgPos = posMap[title] || 'center';
+        panel.style.background = 'linear-gradient(135deg, rgba(14,42,71,0.85), rgba(14,42,71,0.9)), url("' + bgImg + '") ' + bgPos + '/cover no-repeat';
     } else {
         panel.style.background = 'rgba(14, 42, 71, 0.97)';
     }
