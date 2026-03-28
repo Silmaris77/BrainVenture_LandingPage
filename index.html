@@ -48,9 +48,6 @@
                 <a href="#lab"><i class="fa fa-flask"></i><span>Lab</span></a>
                 <a href="#modules"><i class="fa fa-th-list"></i><span>Program</span></a>
                 <a href="#contact"><i class="fa fa-envelope"></i><span>Kontakt</span></a>
-                <button id="nav-music-btn" class="nav-music-btn" aria-label="Muzyka" title="Muzyka">
-                    <i class="fa fa-volume-off"></i><span>Muzyka</span>
-                </button>
             </div>
         </nav>
 
@@ -819,7 +816,6 @@ w nowoczesnym biznesie staje się pułapką. Moduł pokazuje, dlaczego kontrola 
     <script>
         (function () {
             const btn = document.getElementById('music-toggle');
-            const navBtn = document.getElementById('nav-music-btn');
             const audio = document.getElementById('bg-music');
             const slider = document.getElementById('volume-slider');
             audio.volume = 0.35;
@@ -829,19 +825,17 @@ w nowoczesnym biznesie staje się pułapką. Moduł pokazuje, dlaczego kontrola 
             });
 
             function setPlaying() {
-                [btn, navBtn].forEach(b => {
-                    b.classList.add('playing');
-                    b.querySelector('i').className = 'fa fa-volume-up';
-                    b.title = 'Wyłącz muzykę';
-                });
+                btn.classList.add('playing');
+                btn.querySelector('i').className = 'fa fa-volume-up';
+                btn.title = 'Wyłącz muzykę';
             }
             function setStopped() {
-                [btn, navBtn].forEach(b => {
-                    b.classList.remove('playing');
-                    b.querySelector('i').className = 'fa fa-volume-off';
-                    b.title = 'Włącz muzykę';
-                });
+                btn.classList.remove('playing');
+                btn.querySelector('i').className = 'fa fa-volume-off';
+                btn.title = 'Włącz muzykę';
             }
+
+            const widget = document.getElementById('music-widget');
 
             function toggle() {
                 if (audio.paused) {
@@ -851,6 +845,37 @@ w nowoczesnym biznesie staje się pułapką. Moduł pokazuje, dlaczego kontrola 
                     setStopped();
                 }
             }
+
+            function isMobile() { return window.innerWidth <= 600; }
+
+            // On mobile: tap = toggle music, hold = show volume slider
+            let holdTimer = null;
+            btn.addEventListener('touchstart', (e) => {
+                holdTimer = setTimeout(() => {
+                    holdTimer = null;
+                    widget.classList.toggle('expanded');
+                }, 400);
+            }, { passive: true });
+            btn.addEventListener('touchend', (e) => {
+                if (holdTimer) {
+                    clearTimeout(holdTimer);
+                    holdTimer = null;
+                    toggle();
+                }
+                e.preventDefault();
+            });
+
+            // Desktop: regular click
+            btn.addEventListener('click', (e) => {
+                if (!isMobile()) toggle();
+            });
+
+            // Close expanded on tap outside
+            document.addEventListener('touchstart', (e) => {
+                if (widget.classList.contains('expanded') && !widget.contains(e.target)) {
+                    widget.classList.remove('expanded');
+                }
+            }, { passive: true });
 
             // Try autoplay immediately
             audio.play().then(setPlaying).catch(() => {
@@ -866,9 +891,6 @@ w nowoczesnym biznesie staje się pułapką. Moduł pokazuje, dlaczego kontrola 
                 document.addEventListener('touchstart', startOnInteraction);
                 document.addEventListener('keydown', startOnInteraction);
             });
-
-            btn.addEventListener('click', toggle);
-            navBtn.addEventListener('click', toggle);
         })();
     </script>
     <script src="js/canvas.js"></script>

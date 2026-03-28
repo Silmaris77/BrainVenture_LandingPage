@@ -1291,9 +1291,60 @@ footer {
     /* Dopamine canvas – nie blokuje dotyku */
     #dopamine-canvas { pointer-events: none; }
 
-    /* Music widget – ukryty na mobile (zastąpiony przez nav-music-btn) */
+    /* Music widget – tab przy prawej krawędzi */
     #music-widget {
-        display: none !important;
+        top: 42% !important;
+        bottom: auto !important;
+        right: 0 !important;
+        left: auto !important;
+        flex-direction: row !important;
+        gap: 0 !important;
+        width: auto;
+    }
+    #music-toggle {
+        width: 28px;
+        height: 56px;
+        border-radius: 10px 0 0 10px;
+        border-right: none;
+        font-size: 0.9rem;
+        background: rgba(14, 42, 71, 0.85);
+        border-color: rgba(255,255,255,0.15);
+        backdrop-filter: blur(12px);
+    }
+    #volume-popup {
+        position: static;
+        transform: none !important;
+        opacity: 0;
+        pointer-events: none;
+        width: 0;
+        overflow: hidden;
+        padding: 0;
+        border: none;
+        border-radius: 10px 0 0 10px;
+        background: rgba(14, 42, 71, 0.85);
+        backdrop-filter: blur(12px);
+        transition: opacity 0.2s, width 0.2s;
+        height: 56px;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+    }
+    #music-widget.expanded #volume-popup {
+        opacity: 1;
+        pointer-events: auto;
+        width: 52px;
+        padding: 0 10px;
+        border: 1px solid rgba(255,255,255,0.15);
+        border-right: none;
+    }
+    #volume-slider {
+        height: 36px;
+        width: 6px;
+    }
+    #music-widget:hover #volume-popup {
+        opacity: 0;
+        pointer-events: none;
+        width: 0;
     }
 }
 
