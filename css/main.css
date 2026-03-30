@@ -976,7 +976,7 @@ footer {
     }
 
     /* Section headers */
-    .section-header h2 { font-size: 2rem; }
+    .section-header h2 { font-size: 1.5rem; }
     .section-header span { font-size: 0.76rem; letter-spacing: 1.6px; }
 
     /* SCARF Simulator */
@@ -1245,9 +1245,10 @@ footer {
         background: rgba(10,20,40,0.98) !important;
         border-radius: 28px !important;
     }
+    #ekosystem h2 { font-size: 1.5rem !important; }
     #contact h2 {
         max-width: none !important;
-        font-size: 2rem !important;
+        font-size: 1.5rem !important;
         line-height: 1.15;
     }
     #contact .card-text {
@@ -1344,8 +1345,9 @@ footer {
     .stat-box { width: 100% !important; }
     /* Contact padding */
     #contact > div:first-child { padding: 36px 20px !important; }
-    /* Nagłówek contact */
-    #contact h2 { font-size: 2rem !important; }
+    /* Nagłówki z inline font-size */
+    #contact h2 { font-size: 1.5rem !important; }
+    #ekosystem h2 { font-size: 1.5rem !important; }
 }
 
 .card-exercise-badge {
