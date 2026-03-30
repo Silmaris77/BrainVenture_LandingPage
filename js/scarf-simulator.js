@@ -404,6 +404,11 @@ function selectDifficulty(level) {
     boardConfidence = settings.start;
     impactMultiplier = settings.multi;
 
+    // Update mobile header with selected level name
+    const levelNames = { junior: 'Junior Lider', manager: 'Menedżer Zespołu', director: 'Dyrektor Strategiczny' };
+    const label = document.getElementById('mobile-level-label');
+    if (label) label.textContent = levelNames[level] || level;
+
     // Shuffle scenarios and pick 10
     currentScenariosPool = [...scenariosDatabase[level]]
         .sort(() => Math.random() - 0.5)

@@ -1,6 +1,7 @@
 
 // --- Scroll to Top Logic ---
 const scrollToTopBtn = document.getElementById('scroll-to-top');
+const musicWidget = document.getElementById('music-widget');
 
 // Funkcja sprawdzająca przewinięcie
 function checkScroll() {
@@ -19,8 +20,10 @@ function checkScroll() {
 
     if (scrollPos > 300) {
         scrollToTopBtn.classList.add('visible');
+        if (musicWidget) musicWidget.classList.add('visible');
     } else {
         scrollToTopBtn.classList.remove('visible');
+        if (musicWidget) musicWidget.classList.remove('visible');
     }
 }
 
