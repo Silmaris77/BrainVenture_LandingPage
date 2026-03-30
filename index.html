@@ -835,47 +835,25 @@ w nowoczesnym biznesie staje się pułapką. Moduł pokazuje, dlaczego kontrola 
                 btn.title = 'Włącz muzykę';
             }
 
-            const widget = document.getElementById('music-widget');
+            function setPlaying() {
+                btn.classList.add('playing');
+                btn.querySelector('i').className = 'fa fa-volume-up';
+                btn.title = 'Wyłącz muzykę';
+            }
+            function setStopped() {
+                btn.classList.remove('playing');
+                btn.querySelector('i').className = 'fa fa-volume-off';
+                btn.title = 'Włącz muzykę';
+            }
 
-            function toggle() {
+            btn.addEventListener('click', () => {
                 if (audio.paused) {
                     audio.play().then(setPlaying);
                 } else {
                     audio.pause();
                     setStopped();
                 }
-            }
-
-            function isMobile() { return window.innerWidth <= 600; }
-
-            // On mobile: tap = toggle music, hold = show volume slider
-            let holdTimer = null;
-            btn.addEventListener('touchstart', (e) => {
-                holdTimer = setTimeout(() => {
-                    holdTimer = null;
-                    widget.classList.toggle('expanded');
-                }, 400);
-            }, { passive: true });
-            btn.addEventListener('touchend', (e) => {
-                if (holdTimer) {
-                    clearTimeout(holdTimer);
-                    holdTimer = null;
-                    toggle();
-                }
-                e.preventDefault();
             });
-
-            // Desktop: regular click
-            btn.addEventListener('click', (e) => {
-                if (!isMobile()) toggle();
-            });
-
-            // Close expanded on tap outside
-            document.addEventListener('touchstart', (e) => {
-                if (widget.classList.contains('expanded') && !widget.contains(e.target)) {
-                    widget.classList.remove('expanded');
-                }
-            }, { passive: true });
 
             // Try autoplay immediately
             audio.play().then(setPlaying).catch(() => {
@@ -885,7 +863,7 @@ w nowoczesnym biznesie staje się pułapką. Moduł pokazuje, dlaczego kontrola 
                         document.removeEventListener('click', startOnInteraction);
                         document.removeEventListener('touchstart', startOnInteraction);
                         document.removeEventListener('keydown', startOnInteraction);
-                    });
+                    }).catch(() => {});
                 };
                 document.addEventListener('click', startOnInteraction);
                 document.addEventListener('touchstart', startOnInteraction);
