@@ -1293,7 +1293,7 @@ footer {
     /* Dopamine canvas – nie blokuje dotyku */
     #dopamine-canvas { pointer-events: none; }
 
-    /* Music widget – tab przy prawej krawędzi */
+    /* Music widget – tab przy prawej krawędzi, pojawia się jak scroll-to-top */
     #music-widget {
         top: 42% !important;
         bottom: auto !important;
@@ -1301,6 +1301,16 @@ footer {
         left: auto !important;
         flex-direction: column !important;
         gap: 0 !important;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateX(100%);
+        transition: opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    #music-widget.visible {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateX(0);
     }
     #music-toggle {
         width: 32px !important;
