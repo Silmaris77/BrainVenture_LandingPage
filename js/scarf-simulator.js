@@ -388,14 +388,12 @@ function setMobileScarfState(isSimulatorVisible) {
 }
 
 function returnToDifficultySelection() {
-    if (!isMobileScarfFlow()) return;
-
     document.getElementById('results-overlay').style.display = 'none';
     document.getElementById('simulator-main').style.display = 'none';
     document.getElementById('difficulty-overlay').style.display = 'flex';
     const sim = document.getElementById('scarf-simulator');
     if (sim) sim.classList.remove('mobile-results-active');
-    setMobileScarfState(false);
+    if (isMobileScarfFlow()) setMobileScarfState(false);
 }
 
 function selectDifficulty(level) {
@@ -405,7 +403,7 @@ function selectDifficulty(level) {
     impactMultiplier = settings.multi;
 
     // Update mobile header with selected level name
-    const levelNames = { junior: 'Junior Lider', manager: 'Menedżer Zespołu', director: 'Dyrektor Strategiczny' };
+    const levelNames = { junior: 'Team Leader', manager: 'Menedżer Zespołu', director: 'Dyrektor Strategiczny' };
     const label = document.getElementById('mobile-level-label');
     if (label) label.textContent = levelNames[level] || level;
 

@@ -385,6 +385,30 @@ h1 span {
     display: none;
 }
 
+.desktop-step-back {
+    position: absolute;
+    top: 22px;
+    right: 26px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    color: var(--text-dim);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    z-index: 10;
+}
+.desktop-step-back:hover {
+    background: rgba(177,10,74,0.2);
+    border-color: var(--accent-magenta);
+    color: #fff;
+}
+
 .mobile-step-back {
     display: none;
 }
@@ -1056,6 +1080,8 @@ footer {
     #difficulty-overlay {
         padding: 24px 20px;
     }
+    .mobile-simulator-header { display: none !important; }
+    #simulator-main > .desktop-step-back { display: flex !important; }
     .mobile-simulator-header {
         display: flex;
         align-items: center;

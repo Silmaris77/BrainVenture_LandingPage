@@ -258,7 +258,7 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                             <button class="diff-btn junior" onclick="selectDifficulty('junior')">
                                 <div class="diff-icon" style="background: rgba(74, 222, 128, 0.15); color: #4ade80;"><i class="fa fa-leaf"></i></div>
                                 <div class="u-flex-grow">
-                                    <strong style="display: block; font-family: var(--font-heading); font-size: 1rem; margin-bottom: 4px;">Junior Lider</strong>
+                                    <strong style="display: block; font-family: var(--font-heading); font-size: 1rem; margin-bottom: 4px;">Team Leader</strong>
                                     <small style="color: var(--text-dim); font-size: 0.8rem; line-height: 1.5;">Wyzwania 1:1, budowanie autorytetu, empatyczny feedback, skuteczny onboarding.</small>
                                 </div>
                                 <div class="diff-cta"><i class="fa fa-chevron-right"></i></div>
@@ -302,17 +302,19 @@ Unikalne podejście,<br> które łączy najnowsze odkrycia neuronauk, praktykę 
                 </div>
 
                 <div id="simulator-main" style="display:none; width:100%;">
+                <button type="button" class="desktop-step-back" onclick="returnToDifficultySelection()" title="Wróć do wyboru poziomu">
+                    <i class="fa fa-times"></i>
+                </button>
                 <div class="mobile-simulator-header">
                     <p id="mobile-level-label">Podejmuj decyzje i obserwuj reakcję mózgu</p>
-                    <button type="button" class="mobile-step-back" onclick="returnToDifficultySelection()">
-                        <i class="fa fa-angle-left"></i> Poziomy
+                    <button type="button" class="desktop-step-back mobile-step-back" onclick="returnToDifficultySelection()" title="Wróć do wyboru poziomu">
+                        <i class="fa fa-times"></i>
                     </button>
                 </div>
                 <div class="simulator-grid">
                     <!-- Left: Scenarios -->
                     <div class="scenario-box" style="height: 720px; overflow: hidden; padding-right: 16px;">
-                        <div class="section-header" style="text-align: left; margin-bottom: 20px;">
-                            <span>Interaktywne Laboratorium</span>
+                        <div class="section-header" style="text-align: left; margin-bottom: 20px; margin-top: 52px;">
                             <h2 style="font-size: 2.2rem;">SCARF Dynamic Simulator</h2>
                             <p style="color: var(--text-dim); font-size: 1rem; margin-top: 8px; font-weight: 400;">Sprawdź jak działa SCARF —<br>podejmuj decyzje i obserwuj reakcję mózgu pracownika.</p>
                         </div>
@@ -812,71 +814,13 @@ w nowoczesnym biznesie staje się pułapką. Moduł pokazuje, dlaczego kontrola 
         </div>
     </div>
 
-    <!-- Background Logic -->
-    <script>
-        (function () {
-            const btn = document.getElementById('music-toggle');
-            const audio = document.getElementById('bg-music');
-            const slider = document.getElementById('volume-slider');
-            audio.volume = 0.35;
-
-            slider.addEventListener('input', () => {
-                audio.volume = slider.value / 100;
-            });
-
-            function setPlaying() {
-                btn.classList.add('playing');
-                btn.querySelector('i').className = 'fa fa-volume-up';
-                btn.title = 'Wyłącz muzykę';
-            }
-            function setStopped() {
-                btn.classList.remove('playing');
-                btn.querySelector('i').className = 'fa fa-volume-off';
-                btn.title = 'Włącz muzykę';
-            }
-
-            function setPlaying() {
-                btn.classList.add('playing');
-                btn.querySelector('i').className = 'fa fa-volume-up';
-                btn.title = 'Wyłącz muzykę';
-            }
-            function setStopped() {
-                btn.classList.remove('playing');
-                btn.querySelector('i').className = 'fa fa-volume-off';
-                btn.title = 'Włącz muzykę';
-            }
-
-            btn.addEventListener('click', () => {
-                if (audio.paused) {
-                    audio.play().then(setPlaying);
-                } else {
-                    audio.pause();
-                    setStopped();
-                }
-            });
-
-            // Try autoplay immediately
-            audio.play().then(setPlaying).catch(() => {
-                const startOnInteraction = () => {
-                    audio.play().then(() => {
-                        setPlaying();
-                        document.removeEventListener('click', startOnInteraction);
-                        document.removeEventListener('touchstart', startOnInteraction);
-                        document.removeEventListener('keydown', startOnInteraction);
-                    }).catch(() => {});
-                };
-                document.addEventListener('click', startOnInteraction);
-                document.addEventListener('touchstart', startOnInteraction);
-                document.addEventListener('keydown', startOnInteraction);
-            });
-        })();
-    </script>
     <script src="js/canvas.js"></script>
     <script src="js/scarf-simulator.js"></script>
     <script src="js/pill-carousel.js"></script>
     <script src="js/brain-demos.js"></script>
     <script src="js/contact-form.js"></script>
     <script src="js/ui.js"></script>
+    <script src="js/music.js"></script>
 
     <!-- Module Detail Modal -->
     <div id="module-modal" onclick="if(event.target===this) closeModuleModal()">
