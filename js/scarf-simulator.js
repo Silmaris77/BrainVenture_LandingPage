@@ -125,7 +125,7 @@ const scenariosDatabase = {
             desc: "Pracownik delikatnie wspomina o problemach w domu.",
             choices: [
                 { text: "„To Twoja sprawa. Jak nie dowieziesz targetu, to będziemy oboje mieli problemy.\"", impact: { Relatedness: -30, Status: -20, Board: +10 }, feedback: "Neuro-zdrada. Odcięcie emocjonalne zabija zaufanie. Zarząd widzi 'skupienie na KPI'." },
-                { text: "Odsyłasz go do HR: „Oni się tym zajmują, ja nie mam czasu.\"", impact: { Relatedness: -15, Status: -10, Board: 0 }, feedback: "Spychologia. Bezpieczne proceduralnie, ale chłodne ludzko." },
+                { text: "Odsyłasz go do HR: „Oni się tym zajmują, ja nie mam czasu.\"", impact: { Relatedness: -15, Status: -10, Board: 0 }, feedback: "Spychologia. Bezpieczne proceduralnie, ale chłodno." },
                 { text: "„Przestań pracować! Idź do domu na tydzień płatnego urlopu, ja to załatwię z kadrą.\"", impact: { Relatedness: +30, Autonomy: +20, Board: -30 }, feedback: "Ogromna lojalność pracownika, ale skrajne naruszenie procedur korporacyjnych (koszty)." },
                 { text: "„Dzięki, że ufasz mi na tyle, by to powiedzieć. Jeśli potrzebujesz elastyczności dziś, daj znać.\"", impact: { Relatedness: +25, Autonomy: +20, Board: -5 }, feedback: "Bezpieczna przystań (Relacje). Budujesz kapitał społeczny bez palenia mostów z HR." }
             ]
@@ -138,7 +138,7 @@ const scenariosDatabase = {
                 { text: "Decydujesz się na pracę po godzinach: „Zrobię to lepiej i nikt nie schrzani roboty.\"", impact: { Autonomy: -25, Status: -15, Board: +15 }, feedback: "Zespół czuje brak zaufania. Board widzi wynik, ale Ty jesteś wąskim gardłem." },
                 { text: "Najlepszemu specjaliście, mimo jego przeładowania: „Wiem, że masz dużo pracy, ale tylko Ty dajesz 100% pewności.\"", impact: { Fairness: -20, Certainty: +25, Board: +5 }, feedback: "Bezpieczne, ale niszczy Sprawiedliwość i grozi wypaleniem 'gwiazdy'." },
                 { text: "Robisz losowanie: „Niech los zdecyduje, kto się dziś wykaże.\"", impact: { Certainty: -30, Fairness: +10, Board: -25 }, feedback: "Chaos. Zarząd uważa to za skrajny nieprofesjonalizm lidera." },
-                { text: "Wybiersz juniora: „To Twoja szansa. Wyznaczam ramy, ale Ty decydujesz o metodzie.\"", impact: { Status: +25, Autonomy: +30, Certainty: -15, Board: 0 }, feedback: "Inwestycja w rozwój (Status + Autonomia). Wymaga Twojego monitoringu (Pewność)." }
+                { text: "Wybierasz juniora: „To Twoja szansa. Wyznaczam ramy, ale Ty decydujesz o metodzie.\"", impact: { Status: +25, Autonomy: +30, Certainty: -15, Board: 0 }, feedback: "Inwestycja w rozwój (Status + Autonomia). Wymaga Twojego monitoringu (Pewność)." }
             ]
         }
     ],
@@ -215,7 +215,7 @@ const scenariosDatabase = {
             desc: "Widzisz 'quiet quitting' u kluczowych pracowników.",
             choices: [
                 { text: "Dorzucasz im nowe, trudne zadania i krótkie terminy, by ich 'rozruszać'.", impact: { Autonomy: -30, Status: -20, Board: +15 }, feedback: "Dokładanie kamieni do tonącego statku. Przyspieszasz odejście ludzi." },
-                { text: "Ignorusze, póki dowożą minimum. Trzymamy status quo.", impact: { Relatedness: -20, Fairness: -15, Board: 0 }, feedback: "Pozwalasz na powolny rozkład kultury pracy. Nierealizowanie potencjału." },
+                { text: "Ignorujesz, póki dowożą minimum. Trzymamy status quo.", impact: { Relatedness: -20, Fairness: -15, Board: 0 }, feedback: "Pozwalasz na powolny rozkład kultury pracy. Nierealizowanie potencjału." },
                 { text: "Proponujesz im nielimitowane płatne urlopy, byle tylko zostali.", impact: { Relatedness: +30, Board: -30, Fairness: -25 }, feedback: "Desperacja. Niszczysz budżet i Sprawiedliwość wobec reszty zespołu." },
                 { text: "„Czego potrzebujesz, by znów czuć flow? Pogadajmy o zmianie Twojej roli.\"", impact: { Autonomy: +25, Status: +25, Relatedness: +20, Board: -10 }, feedback: "Indywidualne podejście. Budujesz Status i Autonomię przez dopasowanie roli." }
             ]
@@ -327,7 +327,7 @@ const scenariosDatabase = {
             desc: "Ogłaszasz nową wizję na 5 lat, ale nikt w nią nie wierzy.",
             choices: [
                 { text: "„Wierzę w tę wizję. Albo w to wchodzicie, albo jutro widzę Wasze wypowiedzenia.\"", impact: { Autonomy: -20, Status: -15, Board: +20 }, feedback: "Dyktatura wizjonerska. Board widzi determinację, zespół jest w trybie ucieczki." },
-                { text: "Rezygnujsze z wizji: „Skoro Wam się nie podoba, to po prostu róbmy to co wczoraj.\"", impact: { Status: -20, Certainty: -15, Board: -20 }, feedback: "Kapitulacja lidera. Tracisz autorytet u wszystkich. Firma stoi w miejscu." },
+                { text: "Rezygnujesz z wizji: „Skoro Wam się nie podoba, to po prostu róbmy to co wczoraj.\"", impact: { Status: -20, Certainty: -15, Board: -20 }, feedback: "Kapitulacja lidera. Tracisz autorytet u wszystkich. Firma stoi w miejscu." },
                 { text: "Obiecujesz premie za 'uwierzenie' w nową strategię.", impact: { Board: -20, Fairness: -15, Status: +10 }, feedback: "Przekupstwo motywacyjne buduje cynizm w zespole i niszczy budżet." },
                 { text: "„Wizja to kierunek. Wypracujmy wspólnie mapę na 6 miesięcy. Co o tym sądzicie?\"", impact: { Autonomy: +20, Status: +20, Certainty: +20, Board: +15 }, feedback: "Partycypacja. Nadajesz ludziom Status współtwórców wizji." }
             ]
@@ -338,7 +338,7 @@ const scenariosDatabase = {
             desc: "Konkurencja próbuje podkupić Twój cały kluczowy zespół projektowy.",
             choices: [
                 { text: "Blokujesz ich odejście groźbami prawnymi i zakazami konkurencji.", impact: { Autonomy: -20, Relatedness: -15, Board: +10 }, feedback: "Atak na wolność (Autonomia) wyzwala ekstremalny opór i nienawiść do marki." },
-                { text: "Ignorusze: „Nikt nie jest niezastąpiony. Jak pójdą, to przyjdą inni.\"", impact: { Relatedness: -15, Certainty: -15, Board: -15 }, feedback: "Poczucie bycia śmieciem (Status). Board przerażony brakiem zarządzania ryzykiem." },
+                { text: "Ignorujesz: „Nikt nie jest niezastąpiony. Jak pójdą, to przyjdą inni.\"", impact: { Relatedness: -15, Certainty: -15, Board: -15 }, feedback: "Poczucie bycia śmieciem (Status). Board przerażony brakiem zarządzania ryzykiem." },
                 { text: "Dajesz każdemu 50% podwyżki na koszt innych działów.", impact: { Fairness: -20, Status: +15, Board: -20 }, feedback: "Niszczysz firmę od środka. Konflikt między działami i ruinę finansową." },
                 { text: "„Wiem o ofertach. Porozmawiajmy o tym, co musi się zmienić tutaj, byście nie chcieli odchodzić.\"", impact: { Relatedness: +20, Autonomy: +20, Status: +20, Board: +5 }, feedback: "Relacje oparte na zaufaniu i wpływie. Szacunek dla ich wartości." }
             ]
@@ -349,7 +349,7 @@ const scenariosDatabase = {
             desc: "Firma świetnie zarabia, ale ludzie czują się tylko trybikami w maszynie.",
             choices: [
                 { text: "Ignorujesz sytuację, póki wyniki rosną.", impact: { Relatedness: -15, Status: -15, Board: +20 }, feedback: "Krótkowzroczność. W kryzysie wszyscy Cię zostawią, bo nie czują więzi." },
-                { text: "Inwestujesz luksusową integrację (pokazówka).", impact: { Status: +15, Relatedness: +10, Board: -20 }, feedback: "Pusty gest dyrektorski. Board widzi nieuzasadnione koszty, ludzie czują falsz." },
+                { text: "Inwestujesz luksusową integrację (pokazówka).", impact: { Status: +15, Relatedness: +10, Board: -20 }, feedback: "Pusty gest dyrektorski. Board widzi nieuzasadnione koszty, ludzie czują fałsz." },
                 { text: "Organizujesz obowiązkowe warsztaty 'Jak być wdzięcznym firmie'.", impact: { Autonomy: -15, Status: -15, Board: -10 }, feedback: "Desperacja. Przymusowa wdzięczność to neuro-koszmar i upokorzenie." },
                 { text: "Przeznaczasz 5% zysku na cel społeczny wybrany przez pracowników.", impact: { Relatedness: +20, Status: +20, Autonomy: +15, Board: +5 }, feedback: "Purpose (Sens). Buduje dumę z marki i poczucie sprawstwa (Autonomia)." }
             ]
